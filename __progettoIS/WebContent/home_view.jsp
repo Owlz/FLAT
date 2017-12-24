@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Homepage</title>
+	<%@include file="includes/_import.jsp" %>
 </head>
 <body>
+<jsp:include page="includes/_header.jsp"/>
 
 
 

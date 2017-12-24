@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Area Utente</title>
+	<%@include file="includes/_import.jsp" %>
 </head>
 <body>
 
