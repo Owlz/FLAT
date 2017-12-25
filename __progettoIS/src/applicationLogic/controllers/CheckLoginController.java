@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import applicationLogic.exception.DatiNonPresenti;
+import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.managers.AutenticazioneManager;
 import applicationLogic.models.Utente;
 
@@ -24,13 +26,17 @@ public class CheckLoginController extends HttpServlet {
 		u.setUsername(request.getParameter("username"));
 		u.setPassword(request.getParameter("password"));
 		
-		u = AutenticazioneManager.autenticaUtente(u);
-
-		if(!u.getRuolo().equals("visitatore")){
+		try {
+			u = AutenticazioneManager.autenticaUtente(u);
 			request.getSession().setAttribute("utente", u);
 			response.sendRedirect(request.getContextPath() + "/");
-		}else{
-			request.getSession().setAttribute("errore", "login fallito");
+			
+		} catch (DatiNonPresenti e) {
+			request.getSession().setAttribute("errore", "login fallito, dati non presenti (username errato)");
+			response.sendRedirect(request.getContextPath() + "/login");
+			
+		} catch (DatiNonValidi e) {
+			request.getSession().setAttribute("errore", "login fallito, dati non validi (username azzeccato ma password errata)");
 			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}

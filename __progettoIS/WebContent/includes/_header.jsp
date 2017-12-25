@@ -4,6 +4,6 @@
 <% if(!utente.getRuolo().equals("visitatore")){ %>
 	Sei loggato, <a href="logout">disconnettiti</a>
 <% }else{  %>
-	<a href="login">Va al login</a>
+	<a href="login">Va al login</a> - <a href="registrazione">Va alla registrazione</a>
 <% } %>
 </div>

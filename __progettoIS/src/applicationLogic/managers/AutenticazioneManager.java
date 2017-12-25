@@ -2,6 +2,8 @@ package applicationLogic.managers;
 
 import java.sql.SQLException;
 
+import applicationLogic.exception.DatiNonPresenti;
+import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.models.Utente;
 import storage.UtenteDAO;
 
@@ -11,27 +13,33 @@ import storage.UtenteDAO;
  * @since 1.0
  */
 public class AutenticazioneManager {
-
+	
+	private AutenticazioneManager(){/*Costruttore vuoto e privato poichè non istanziabile*/}
+	
 	/**
 	 * Gesisce l'autenticazione di un utente
-	 * @param utente
+	 * @param u
 	 * @return un oggetto di tipo Utente con tutte le informazioni
-	 * @throws SQLException nel caso in cui l'utente non è nel database
+	 * @throws DatiNonPresenti nel caso in cui i dati non sono nel database
+	 * @throws DatiNonValidi nel caso in cui i dati non corrispondono
 	 */
-	public static Utente autenticaUtente(Utente utente){
-		Utente utDB;
+	public static Utente autenticaUtente(Utente u) throws DatiNonPresenti, DatiNonValidi{
+		Utente uDB;
 		try {
-			utDB = UtenteDAO.getUtente(utente);
-			if(utDB.getRuolo().equals("visitatore"))						//utente non trovato nel DB
-				return utente;
-			else if(!utDB.getUsername().equals(utente.getUsername()) || 
-					!utDB.getPassword().equals(utente.getPassword()))		//username e/o password non corrispondono
-				return utente;
-			else															//corrispondono 
-				return utDB;
+			uDB = UtenteDAO.getUtente(u);
+			
+			if(uDB.getRuolo().equals("visitatore"))
+				throw new DatiNonPresenti(uDB.getUsername());
+			
+			else if(!uDB.getUsername().equals(u.getUsername()) || !uDB.getPassword().equals(u.getPassword()))
+				throw new DatiNonValidi(uDB.getUsername()); 
+			
+			else
+				return uDB;
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return utente;
+			 e.printStackTrace();	//db down oppure query scritta male, non deve mai succedere in produzione
+			 return null;
 		}
 	}
 

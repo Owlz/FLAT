@@ -9,7 +9,24 @@ import applicationLogic.models.Utente;
 
 public class UtenteDAO {
 	private static final String GET_UTENTE = "SELECT * FROM utenti WHERE username = ?";
+	private static final String INSERT_UTENTE = "INSERT INTO utenti (`username`, `password`, `nome`, `cognome`, `email`, `ruolo`) VALUES (?, ?, ?, ?, ?, ?)";
 
+	public static void inserisciUtente(Utente utente) throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(INSERT_UTENTE);
+		pst.setString(1, utente.getUsername());
+		pst.setString(2, utente.getPassword());
+		pst.setString(3, utente.getNome());
+		pst.setString(4, utente.getCognome());
+		pst.setString(5, utente.getEmail());
+		pst.setString(6, utente.getRuolo());
+
+		pst.executeUpdate();
+		con.commit();
+
+		DBConnection.riaggiungiConnessione(con);
+		
+	}
 	public static Utente getUtente(Utente utente) throws SQLException {
 		Utente utFinal = new Utente();
 
@@ -18,10 +35,10 @@ public class UtenteDAO {
 		pst.setString(1, utente.getUsername());
 		ResultSet rs = pst.executeQuery();
 		con.commit();
-		
+
 		while (rs.next()) {
 			String username = rs.getString("username");
-			
+
 			if (utente.getUsername().equals(username)) {
 				String password = rs.getString("password");
 				String nome = rs.getString("nome");
@@ -35,8 +52,10 @@ public class UtenteDAO {
 				utFinal.setCognome(cognome);
 				utFinal.setEmail(mail);
 
-				if (ruolo.equals("admin")) utFinal.setRuolo("admin");
-				else utFinal.setRuolo("utente");
+				if (ruolo.equals("admin"))
+					utFinal.setRuolo("admin");
+				else
+					utFinal.setRuolo("utente");
 			}
 		}
 
