@@ -28,7 +28,7 @@ public class UtenteDAO {
 		
 	}
 	public static Utente getUtente(Utente utente) throws SQLException {
-		Utente utFinal = new Utente();
+		Utente utFinal = null;
 
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(GET_UTENTE);
@@ -40,6 +40,8 @@ public class UtenteDAO {
 			String username = rs.getString("username");
 
 			if (utente.getUsername().equals(username)) {
+				utFinal = new Utente();
+				
 				String password = rs.getString("password");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
