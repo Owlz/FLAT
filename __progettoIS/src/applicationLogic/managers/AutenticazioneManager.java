@@ -13,12 +13,11 @@ import storage.UtenteDAO;
  * @since 1.0
  */
 public class AutenticazioneManager {
-	
 	private AutenticazioneManager(){/*Costruttore vuoto e privato poichè non istanziabile*/}
 	
 	/**
 	 * Gesisce l'autenticazione di un utente
-	 * @param u
+	 * @param u l'utente da controllare
 	 * @return un oggetto di tipo Utente con tutte le informazioni
 	 * @throws DatiNonPresenti nel caso in cui i dati non sono nel database
 	 * @throws DatiNonValidi nel caso in cui i dati non corrispondono

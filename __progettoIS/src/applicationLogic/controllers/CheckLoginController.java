@@ -30,9 +30,10 @@ public class CheckLoginController extends HttpServlet {
 			u = AutenticazioneManager.autenticaUtente(u);
 			request.getSession().setAttribute("utente", u);
 			response.sendRedirect(request.getContextPath() + "/");
+			/* TODO questo deve ridirezionare verso l'area utente */
 			
 		} catch (DatiNonPresenti e) {
-			request.getSession().setAttribute("errore", "login fallito, dati non presenti (username errato)");
+			request.getSession().setAttribute("errore", "login fallito, dati non presenti (username errato) -> " + e.getCampo());
 			response.sendRedirect(request.getContextPath() + "/login");
 			
 		} catch (DatiNonValidi e) {

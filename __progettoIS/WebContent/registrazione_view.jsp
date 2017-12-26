@@ -12,7 +12,7 @@
 <body>
 <% if(errore != null){ %>
 	<p><%=errore%></p>
-<% } %>
+<% } errore = null; %>
 <form action="checkregistrazione" method="post">
 	Username <input type="text" name="username"><br/>
 	Password <input type="password" name="password"><br/>

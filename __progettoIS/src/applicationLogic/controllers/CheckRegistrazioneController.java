@@ -34,14 +34,15 @@ public class CheckRegistrazioneController extends HttpServlet {
 
 		try {
 			u = RegistrazioneManager.aggiungiUtente(u);
-			response.sendRedirect(request.getContextPath() + "/id?u=" + u.getUsername());
+			response.sendRedirect(request.getContextPath());
+			/* TODO questo deve ridirezionare verso l'area utente */
 
 		} catch (DatiNonValidi e) {
-			request.getSession().setAttribute("errore", "registrazione fallita (dati non validi)");
+			request.getSession().setAttribute("errore", "registrazione fallita (dati non validi e/o campi vuoti)");
 			response.sendRedirect(request.getContextPath() + "/registrazione");
 
 		} catch (DatiOccupati e) {
-			request.getSession().setAttribute("errore", "registrazione fallita (dati occupati)" + e.getMessage());
+			request.getSession().setAttribute("errore", "registrazione fallita (dati occupati) -> " + e.getCampo());
 			response.sendRedirect(request.getContextPath() + "/registrazione");
 		}
 	}
