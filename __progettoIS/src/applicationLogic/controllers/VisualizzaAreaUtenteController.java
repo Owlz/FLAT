@@ -18,7 +18,10 @@ public class VisualizzaAreaUtenteController extends HttpServlet {
 		Utente u = new Utente();
 		u.setUsername(request.getParameter("id"));
 		
-		u = AreaUtenteManager.getUtente(u);
+		Utente utenteInSessione = (Utente) request.getSession().getAttribute("utente");
+		
+		if(utenteInSessione != null && u.getUsername().equals(utenteInSessione.getUsername())) u = utenteInSessione;
+		else u = AreaUtenteManager.getUtente(u);
 		
 		if(u == null)
 			response.sendRedirect(request.getContextPath() + "/");
@@ -28,8 +31,7 @@ public class VisualizzaAreaUtenteController extends HttpServlet {
 		}
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		doGet(request, response);
 	}
 

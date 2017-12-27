@@ -10,8 +10,9 @@ import applicationLogic.models.Utente;
 public class UtenteDAO {
 	private static final String GET_UTENTE = "SELECT * FROM utenti WHERE username = ?";
 	private static final String INSERT_UTENTE = "INSERT INTO utenti (`username`, `password`, `nome`, `cognome`, `email`, `ruolo`) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_UTENTE = "UPDATE utenti SET `password` = ?, `nome` = ?, `cognome` = ?, `email` = ? WHERE `username` = ?";
 
-	public static void inserisciUtente(Utente utente) throws SQLException {
+	public static Utente inserisciUtente(Utente utente) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(INSERT_UTENTE);
 		pst.setString(1, utente.getUsername());
@@ -26,7 +27,9 @@ public class UtenteDAO {
 
 		DBConnection.riaggiungiConnessione(con);
 		
+		return utente;
 	}
+
 	public static Utente getUtente(Utente utente) throws SQLException {
 		Utente utFinal = null;
 
@@ -41,7 +44,7 @@ public class UtenteDAO {
 
 			if (utente.getUsername().equals(username)) {
 				utFinal = new Utente();
-				
+
 				String password = rs.getString("password");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
@@ -63,6 +66,22 @@ public class UtenteDAO {
 
 		DBConnection.riaggiungiConnessione(con);
 		return utFinal;
+	}
+
+	public static Utente aggiornaUtente(Utente utente) throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(UPDATE_UTENTE);
+		pst.setString(1, utente.getPassword());
+		pst.setString(2, utente.getNome());
+		pst.setString(3, utente.getCognome());
+		pst.setString(4, utente.getEmail());
+		pst.setString(5, utente.getUsername());
+
+		pst.executeUpdate();
+		con.commit();
+
+		DBConnection.riaggiungiConnessione(con);
+		return utente;
 	}
 
 }
