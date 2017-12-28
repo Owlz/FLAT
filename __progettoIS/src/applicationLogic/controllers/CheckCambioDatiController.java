@@ -20,10 +20,10 @@ public class CheckCambioDatiController extends HttpServlet {
 		Utente uNew = new Utente();
 		Utente uAtt = (Utente) request.getSession().getAttribute("utente");
 		
-		uNew.setPassword(request.getParameter("password"));
-		uNew.setNome(request.getParameter("nome"));
-		uNew.setCognome(request.getParameter("cognome"));
-		uNew.setEmail(request.getParameter("email"));
+		uNew.setPassword(request.getParameter("password").trim());
+		uNew.setNome(request.getParameter("nome").trim());
+		uNew.setCognome(request.getParameter("cognome").trim());
+		uNew.setEmail(request.getParameter("email").trim());
 		
 		try {
 			uNew = AreaUtenteManager.aggiornaUtente(uNew, uAtt);

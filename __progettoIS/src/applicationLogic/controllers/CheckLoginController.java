@@ -23,8 +23,8 @@ public class CheckLoginController extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente u = new Utente();
-		u.setUsername(request.getParameter("username"));
-		u.setPassword(request.getParameter("password"));
+		u.setUsername(request.getParameter("username").trim());
+		u.setPassword(request.getParameter("password").trim());
 		
 		try {
 			u = AutenticazioneManager.autenticaUtente(u);
