@@ -27,16 +27,12 @@ function formatFilm (film) {
 
 $(".js-example-basic-single").select2({
     ajax: {
-      url: "http://api.themoviedb.org/3/search/movie",
+      url: "ricerca",
       dataType: 'json',
       delay: 250,
       data: function (params) {
         return {
-          api_key: "ca9d1ed5bdb0e282100b74e5ea8271ce",
-          region: "it",
-          language: "it-IT",
-          sort_by: "popularity.desc",
-          query: params.term
+        	query: params.term
         };
       },
       processResults: function (data, params) {

@@ -28,8 +28,7 @@ public class CheckCambioDatiController extends HttpServlet {
 		try {
 			uNew = AreaUtenteManager.aggiornaUtente(uNew, uAtt);
 			request.getSession().setAttribute("utente", uNew);
-			response.sendRedirect(request.getContextPath());
-			/* TODO questo deve ridirezionare verso l'area utente */
+			response.sendRedirect(request.getContextPath() + "/utente?id=" + uNew.getUsername());
 
 		} catch (DatiOccupati e) {
 			request.getSession().setAttribute("errore", "cambio dati fallito (dati occupati) -> " + e.getCampo());

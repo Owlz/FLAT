@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.exception.DatiOccupati;
 import applicationLogic.models.Utente;
-import storage.UtenteDAO;
+import storage.database.UtenteDAO;
 
 /**
  * Gestisce tutto ciò che riguarda il collegamento fra l'applicazione ed il

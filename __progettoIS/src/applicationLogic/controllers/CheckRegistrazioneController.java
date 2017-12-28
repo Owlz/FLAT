@@ -34,8 +34,7 @@ public class CheckRegistrazioneController extends HttpServlet {
 
 		try {
 			u = RegistrazioneManager.aggiungiUtente(u);
-			response.sendRedirect(request.getContextPath());
-			/* TODO questo deve ridirezionare verso l'area utente */
+			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 
 		} catch (DatiNonValidi e) {
 			request.getSession().setAttribute("errore", "registrazione fallita (dati non validi e/o campi vuoti)");
