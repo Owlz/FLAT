@@ -8,6 +8,7 @@ public class nomeStrano {
 	public static void main(String[] args) {
 		//fdsvsdvpmnsdkvn
 		//dsavnsvòknsdvonsdv
+		// luca pull
 
 	}
 
