@@ -39,53 +39,19 @@ public class Utente {
 		this.ruolo = ruolo;
 	}
 
-	public String getNome() {
-		return nome;
-	}
+	public String getNome() { return nome; }
+	public String getCognome() { return cognome; }
+	public String getUsername() { return username; }
+	public String getPassword() { return password; }
+	public String getEmail() { return email; }
+	public String getRuolo() { return ruolo; }
 
-	public String getCognome() {
-		return cognome;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-	
-	public String getRuolo() {
-		return ruolo;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
+	public void setNome(String nome) { this.nome = nome; }
+	public void setCognome(String cognome) { this.cognome = cognome; }
+	public void setUsername(String username) { this.username = username; }
+	public void setPassword(String password) { this.password = password; }
+	public void setEmail(String email) { this.email = email; }
+	public void setRuolo(String ruolo) { this.ruolo = ruolo; }
 
 	@Override
 	public String toString() {

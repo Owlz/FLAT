@@ -21,13 +21,8 @@ public class DatiOccupati extends Exception {
 		return msg;
 	}
 
-	public String getCampo() {
-		return campo;
-	}
-
-	public void setCampo(String campo) {
-		this.campo = campo;
-	}
+	public String getCampo() { return campo; }
+	public void setCampo(String campo) { this.campo = campo; }
 
 
 }
