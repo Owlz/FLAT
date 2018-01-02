@@ -12,6 +12,7 @@ public class Film {
 	private String descrizione;
 	private String dataDiUscita;
 	private double voto;
+	private int numeroVoti;
 	private String backdrop;
 	
 	public Film(){}
@@ -24,7 +25,8 @@ public class Film {
 	}
 
 	public Film(int id, String titolo, String titoloOriginale, String locandina, ArrayList<String> generi,
-			String linguaOriginale, String descrizione, String dataDiUscita, double voto, String backdrop) {
+			String linguaOriginale, String descrizione, String dataDiUscita, double voto, int numeroVoti,
+			String backdrop) {
 		this.id = id;
 		this.titolo = titolo;
 		this.titoloOriginale = titoloOriginale;
@@ -34,6 +36,7 @@ public class Film {
 		this.descrizione = descrizione;
 		this.dataDiUscita = dataDiUscita;
 		this.voto = voto;
+		this.numeroVoti = numeroVoti;
 		this.backdrop = backdrop;
 	}
 
@@ -46,6 +49,7 @@ public class Film {
 	public String getDescrizione() { return descrizione; }
 	public String getDataDiUscita() { return dataDiUscita; }
 	public double getVoto() { return voto; }
+	public int getNumeroVoti() { return numeroVoti;}
 	public String getBackdrop() { return backdrop; }
 
 	public void setId(int id) { this.id = id; }
@@ -57,6 +61,7 @@ public class Film {
 	public void setDescrizione(String descrizione) { this.descrizione = descrizione; }
 	public void setDataDiUscita(String dataDiUscita) { this.dataDiUscita = dataDiUscita; }
 	public void setVoto(double voto) { this.voto = voto; }
+	public void setNumeroVoti(int numeroVoti) { this.numeroVoti = numeroVoti; }
 	public void setBackdrop(String backdrop) { this.backdrop = backdrop; }
 
 	@Override
@@ -67,9 +72,11 @@ public class Film {
 				+ (generi != null ? "generi=" + generi + ", " : "")
 				+ (linguaOriginale != null ? "linguaOriginale=" + linguaOriginale + ", " : "")
 				+ (descrizione != null ? "descrizione=" + descrizione + ", " : "")
-				+ (dataDiUscita != null ? "dataDiUscita=" + dataDiUscita + ", " : "") + "voto=" + voto + ", "
-				+ (backdrop != null ? "backdrop=" + backdrop : "") + "]";
+				+ (dataDiUscita != null ? "dataDiUscita=" + dataDiUscita + ", " : "") + "voto=" + voto + ", numeroVoti="
+				+ numeroVoti + ", " + (backdrop != null ? "backdrop=" + backdrop : "") + "]";
 	}
+
+	
 
 	
 }

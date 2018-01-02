@@ -1,36 +1,28 @@
 package applicationLogic.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import applicationLogic.managers.RicercaManager;
 import applicationLogic.models.Film;
 
-@WebServlet("/ricerca")
-public class RicercaController extends HttpServlet {
+@WebServlet("/film")
+public class VisualizzaFilm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String query = request.getParameter("query");
+		String idStringa = request.getParameter("id");
 		
-		ArrayList<Film> films = RicercaManager.ricercaFilms(query);
+		Film film = RicercaManager.ricercaFilm(idStringa);
 		
-		JSONArray array = new JSONArray(films);
-		JSONObject obj = new JSONObject().put("results", array);
-		
-		response.setContentType("text/json");
-		response.getWriter().write(obj.toString());
+		request.setAttribute("film", film);
+		request.getRequestDispatcher("film_view.jsp").forward(request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

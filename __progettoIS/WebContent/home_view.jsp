@@ -20,33 +20,39 @@
 function formatFilm (film) {
     var baseUrl = "http://image.tmdb.org/t/p/w45";
     var $film = $(
-      '<span><img src="' + baseUrl +  film.poster_path + '" class="img-flag" /> ' + film.title + '</span>'
+      '<span><img src="' + baseUrl +  film.locandina + '" class="img-flag" /> ' + film.titolo + '</span>'
     );
     return $film;
   };
 
-$(".js-example-basic-single").select2({
-    ajax: {
-      url: "ricerca",
-      dataType: 'json',
-      delay: 250,
-      data: function (params) {
-        return {
-        	query: params.term
-        };
-      },
-      processResults: function (data, params) {
-        return {
-          results: data.results
-        };
-      },
-      cache: true
-    },
-    placeholder: 'Cerca un film',
-    escapeMarkup: function (markup) { return markup; },
-    minimumInputLength: 2,
-    templateResult: formatFilm
-  });
+  $(".js-example-basic-single")
+	.select2({
+		ajax: {
+			url: "ricerca",
+			dataType: 'json',
+			delay: 250,
+			data: function(params) {
+				return {
+					query: params.term
+				};
+			},
+			processResults: function(data, params) {
+				return {
+					results: data.results
+				};
+			},
+			cache: true
+		},
+		placeholder: 'Cerca un film',
+		escapeMarkup: function(markup) {
+			return markup;
+		},
+		minimumInputLength: 2,
+		templateResult: formatFilm
+	})
+	.on("select2:selecting", function(e) {
+		window.location.href = "film?id=" + e.params.args.data.id;
+	});
 </script>
 </body>
 </html>
