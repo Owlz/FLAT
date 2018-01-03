@@ -61,7 +61,7 @@ local.properties
 
 ### Java ###
 # Personal classes
-DBConnection.java
+**/DBConnection.java
 
 # Compiled class file
 *.class
