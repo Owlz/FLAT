@@ -1,9 +1,11 @@
 package applicationLogic.managers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import applicationLogic.models.Film;
 import storage.api.ApiRequest;
+import storage.database.FilmDAO;
 
 /**
  * Gestisce tutto ciò che riguarda il collegamento fra l'applicazione e la
@@ -14,8 +16,7 @@ import storage.api.ApiRequest;
  */
 public class RicercaManager {
 
-	public RicercaManager() {
-		/* Costruttore vuoto e privato poichè non istanziabile */}
+	private RicercaManager() {/* Costruttore vuoto e privato poichè non istanziabile */}
 
 	public static ArrayList<Film> ricercaFilms(String query) {
 		String richiesta = query.trim();
@@ -31,7 +32,13 @@ public class RicercaManager {
 		}
 
 		if (id != -1) {
-			return ApiRequest.getFilm(id);
+			Film filmOut =  ApiRequest.getFilm(id);
+			
+			try {
+				FilmDAO.inserisciUtente(filmOut);
+			} catch (SQLException e) {/*film già presente*/}
+			
+			return filmOut;
 		} else {
 			return new Film(0, 
 					"Errore richiesta - Titolo",
@@ -46,4 +53,6 @@ public class RicercaManager {
 					"Errore richiesta - Backdrop");
 		}
 	}
+	
+	
 }

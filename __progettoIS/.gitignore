@@ -60,6 +60,9 @@ local.properties
 .classpath
 
 ### Java ###
+# Personal classes
+DBConnection.java
+
 # Compiled class file
 *.class
 
