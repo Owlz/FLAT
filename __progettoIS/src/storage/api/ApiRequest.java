@@ -34,8 +34,8 @@ public class ApiRequest {
 		return new JSONObject(source);
 	}
 
-	public static Film getFilm(int id) {
-		String url_request = BASE_URL_MOVIE + id + "?" + API_KEY + "&" + LANGUAGE + "&" + REGION;
+	public static Film getFilm(Film f) {
+		String url_request = BASE_URL_MOVIE + f.getId() + "?" + API_KEY + "&" + LANGUAGE + "&" + REGION;
 		JSONObject obj;
 		try {
 			obj = sendRequest(url_request);
@@ -48,7 +48,7 @@ public class ApiRequest {
 					gen.add(generi.getJSONObject(i).optString("name"));
 			}
 			
-			Film out = new Film(obj.optInt("id"), 
+			f = new Film(obj.optInt("id"), 
 					obj.optString("title"), 
 					obj.optString("original_title"),
 					obj.optString("poster_path"), 
@@ -60,7 +60,7 @@ public class ApiRequest {
 					obj.optInt("vote_count"),
 					obj.optString("backdrop"));
 			
-			return out;
+			return f;
 			
 		} catch (IOException e) {
 			e.printStackTrace();		// server offline

@@ -75,8 +75,15 @@ public class Film {
 				+ (dataDiUscita != null ? "dataDiUscita=" + dataDiUscita + ", " : "") + "voto=" + voto + ", numeroVoti="
 				+ numeroVoti + ", " + (backdrop != null ? "backdrop=" + backdrop : "") + "]";
 	}
-
 	
-
-	
+	@Override
+	public boolean equals(Object o){
+	    if (o == null) return false;
+	    if (!(o instanceof Film)) return false;
+	    if (o == this) return true;
+	    
+	    Film f = (Film) o;
+	    if (this.id == f.getId()) return true;
+	    else return false;
+	}	
 }

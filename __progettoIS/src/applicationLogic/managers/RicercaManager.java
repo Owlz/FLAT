@@ -32,10 +32,12 @@ public class RicercaManager {
 		}
 
 		if (id != -1) {
-			Film filmOut =  ApiRequest.getFilm(id);
+			Film in = new Film();
+			in.setId(id);
+			Film filmOut =  ApiRequest.getFilm(in);
 			
 			try {
-				FilmDAO.inserisciUtente(filmOut);
+				FilmDAO.inserisciFilm(filmOut);
 			} catch (SQLException e) {/*film già presente*/}
 			
 			return filmOut;
@@ -44,7 +46,7 @@ public class RicercaManager {
 					"Errore richiesta - Titolo",
 					"Errore richiesta - Titolo Lingua Originale",
 					"Errore richiesta - Locandina",
-					null,
+					new ArrayList<String>(),
 					"Errore richiesta - Lingua Originale",
 					"Errore richiesta - Descrizione",
 					"Errore richiesta - Data di uscita",

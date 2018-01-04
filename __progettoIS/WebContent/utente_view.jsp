@@ -20,6 +20,7 @@
 	</ul>
 	<% if(datiUtente.getUsername().equals(utente.getUsername())){ %>
 		<a href="cambiodati">Clicca per cambiare i dati dell'account</a>
+		<a href="watchlist">Clicca per visualizzare la watchlist</a>
 	<% } %>
 </body>
 </html>
