@@ -20,7 +20,13 @@ public class RicercaManager {
 
 	public static ArrayList<Film> ricercaFilms(String query) {
 		String richiesta = query.trim();
-		return ApiRequest.getFilms(richiesta);
+		ArrayList<Film> risultato =  ApiRequest.getFilms(richiesta);
+		if(risultato == null){
+			risultato = new ArrayList<Film>();
+			risultato.add(new Film(0, "Errore richiesta", "Errore richiesta", "Errore richiesta"));
+		}
+		return risultato;
+		
 	}
 
 	public static Film ricercaFilm(String idStringa) {

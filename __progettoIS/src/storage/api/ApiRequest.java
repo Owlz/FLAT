@@ -19,19 +19,34 @@ public class ApiRequest {
 	final static String REGION = "region=it";
 
 	protected static JSONObject sendRequest(String query) throws IOException {
-		URL apiRequest = new URL(query);
+		URL apiRequest = new URL(sanitarizza(query));
 		URLConnection connection;
 		connection = apiRequest.openConnection();
 		connection.setDoOutput(true);
 
 		// utf-8 per evitare problemi con caratteri strani
 		Scanner s = new Scanner(apiRequest.openStream(), "UTF-8");
+		
+		/* TODO: 	Può lanciare una null pointer exception su apiRequest.openStream()
+		 * 			quando il film non viene trovato nel database (fatto strano poichè
+		 * 			viene comunque restituito qualcosa dall'api)
+		 */
 
 		// \z significa fino fine richiesta
 		String source = s.useDelimiter("\\Z").next();
 		s.close();
 
 		return new JSONObject(source);
+	}
+
+	protected static String sanitarizza(String query) {
+		return query.replaceAll(" ", "+")
+				.replaceAll("è", "&#232;")
+				.replaceAll(">", "&gt;")
+				.replaceAll("<", "&lt;")
+				.replaceAll("'", "&#39;")
+				.replaceAll("\"", "&quot;")
+				.replaceAll("&", "&amp;");
 	}
 
 	public static Film getFilm(Film f) {
@@ -69,7 +84,7 @@ public class ApiRequest {
 	}
 
 	public static ArrayList<Film> getFilms(String query) {
-		String url_request = BASE_URL_SEARCH + "?" + API_KEY + "&" + REGION + "&" + LANGUAGE + "&query=" + sanitarizza(query);
+		String url_request = BASE_URL_SEARCH + "?" + API_KEY + "&" + REGION + "&" + LANGUAGE + "&query=" + query;
 		ArrayList<Film> listaFilmFinale = new ArrayList<Film>();
 
 		try {
@@ -91,18 +106,8 @@ public class ApiRequest {
 			
 		} catch (IOException e) {
 			e.printStackTrace(); // server offline
-			listaFilmFinale.add(new Film(0, "Errore richiesta", "Errore richiesta", "Errore richiesta"));
-			return listaFilmFinale;
+			return null;
 		}
 	}
 
-	protected static String sanitarizza(String query) {
-		return query.replaceAll(" ", "+")
-				.replaceAll("è", "&#232;")
-				.replaceAll(">", "&gt;")
-				.replaceAll("<", "&lt;")
-				.replaceAll("'", "&#39;")
-				.replaceAll("\"", "&quot;")
-				.replaceAll("&", "&amp;");
-	}
 }
