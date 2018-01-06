@@ -19,7 +19,7 @@ public class ApiRequest {
 	final static String REGION = "region=it";
 
 	protected static JSONObject sendRequest(String query) throws IOException {
-		URL apiRequest = new URL(sanitarizza(query));
+		URL apiRequest = new URL(query);
 		URLConnection connection;
 		connection = apiRequest.openConnection();
 		connection.setDoOutput(true);
@@ -84,7 +84,7 @@ public class ApiRequest {
 	}
 
 	public static ArrayList<Film> getFilms(String query) {
-		String url_request = BASE_URL_SEARCH + "?" + API_KEY + "&" + REGION + "&" + LANGUAGE + "&query=" + query;
+		String url_request = BASE_URL_SEARCH + "?" + API_KEY + "&" + REGION + "&" + LANGUAGE + "&query=" + sanitarizza(query);
 		ArrayList<Film> listaFilmFinale = new ArrayList<Film>();
 
 		try {

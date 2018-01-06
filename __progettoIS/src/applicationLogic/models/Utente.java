@@ -58,5 +58,15 @@ public class Utente {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", username=" + username + ", password=" + password
 				+ ", email=" + email + ", ruolo=" + ruolo + "]";
 	}
-	
+
+	@Override
+	public boolean equals(Object o){
+	    if (o == null) return false;
+	    if (!(o instanceof Utente)) return false;
+	    if (o == this) return true;
+	    
+	    Utente u = (Utente) o;
+	    if (this.username.equals(u.getUsername())) return true;
+	    else return false;
+	}	
 }

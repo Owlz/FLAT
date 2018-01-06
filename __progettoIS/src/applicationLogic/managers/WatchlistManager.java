@@ -68,7 +68,6 @@ public class WatchlistManager {
 			return false;
 			
 		} catch (NumberFormatException | NullPointerException e) {
-			System.out.println("utente non loggato");
 			return false;
 		}
 	}
