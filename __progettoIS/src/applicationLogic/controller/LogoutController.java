@@ -1,29 +1,24 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import applicationLogic.managers.WatchlistManager;
-import applicationLogic.models.Utente;
-
-@WebServlet("/addwatchlist")
-public class WatchlistAggiuntaController extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idFilm = request.getParameter("id");
-		Utente utente = (Utente) request.getSession().getAttribute("utente");
+		HttpSession sessione = request.getSession(false);
 		
-		response.setContentType("text/json");
-		if(WatchlistManager.addWatchlist(idFilm, utente))
-			response.getWriter().write("succ");
-		else
-			response.getWriter().write("fall");
+		if (sessione != null)
+	         sessione.invalidate();
+		
+		response.sendRedirect("./");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

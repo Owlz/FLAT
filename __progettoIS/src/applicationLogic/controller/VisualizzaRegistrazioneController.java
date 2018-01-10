@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

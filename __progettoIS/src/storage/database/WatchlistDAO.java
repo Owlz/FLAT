@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import applicationLogic.models.Film;
-import applicationLogic.models.Utente;
+import applicationLogic.bean.Film;
+import applicationLogic.bean.FilmLocal;
+import applicationLogic.bean.Utente;
 
 public class WatchlistDAO {
 	private static final String INSERT_FILM_WATCHLIST = "INSERT INTO `watch` (`username_utente`, `id_film`) VALUES (?, ?)";
@@ -47,7 +48,7 @@ public class WatchlistDAO {
 
 		ArrayList<Film> lista = new ArrayList<>();
 		while (rs.next()) {
-			Film f = new Film();
+			Film f = new FilmLocal();
 			f.setId(rs.getInt("id_film"));
 			
 			lista.add(f);

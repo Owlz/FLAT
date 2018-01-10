@@ -1,4 +1,4 @@
-package applicationLogic.models;
+package applicationLogic.bean;
 
 /**
  * Classe che modella gli <strong>Utenti</strong> del sistema
@@ -17,7 +17,7 @@ public class Utente {
 	private String ruolo = "visitatore";		//visitatore, utente, moderatore.
 	
 	/**
-	 * Costruttore vuoto, da riempire con Getters e Setters
+	 * Costruttore vuoto
 	 */
 	public Utente() {}
 
@@ -55,8 +55,11 @@ public class Utente {
 
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", username=" + username + ", password=" + password
-				+ ", email=" + email + ", ruolo=" + ruolo + "]";
+		return "Utente [" + (nome != null ? "nome=" + nome + ", " : "")
+				+ (cognome != null ? "cognome=" + cognome + ", " : "")
+				+ (username != null ? "username=" + username + ", " : "")
+				+ (password != null ? "password=" + password + ", " : "")
+				+ (email != null ? "email=" + email + ", " : "") + (ruolo != null ? "ruolo=" + ruolo : "") + "]";
 	}
 
 	@Override

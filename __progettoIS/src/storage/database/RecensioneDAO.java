@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import applicationLogic.models.Film;
-import applicationLogic.models.Recensione;
-import applicationLogic.models.Utente;
+import applicationLogic.bean.Film;
+import applicationLogic.bean.FilmLocal;
+import applicationLogic.bean.Recensione;
+import applicationLogic.bean.Utente;
 
 public class RecensioneDAO {
 	private static final String GET_RECENSIONE_BY_UTENTE = "SELECT * FROM `recensioni` WHERE `usernameUtente`=?";
@@ -29,8 +30,7 @@ public class RecensioneDAO {
 
 		while (rs.next()) {
 			int idFilm = rs.getInt("idFilm");
-			Film f = new Film();
-			f.setId(idFilm);
+			Film f = new FilmLocal(idFilm);
 			
 			int voto = rs.getInt("voto_recensione");
 			String titolo = rs.getString("titolo_recensione");

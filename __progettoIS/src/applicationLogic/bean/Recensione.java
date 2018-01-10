@@ -1,4 +1,4 @@
-package applicationLogic.models;
+package applicationLogic.bean;
 
 public class Recensione {
 	private Utente utente;

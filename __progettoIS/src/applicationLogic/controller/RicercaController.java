@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import applicationLogic.managers.RicercaManager;
-import applicationLogic.models.Film;
+import applicationLogic.bean.Film;
+import applicationLogic.model.RicercaManager;
 
 @WebServlet("/ricerca")
 public class RicercaController extends HttpServlet {

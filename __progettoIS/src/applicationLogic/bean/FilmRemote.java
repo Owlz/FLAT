@@ -1,9 +1,8 @@
-package applicationLogic.models;
+package applicationLogic.bean;
 
 import java.util.ArrayList;
 
-public class Film {
-	private int id;
+public class FilmRemote extends Film {
 	private String titolo;
 	private String titoloOriginale;
 	private String locandina;
@@ -15,19 +14,18 @@ public class Film {
 	private int numeroVoti;
 	private String backdrop;
 	
-	public Film(){}
-	
-	public Film(int id, String titolo, String titoloOriginale, String locandina) {
-		this.id = id;
-		this.titolo = titolo;
-		this.titoloOriginale = titoloOriginale;
-		this.locandina = locandina;
+	public FilmRemote(){
+		super();
 	}
-
-	public Film(int id, String titolo, String titoloOriginale, String locandina, ArrayList<String> generi,
+	
+	public FilmRemote(int id){
+		super(id);
+	}
+	
+	public FilmRemote(int id, String titolo, String titoloOriginale, String locandina, ArrayList<String> generi,
 			String linguaOriginale, String descrizione, String dataDiUscita, double voto, int numeroVoti,
 			String backdrop) {
-		this.id = id;
+		super(id);
 		this.titolo = titolo;
 		this.titoloOriginale = titoloOriginale;
 		this.locandina = locandina;
@@ -39,8 +37,7 @@ public class Film {
 		this.numeroVoti = numeroVoti;
 		this.backdrop = backdrop;
 	}
-
-	public int getId() { return id; }
+	
 	public String getTitolo() { return titolo; }
 	public String getTitoloOriginale() { return titoloOriginale; }
 	public String getLocandina() { return locandina; }
@@ -52,7 +49,6 @@ public class Film {
 	public int getNumeroVoti() { return numeroVoti;}
 	public String getBackdrop() { return backdrop; }
 
-	public void setId(int id) { this.id = id; }
 	public void setTitolo(String titolo) { this.titolo = titolo; }
 	public void setTitoloOriginale(String titoloOriginale) { this.titoloOriginale = titoloOriginale; }
 	public void setLocandina(String locandina) { this.locandina = locandina; }
@@ -63,27 +59,30 @@ public class Film {
 	public void setVoto(double voto) { this.voto = voto; }
 	public void setNumeroVoti(int numeroVoti) { this.numeroVoti = numeroVoti; }
 	public void setBackdrop(String backdrop) { this.backdrop = backdrop; }
+	
+	public static Film generateByStringId(String idString){
+		Integer id = null;
+		try{
+			id = Integer.parseInt(idString);
+		}catch(NullPointerException | NumberFormatException e){}
+		
+		if(id != null) return new FilmRemote(id);
+		else return null;
+	}
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", " + (titolo != null ? "titolo=" + titolo + ", " : "")
+		return getClass().getName() + " [id = "+ getId() + ", " + (titolo != null ? "titolo=" + titolo + ", " : "")
 				+ (titoloOriginale != null ? "titoloOriginale=" + titoloOriginale + ", " : "")
 				+ (locandina != null ? "locandina=" + locandina + ", " : "")
 				+ (generi != null ? "generi=" + generi + ", " : "")
 				+ (linguaOriginale != null ? "linguaOriginale=" + linguaOriginale + ", " : "")
 				+ (descrizione != null ? "descrizione=" + descrizione + ", " : "")
 				+ (dataDiUscita != null ? "dataDiUscita=" + dataDiUscita + ", " : "") + "voto=" + voto + ", numeroVoti="
-				+ numeroVoti + ", " + (backdrop != null ? "backdrop=" + backdrop : "") + "]";
+				+ numeroVoti + ", " + (backdrop != null ? "backdrop=" + backdrop + ", " : "") + "]";
 	}
+
 	
-	@Override
-	public boolean equals(Object o){
-	    if (o == null) return false;
-	    if (!(o instanceof Film)) return false;
-	    if (o == this) return true;
-	    
-	    Film f = (Film) o;
-	    if (this.id == f.getId()) return true;
-	    else return false;
-	}	
+	
+	
 }

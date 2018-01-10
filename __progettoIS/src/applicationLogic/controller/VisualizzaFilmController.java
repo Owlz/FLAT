@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,34 +9,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import applicationLogic.managers.RecensioneManager;
-import applicationLogic.managers.RicercaManager;
-import applicationLogic.managers.WatchlistManager;
-import applicationLogic.models.Film;
-import applicationLogic.models.Recensione;
-import applicationLogic.models.Utente;
+import applicationLogic.bean.Film;
+import applicationLogic.bean.FilmLocal;
+import applicationLogic.bean.Recensione;
+import applicationLogic.bean.Utente;
+import applicationLogic.model.RecensioneManager;
+import applicationLogic.model.RicercaManager;
+import applicationLogic.model.WatchlistManager;
 
 @WebServlet("/film")
 public class VisualizzaFilmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idStringa = request.getParameter("id");
 		Utente u = (Utente) request.getSession().getAttribute("utente");
+
+		String idStringa = request.getParameter("id");
+		Film f = RicercaManager.ricercaFilm(FilmLocal.generateByStringId(idStringa));
 		
-		Film f = RicercaManager.ricercaFilm(idStringa);
-		String watchlist = WatchlistManager.check(idStringa, u) ? "true" : "false";
-		
+		// ottengo una lista di recensioni del film attuale
 		ArrayList<Recensione> listaRec = RecensioneManager.getRecensioniByFilm(f);
 		
-		if(u != null){
+		String watchlist = "false";
+		if(u != null){	
+			// controllo se il film è nella watchlist dell'utente attuale
+			watchlist = WatchlistManager.checkFilmInWatchlist(f, u) ? "true" : "false";
+			
+			//controllo se l'utente ha recensito il film attuale
 			Recensione recUtente = RecensioneManager.getRecensione(u, f);
 			if(listaRec.contains(recUtente)) request.setAttribute("recUtente", recUtente);
+			else request.setAttribute("recUtente", null);
 		}
-		
-		request.setAttribute("film", f);
+
 		request.setAttribute("inWatchlist", watchlist);
 		request.setAttribute("listaRecensioni", listaRec);	// controllare se "size > 0"
+		request.setAttribute("film", f);
 		
 		request.getRequestDispatcher("film_view.jsp").forward(request, response);
 	}

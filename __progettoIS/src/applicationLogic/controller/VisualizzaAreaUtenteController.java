@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import applicationLogic.managers.AreaUtenteManager;
-import applicationLogic.models.Utente;
+import applicationLogic.bean.Utente;
+import applicationLogic.model.GestioneAccountManager;
 
 @WebServlet("/utente")
 public class VisualizzaAreaUtenteController extends HttpServlet {
@@ -20,12 +20,12 @@ public class VisualizzaAreaUtenteController extends HttpServlet {
 		
 		Utente utenteInSessione = (Utente) request.getSession().getAttribute("utente");
 		
-		if(utenteInSessione != null && u.getUsername().equals(utenteInSessione.getUsername())) u = utenteInSessione;
-		else u = AreaUtenteManager.getUtente(u);
+		if(utenteInSessione != null && utenteInSessione.equals(u)) u = utenteInSessione;
+		else u = GestioneAccountManager.getUtente(u);
 		
-		if(u == null)
+		if(u == null)	// caso in cui l'url portava ad un utente che non è nel database
 			response.sendRedirect(request.getContextPath() + "/");
-		else{
+		else{			// caso standard
 			request.setAttribute("datiUtente", u);
 			request.getRequestDispatcher("utente_view.jsp").forward(request, response);
 		}

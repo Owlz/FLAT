@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiOccupati;
-import applicationLogic.managers.AreaUtenteManager;
-import applicationLogic.models.Utente;
+import applicationLogic.model.GestioneAccountManager;
 
 @WebServlet("/controllocambiodati")
 public class CheckCambioDatiController extends HttpServlet {
@@ -26,7 +26,7 @@ public class CheckCambioDatiController extends HttpServlet {
 		uNew.setEmail(request.getParameter("email").trim());
 		
 		try {
-			uNew = AreaUtenteManager.aggiornaUtente(uNew, uAtt);
+			uNew = GestioneAccountManager.aggiornaUtente(uNew, uAtt);
 			request.getSession().setAttribute("utente", uNew);
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + uNew.getUsername());
 

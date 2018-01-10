@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="datiUtente" class="applicationLogic.models.Utente" scope="request"/>
-<jsp:useBean id="utente" class="applicationLogic.models.Utente" scope="session"/>
+<jsp:useBean id="datiUtente" class="applicationLogic.bean.Utente" scope="request"/>
+<jsp:useBean id="utente" class="applicationLogic.bean.Utente" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>

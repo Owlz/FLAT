@@ -1,10 +1,10 @@
-package applicationLogic.managers;
+package applicationLogic.model;
 
 import java.sql.SQLException;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonPresenti;
 import applicationLogic.exception.DatiNonValidi;
-import applicationLogic.models.Utente;
 import storage.database.UtenteDAO;
 
 /**
@@ -25,9 +25,10 @@ public class AutenticazioneManager {
 	public static Utente autenticaUtente(Utente u) throws DatiNonPresenti, DatiNonValidi{
 		Utente uDB;
 		try {
+			/* TODO: qui si controllano i campi del login */
 			uDB = UtenteDAO.getUtente(u);
 			
-			if(uDB.getRuolo().equals("visitatore"))
+			if( uDB.getRuolo().equals("visitatore"))
 				throw new DatiNonPresenti(uDB.getUsername());
 			
 			else if(!uDB.getUsername().equals(u.getUsername()) || !uDB.getPassword().equals(u.getPassword()))

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="errore" class="java.lang.String" scope="session"/>
+<jsp:useBean id="errore" class="java.lang.String" scope="request"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,9 @@
 	<%@include file="includes/_import.jsp" %>
 </head>
 <body>
-<% if(errore != null){ %>
+<% if(!errore.equals("")){ %>
 	<p><%=errore%></p>
-<% } errore = null;%>
+<% }%>
 <form action="checklogin" method="post">
 	Username <input type="text" name="username"><br/>
 	Password <input type="password" name="password">

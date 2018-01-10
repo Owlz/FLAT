@@ -1,4 +1,4 @@
-<jsp:useBean id="utente" class="applicationLogic.models.Utente" scope="session" />
+<jsp:useBean id="utente" class="applicationLogic.bean.Utente" scope="session" />
 
 <div style="background-color: red;"><a href="<%= request.getContextPath() %>">homepage</a> - 
 <% if(!utente.getRuolo().equals("visitatore")){ %>
