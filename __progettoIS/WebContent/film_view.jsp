@@ -39,9 +39,10 @@ accedi per utilizzare la watchlist
 			<p><%=recUtente.getRecensione() %></p>
 		</div>
 <% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
-	<form method="post" action="inseriscirecensione" style="background-color: #b77cf1">
+	<form method="post" action="addrecensione" style="background-color: #b77cf1">
 		Voto (obbligatorio): 
 			<select name="voto">
+				<option selected="selected" value="0">--</option>
 				<% int x = 11; while(x --> 1) { %>
 					<option value="<%= x %>"><%= x %></option>
 				<% } %>

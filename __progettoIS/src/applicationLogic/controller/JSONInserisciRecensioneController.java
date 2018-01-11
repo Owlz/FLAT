@@ -13,6 +13,7 @@ import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.Recensione;
 import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiTroppoBrevi;
+import applicationLogic.exception.VotoMancante;
 import applicationLogic.model.RecensioneManager;
 
 @WebServlet("/addrecensione")
@@ -36,7 +37,9 @@ public class JSONInserisciRecensioneController extends HttpServlet {
 			response.getWriter().write("succ");
 			
 		} catch (DatiTroppoBrevi e) {
-			System.out.println(e.getMessage());
+			response.getWriter().write(e.getMessage());
+			
+		} catch (VotoMancante e) {
 			response.getWriter().write(e.getMessage());
 		}
 	}
