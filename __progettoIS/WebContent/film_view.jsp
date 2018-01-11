@@ -38,7 +38,7 @@ accedi per utilizzare la watchlist
 			<h3>Titolo: <i><%=recUtente.getTitolo() %></i> (Voto: <i><%=recUtente.getVoto() %></i>)</h3>
 			<p><%=recUtente.getRecensione() %></p>
 		</div>
-<% } else /* altrimenti mostra la form per inserirla*/ { %>
+<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
 	<form method="post" action="inseriscirecensione" style="background-color: #b77cf1">
 		Voto (obbligatorio): 
 			<select name="voto">
@@ -56,6 +56,8 @@ accedi per utilizzare la watchlist
  		 <input type="hidden" name="idFilm" value="<%=film.getId() %>">
   		<input type="submit" value="invia la recensione">
 	</form>
+<% } else {%>
+	<h2> Solo gli utenti registrati possono inserire le recensioni</h2>
 <% } %>
 <hr/>
 <% if(listaRec.size() > 0){ %>

@@ -14,7 +14,7 @@ import applicationLogic.bean.Utente;
 import applicationLogic.model.WatchlistManager;
 
 @WebServlet("/removewatchlist")
-public class WatchlistRimozioneController extends HttpServlet {
+public class JSONRimuoviWatchlistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class WatchlistRimozioneController extends HttpServlet {
 		String idFilm = request.getParameter("id");
 		Film f = FilmLocal.generateByStringId(idFilm);
 		
-		response.setContentType("text/json");
+		response.setContentType("application/json");
 		if(WatchlistManager.removeWatchlist(f, utente))
 			response.getWriter().write("succ");
 		else

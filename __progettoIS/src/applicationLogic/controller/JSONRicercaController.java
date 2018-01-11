@@ -16,7 +16,7 @@ import applicationLogic.bean.Film;
 import applicationLogic.model.RicercaManager;
 
 @WebServlet("/ricerca")
-public class RicercaController extends HttpServlet {
+public class JSONRicercaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class RicercaController extends HttpServlet {
 		JSONArray array = new JSONArray(films);
 		JSONObject obj = new JSONObject().put("results", array);
 		
-		response.setContentType("text/json");
+		response.setContentType("application/json");
 		response.getWriter().write(obj.toString());
 	}
 

@@ -64,7 +64,7 @@ public class UtenteDAO {
 		}
 
 		DBConnection.riaggiungiConnessione(con);
-		if(utFinal == null) return utente;
+		if(utFinal == null) return null;
 		else return utFinal;
 	}
 

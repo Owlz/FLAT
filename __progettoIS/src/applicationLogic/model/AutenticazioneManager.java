@@ -28,10 +28,10 @@ public class AutenticazioneManager {
 			/* TODO: qui si controllano i campi del login */
 			uDB = UtenteDAO.getUtente(u);
 			
-			if( uDB.getRuolo().equals("visitatore"))
-				throw new DatiNonPresenti(uDB.getUsername());
+			if(uDB == null)
+				throw new DatiNonPresenti(u.getUsername());
 			
-			else if(!uDB.getUsername().equals(u.getUsername()) || !uDB.getPassword().equals(u.getPassword()))
+			else if(!uDB.getPassword().equals(u.getPassword()))
 				throw new DatiNonValidi(uDB.getUsername()); 
 			
 			else

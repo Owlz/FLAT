@@ -10,25 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import applicationLogic.bean.Film;
 import applicationLogic.bean.FilmLocal;
-import applicationLogic.bean.Recensione;
 import applicationLogic.bean.Utente;
+import applicationLogic.model.WatchlistManager;
 
-@WebServlet("/inseriscirecensione")
-public class CheckInserisciRecensioneController extends HttpServlet {
+@WebServlet("/addwatchlist")
+public class JSONInserisciWatchlistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// posso fare questo parse senza preoccuparmi di nulla perchè viene
-		// passato da una <select>
-		int voto = Integer.parseInt(request.getParameter("voto"));
-		String titolo = request.getParameter("titolo");
-		String recensione = request.getParameter("recensione");
-		Utente u = (Utente) request.getSession().getAttribute("utente");
-		Film f = FilmLocal.generateByStringId(request.getParameter("idFilm"));
+		Utente utente = (Utente) request.getSession().getAttribute("utente");
 
-		Recensione r = new Recensione(u, f, voto, titolo, recensione);
-		/* TODO: continuare questa classe/servlet */
-
+		String idFilm = request.getParameter("id");
+		Film f = FilmLocal.generateByStringId(idFilm);
+		
+		response.setContentType("application/json");
+		if(WatchlistManager.addWatchlist(f, utente))
+			response.getWriter().write("succ");
+		else
+			response.getWriter().write("fall");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
