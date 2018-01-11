@@ -12,33 +12,25 @@ import applicationLogic.bean.Film;
 import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.Recensione;
 import applicationLogic.bean.Utente;
-import applicationLogic.exception.DatiTroppoBrevi;
 import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/addrecensione")
-public class JSONInserisciRecensioneController extends HttpServlet {
+@WebServlet("/removerecensione")
+public class JSONRimuoviRecensioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// posso fare questo parse senza preoccuparmi di nulla perchè viene
-		// passato da una <select>
-		int voto = Integer.parseInt(request.getParameter("voto"));
-		String titolo = request.getParameter("titolo").trim();
-		String recensione = request.getParameter("recensione").trim();
-		Utente u = (Utente) request.getSession().getAttribute("utente");
-		Film f = FilmLocal.generateByStringId(request.getParameter("idFilm"));
-
-		Recensione r = new Recensione(u, f, voto, titolo, recensione);
+		Utente utente = (Utente) request.getSession().getAttribute("utente");
+		
+		String idFilm = request.getParameter("id");
+		Film f = FilmLocal.generateByStringId(idFilm);
+		
+		Recensione r = new Recensione(utente, f);
 		
 		response.setContentType("application/json");
-		try {
-			RecensioneManager.addRecensione(r);
+		if(RecensioneManager.removeRecensione(r))
 			response.getWriter().write("succ");
-			
-		} catch (DatiTroppoBrevi e) {
-			System.out.println(e.getMessage());
-			response.getWriter().write(e.getMessage());
-		}
+		else
+			response.getWriter().write("fall");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

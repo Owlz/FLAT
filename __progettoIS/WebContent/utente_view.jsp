@@ -29,9 +29,28 @@
 		<% } else {%>
 			La tua lista di recensioni
 			<% for(Recensione x: listaRec){ %>
-				<%=x.getFilm().getId() %> - <%=x.getTitolo() %> - <%=x.getVoto() %> <br/>
+				<%=x.getFilm().getId() %> - <%=x.getTitolo() %> - <%=x.getVoto() %> <strong onClick="remove(this,<%=x.getFilm().getId() %>)">Rimuovi</strong> <br/>
 			<% } %>
 		<% } %>
 	<% } %>
+<script>
+function remove(elemento, id){
+	let xml = new XMLHttpRequest();
+	let url = "removerecensione?id="+id;
+	
+	xml.open("get", url, true);
+	xml.send();
+	
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				elemento.innerHTML = "rimosso!";
+			} else {
+				x.innerHTML = "errore, riprova";
+			} 
+		}
+	}
+}
+</script>
 </body>
 </html>

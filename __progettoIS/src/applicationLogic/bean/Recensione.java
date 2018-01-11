@@ -17,6 +17,11 @@ public class Recensione {
 		this.recensione = recensione;
 	}
 
+	public Recensione(Utente u, Film f) {
+		this.utente = u;
+		this.film = f;
+	}
+
 	public Utente getUtente() { return utente; }
 	public Film getFilm() { return film; }
 	public int getVoto() { return voto; }

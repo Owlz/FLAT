@@ -59,4 +59,15 @@ public class RecensioneManager {
 			return new ArrayList<Recensione>();
 		}
 	}
+
+	public static boolean removeRecensione(Recensione r) {
+		try{
+			RecensioneDAO.eliminaRecensione(r);
+			return true;
+			
+		} catch (SQLException e) { // non dovrebbero succedere mai ma provo lo stesso
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
