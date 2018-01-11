@@ -1,0 +1,183 @@
+@CHARSET "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+/* --------------------------  BODY ------------------------------ */
+
+body {
+	font-size: 100%;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+}
+
+/* --------------------------  NAVBAR -------------------------------- */
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: inset;
+	border-bottom: inset;
+	width: 100%;
+	height: 60px;
+	z-index: 1;
+    background-color: #333333;
+}
+
+#spazioLogo {
+	margin-left: 20px;
+}
+
+nav ul {
+	list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 20px;
+    height: 60px;
+    overflow: hidden;
+ 	float: right;
+}
+
+nav li {
+    float: right;
+    padding-top: 10px;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #111111;
+}
+
+
+/* --------------------------  CONTAINER   -------------------------------- */
+#container {
+	width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#content {
+	display: flex;
+    justify-content: space-around;
+}
+
+.wrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.griglia {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.cella {
+	flex: 0 0 30%;
+	margin-top: 15px;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	z-index: 100;
+}
+
+/*stile hover*/
+.cella figure {
+	width: 100%;
+	margin: 0;
+	position: relative;
+	overflow: hidden;
+}
+.cella figure img {
+	width: 100%;
+	position: relative;
+	transition: transform 0.4s;
+}
+.cella figure:hover img{
+	transform: translateY(-70px);
+}
+.cella figure:hover figcaption {
+	opacity: 1;
+	transform: translateY(0px);
+	transition: transform 0.4s, opacity 0.1s;
+}
+
+.cella figcaption {
+	position: absolute;
+	left: 0;
+	background: transparent;
+	color: #1b1b1b;
+	height: auto;
+	width: 100%;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transform: translateY(100%);
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.cella figcaption h3 {
+	margin: 0;
+	color: white;
+}
+
+.cella figcaption a {
+    text-align: center;
+    text-decoration: none;
+    margin: 20px;
+    padding: 10px;
+    width: 40%;
+    border-radius: 2px;
+    border: 1px solid black;
+    display: inline-block;
+    background: transparent;
+}
+
+
+#aside {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 30%;
+    padding: 0.625em;
+}
+
+#aside > div {
+	width: 100%;
+	margin-top: 1.25em; 		/*20px/16px = 1.25em */
+	margin-bottom: 1.25em;		/*20px/16px = 1.25em */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#aside > div > p {
+	width: 90%;
+	font-size: small;
+	color: #191717;
+}
+
+#aside > div > img {
+	width: 90%;
+	padding-bottom: 0.625em;	/* 10px/16px = 0.625em */
+}
+
+
+
+
+
