@@ -9,25 +9,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
-	
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
 	<link rel="stylesheet" href="css/home_view.css" type="text/css">
 </head>
 <body>
+<!--       ********************      NavBar      ********************           -->
 <jsp:include page="includes/_header.jsp"/>
 
-<!--       ********************      NavBar      ********************           -->
-<nav id="nav">
-	<div id="spazioLogo">
-		<img src="img/logo.jpg" height="50" alt="logo">
-	</div>
-	
-	<select class="js-example-basic-single" name="film" style="width: 300px;"></select>
-	
-	<ul>
-		<li><a href="registrazione">Registrati</a></li>
-		<li><a href="login">Login</a></li>
-	</ul>
-</nav>
 
 <!--       ********************      Container     ********************           -->
 
@@ -179,43 +167,6 @@
 	
 </div>
 
-<script type="text/javascript">
-function formatFilm (film) {
-    var baseUrl = "http://image.tmdb.org/t/p/w45";
-    var $film = $(
-      '<span><img src="' + baseUrl +  film.locandina + '" class="img-flag" /> ' + film.titolo + '</span>'
-    );
-    return $film;
-  };
-
-  $(".js-example-basic-single")
-	.select2({
-		ajax: {
-			url: "ricerca",
-			dataType: 'json',
-			delay: 250,
-			data: function(params) {
-				return {
-					query: params.term
-				};
-			},
-			processResults: function(data, params) {
-				return {
-					results: data.results
-				};
-			},
-			cache: true
-		},
-		placeholder: 'Cerca un film',
-		escapeMarkup: function(markup) {
-			return markup;
-		},
-		minimumInputLength: 2,
-		templateResult: formatFilm
-	})
-	.on("select2:selecting", function(e) {
-		window.location.href = "film?id=" + e.params.args.data.id;
-	});
-</script>
+<jsp:include page="includes/_import.jsp"/>
 </body>
 </html>

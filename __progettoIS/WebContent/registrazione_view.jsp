@@ -7,24 +7,13 @@
 <html>
 <head>
 	<title>Registrazione</title>
-	<%@include file="includes/_import.jsp" %>
-	<link rel="stylesheet" href="css/login_view.css" type="text/css">
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
+	<link rel="stylesheet" href="css/registrazione_view.css" type="text/css">
 </head>
 <body>
-
 <!--       ********************      NavBar      ********************           -->
-<nav id="nav">
-	<div id="spazioLogo">
-		<img src="img/logo.jpg" height="50" alt="logo">
-	</div>
-	
-	<select class="js-example-basic-single" name="film" style="width: 300px;"></select>
-	
-	<ul>
-		<li><a href="registrazione">Registrati</a></li>
-		<li><a href="login">Login</a></li>
-	</ul>
-</nav>
+
+<jsp:include page="includes/_header.jsp"/>
 
 
 <!--       ********************      Container     ********************           -->
@@ -43,7 +32,6 @@
 	</form>
 </div>
 
-
+<jsp:include page="includes/_import.jsp"/>
 </body>
-
 </html>

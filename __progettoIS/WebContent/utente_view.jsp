@@ -8,31 +8,48 @@
 <html>
 <head>
 	<title>Area Utente</title>
-	<%@include file="includes/_import.jsp" %>
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
+	<link rel="stylesheet" href="css/utente_view.css" type="text/css">
 </head>
 <body>
-	<jsp:include page="includes/_header.jsp"/>
-	<ul>
-		<li><%=datiUtente.getUsername()%></li>
-		<li><%=datiUtente.getPassword()%></li>
-		<li><%=datiUtente.getNome()%></li>
-		<li><%=datiUtente.getCognome()%></li>
-		<li><%=datiUtente.getEmail()%></li>
-		<li><%=datiUtente.getRuolo()%></li>
-	</ul>
+<!--       ********************      NavBar      ********************           -->
+<jsp:include page="includes/_header.jsp"/>
+
+
+<!--       ********************      Container     ********************           -->
+<div id="aside">
+	
+		<h4><%=datiUtente.getNome()%></h4>
+		<h4><%=datiUtente.getCognome()%></h4>
+		<h4><%=datiUtente.getUsername()%></h4>
+		<h4><%=datiUtente.getPassword()%> <span style="color:red">da togliere</span></h4>
+		<h4><%=datiUtente.getEmail()%> <span style="color:red">da togliere</span></h4>
+		<h4><%=datiUtente.getRuolo()%> <span style="color:red">da togliere</span></h4>
+
 	<% if(datiUtente.equals(utente)){ %>
-		<a href="cambiodati">Clicca per cambiare i dati dell'account</a>
-		<a href="watchlist">Clicca per visualizzare la watchlist</a><br/>
+		<a href="cambiodati">Modifica Dati</a>
+		<a href="watchlist">La tua watchlist</a>
+	<% } %>
+</div>
+
+
+<div id="content">
+	<% if(datiUtente.equals(utente)){ %>
 		
 		<% if(listaRec.size() == 0){ %>
-			Non hai ancora fatto recensioni <br/>
-		<% } else {%>
-			La tua lista di recensioni
+			<p> Non hai ancora fatto recensioni</p> <br/>
+		<% } else { %>
+			<p> La tua lista di recensioni </p>
 			<% for(Recensione x: listaRec){ %>
 				<%=x.getFilm().getId() %> - <%=x.getTitolo() %> - <%=x.getVoto() %> <strong onClick="remove(this,<%=x.getFilm().getId() %>)">Rimuovi</strong> <br/>
 			<% } %>
 		<% } %>
+		
 	<% } %>
+</div>
+
+
+
 <script>
 function remove(elemento, id){
 	let xml = new XMLHttpRequest();
@@ -52,5 +69,6 @@ function remove(elemento, id){
 	}
 }
 </script>
+<jsp:include page="includes/_import.jsp"/>
 </body>
 </html>
