@@ -22,7 +22,7 @@ public class GestioneAccountManager {
 	public static Utente getUtente(Utente u) {
 			Utente utenteReturn;
 			try{
-				utenteReturn = UtenteDAO.getUtente(u);
+				utenteReturn = UtenteDAO.select(u);
 			} catch (SQLException e){
 				e.printStackTrace();
 				utenteReturn = null;
@@ -38,7 +38,7 @@ public class GestioneAccountManager {
 		if(uNew.getPassword() != null && !uNew.getPassword().equals("")) uAtt.setPassword(uNew.getPassword());
 
 		try{
-			Utente u = UtenteDAO.aggiornaUtente(uAtt);
+			Utente u = UtenteDAO.update(uAtt);
 			return u;
 		}catch (SQLException e) {
 			throw new DatiOccupati(e.getMessage());

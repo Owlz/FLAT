@@ -28,6 +28,7 @@ public class CheckLoginController extends HttpServlet {
 		
 		try {
 			u = AutenticazioneManager.autenticaUtente(u);
+			
 			request.getSession().setAttribute("utente", u);
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 			

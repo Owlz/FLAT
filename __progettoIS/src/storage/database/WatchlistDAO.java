@@ -11,13 +11,13 @@ import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.Utente;
 
 public class WatchlistDAO {
-	private static final String INSERT_FILM_WATCHLIST = "INSERT INTO `watch` (`username_utente`, `id_film`) VALUES (?, ?)";
-	private static final String REMOVE_FILM_WATCHLIST = "DELETE FROM `watch` WHERE `username_utente`=? AND `id_film`=?";
-	private static final String GET_WATCHLIST_UTENTE = "SELECT * FROM `watch` WHERE `username_utente`=?";
+	private static final String INSERT = "INSERT INTO `watch` (`username_utente`, `id_film`) VALUES (?, ?)";
+	private static final String REMOVE = "DELETE FROM `watch` WHERE `username_utente`=? AND `id_film`=?";
+	private static final String SELECT = "SELECT * FROM `watch` WHERE `username_utente`=?";
 
-	public static void inserisciFilmWatchlist(Film f, Utente u) throws SQLException {
+	public static void insert(Film f, Utente u) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
-		PreparedStatement pst = con.prepareStatement(INSERT_FILM_WATCHLIST);
+		PreparedStatement pst = con.prepareStatement(INSERT);
 		pst.setString(1, u.getUsername());
 		pst.setInt(2, f.getId());
 
@@ -27,9 +27,9 @@ public class WatchlistDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
-	public static void rimuoviFilmWatchlist(Film f, Utente u) throws SQLException {
+	public static void removeFilm(Film f, Utente u) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
-		PreparedStatement pst = con.prepareStatement(REMOVE_FILM_WATCHLIST);
+		PreparedStatement pst = con.prepareStatement(REMOVE);
 		pst.setString(1, u.getUsername());
 		pst.setInt(2, f.getId());
 
@@ -39,9 +39,9 @@ public class WatchlistDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
-	public static ArrayList<Film> getWatchlistUtente(Utente u) throws SQLException {
+	public static ArrayList<Film> selectByUser(Utente u) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
-		PreparedStatement pst = con.prepareStatement(GET_WATCHLIST_UTENTE);
+		PreparedStatement pst = con.prepareStatement(SELECT);
 		pst.setString(1, u.getUsername());
 		ResultSet rs = pst.executeQuery();
 		con.commit();

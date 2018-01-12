@@ -14,7 +14,7 @@ public class WatchlistManager {
 
 	public static boolean addWatchlist(Film f, Utente u) {
 		try{
-			WatchlistDAO.inserisciFilmWatchlist(f, u);
+			WatchlistDAO.insert(f, u);
 			return true;
 			
 		} catch (SQLException e) { // non dovrebbero succedere mai ma provo lo stesso
@@ -25,7 +25,7 @@ public class WatchlistManager {
 
 	public static boolean removeWatchlist(Film f, Utente u) {		
 		try{
-			WatchlistDAO.rimuoviFilmWatchlist(f, u);
+			WatchlistDAO.removeFilm(f, u);
 			return true;
 			
 		} catch (SQLException e) { // non dovrebbero succedere mai ma provo lo stesso
@@ -36,7 +36,7 @@ public class WatchlistManager {
 
 	public static boolean checkFilmInWatchlist(Film f, Utente u) {		
 		try{
-			ArrayList<Film> watchlist = WatchlistDAO.getWatchlistUtente(u);
+			ArrayList<Film> watchlist = WatchlistDAO.selectByUser(u);
 			
 			if(watchlist.contains(f)) return true;
 			else return false;
@@ -52,9 +52,9 @@ public class WatchlistManager {
 		ArrayList<FilmLocal> out = new ArrayList<FilmLocal>();
 		
 		try{
-			watchlistSoloID = WatchlistDAO.getWatchlistUtente(u);
+			watchlistSoloID = WatchlistDAO.selectByUser(u);
 			for(Film x: watchlistSoloID){
-				FilmLocal attuale = FilmLocalDAO.getFilm((FilmLocal) x);
+				FilmLocal attuale = FilmLocalDAO.select((FilmLocal) x);
 				if(attuale != null)	out.add(attuale);
 			}
 			return out;

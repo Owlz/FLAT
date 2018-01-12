@@ -39,6 +39,10 @@ public class Utente {
 		this.ruolo = ruolo;
 	}
 
+	public Utente(String username) {
+		this.username = username;
+	}
+
 	public String getNome() { return nome; }
 	public String getCognome() { return cognome; }
 	public String getUsername() { return username; }

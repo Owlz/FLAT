@@ -18,7 +18,7 @@ public class RecensioneManager {
 		int LUNGHEZZA_MINIMA_REVIEW = 20;
 		int LUNGHEZZA_MINIMA_TITOLO = 5;
 		
-		if(!r.getRecensione().equals("") && r.getRecensione().length() < LUNGHEZZA_MINIMA_REVIEW)
+		if(!r.getTesto().equals("") && r.getTesto().length() < LUNGHEZZA_MINIMA_REVIEW)
 			throw new DatiTroppoBrevi("Il testo della recensione non può essere meno di "+ LUNGHEZZA_MINIMA_REVIEW +" caratteri");
 		
 		if(!r.getTitolo().equals("") && r.getTitolo().length() < LUNGHEZZA_MINIMA_TITOLO)
@@ -28,7 +28,7 @@ public class RecensioneManager {
 			throw new VotoMancante();
 		
 		try {
-			RecensioneDAO.inserisciRecensione(r);
+			RecensioneDAO.insert(r);
 		} catch (SQLException e) {
 			// query mal scritta o dati inseriti non corretti, non dovrebbe mai succedere
 			// quindi è corretto non fare nulla 
@@ -36,37 +36,52 @@ public class RecensioneManager {
 		}
 	}
 	
-
-	public static Recensione getRecensione(Utente u, Film f) {
-		try{
-			return RecensioneDAO.getRecensione(u, f);
+	public static Recensione get(Recensione r) {
+		try{			
+			return RecensioneDAO.selectById(r);
+			
 		} catch (SQLException e){
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static ArrayList<Recensione> getRecensioniByFilm(Film f) {
+	public static Recensione get(Utente u, Film f) {
 		try{
-			return RecensioneDAO.getRecensioni(f);
+			Recensione r = new Recensione();
+			r.setFilm(f);
+			r.setUtente(u);
+			
+			return RecensioneDAO.selectByUtenteFilm(r);
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static ArrayList<Recensione> get(Film f) {
+		try{
+			return RecensioneDAO.selectByFilm(f);
 		}catch (SQLException e){
 			e.printStackTrace();
 			return new ArrayList<Recensione>();
 		}
 	}
 
-	public static ArrayList<Recensione> getRecensioniByUtente(Utente u) {
+	public static ArrayList<Recensione> get(Utente u) {
 		try{
-			return RecensioneDAO.getRecensioni(u);
+			return RecensioneDAO.selectByUtente(u);
+			
 		}catch (SQLException e){
 			e.printStackTrace();
 			return new ArrayList<Recensione>();
 		}
 	}
 
-	public static boolean removeRecensione(Recensione r) {
+	public static boolean rimuovi(Recensione r) {
 		try{
-			RecensioneDAO.eliminaRecensione(r);
+			RecensioneDAO.delete(r);
 			return true;
 			
 		} catch (SQLException e) { // non dovrebbero succedere mai ma provo lo stesso

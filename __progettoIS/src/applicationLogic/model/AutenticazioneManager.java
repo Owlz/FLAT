@@ -26,7 +26,7 @@ public class AutenticazioneManager {
 		Utente uDB;
 		try {
 			/* TODO: qui si controllano i campi del login */
-			uDB = UtenteDAO.getUtente(u);
+			uDB = UtenteDAO.select(u);
 			
 			if(uDB == null)
 				throw new DatiNonPresenti(u.getUsername());

@@ -41,7 +41,7 @@ public class RegistrazioneManager {
 
 		} else {
 			try {
-				return UtenteDAO.inserisciUtente(utente);
+				return UtenteDAO.insert(utente);
 			} catch (SQLException e) {
 				throw new DatiOccupati(e.getMessage());
 			}

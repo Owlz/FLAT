@@ -25,11 +25,16 @@ public class JSONInserisciRecensioneController extends HttpServlet {
 		// passato da una <select>
 		int voto = Integer.parseInt(request.getParameter("voto"));
 		String titolo = request.getParameter("titolo").trim();
-		String recensione = request.getParameter("recensione").trim();
+		String testo = request.getParameter("recensione").trim();
 		Utente u = (Utente) request.getSession().getAttribute("utente");
 		Film f = FilmLocal.generateByStringId(request.getParameter("idFilm"));
 
-		Recensione r = new Recensione(u, f, voto, titolo, recensione);
+		Recensione r = new Recensione();
+		r.setFilm(f);
+		r.setUtente(u);
+		r.setVoto(voto);
+		r.setTitolo(titolo);
+		r.setTesto(testo);
 		
 		response.setContentType("application/json");
 		try {

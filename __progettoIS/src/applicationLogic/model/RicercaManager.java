@@ -38,7 +38,7 @@ public class RicercaManager {
 		FilmRemote fOut = null;
 		try {
 			fOut = FilmRemoteDAO.getFilm(f);
-			FilmLocalDAO.insertFilm(fOut);
+			FilmLocalDAO.insert(fOut);
 			return fOut;
 		} catch (SQLException e) { /* film già presente nel database locale */
 			return fOut;

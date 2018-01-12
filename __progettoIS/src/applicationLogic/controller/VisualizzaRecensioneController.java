@@ -8,26 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import applicationLogic.bean.FilmRemote;
 import applicationLogic.bean.Recensione;
-import applicationLogic.bean.Utente;
 import applicationLogic.model.RecensioneManager;
+import applicationLogic.model.RicercaManager;
 
-@WebServlet("/removerecensione")
-public class JSONRimuoviRecensioneController extends HttpServlet {
+@WebServlet("/recensione")
+public class VisualizzaRecensioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utente utente = (Utente) request.getSession().getAttribute("utente");
-		
 		String idRecensione = request.getParameter("id");
 		Recensione r = Recensione.generateByStringId(idRecensione);
 		r = RecensioneManager.get(r);
+		FilmRemote f = RicercaManager.ricercaFilm(r.getFilm()); /* TODO: non deve cercarlo da dentro all'api, è overkill */
+		r.setFilm(f);
 		
-		response.setContentType("application/json");
-		if(utente != null && utente.getUsername().equals(r.getUtente().getUsername()) && RecensioneManager.rimuovi(r))
-			response.getWriter().write("succ");
-		else
-			response.getWriter().write("fall");
+		request.setAttribute("recensione", r);
+		request.getRequestDispatcher("recensione_view.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

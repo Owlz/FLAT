@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/logout")
-public class LogoutController extends HttpServlet {
+public class JSONLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,7 +18,8 @@ public class LogoutController extends HttpServlet {
 		if (sessione != null)
 	         sessione.invalidate();
 		
-		response.sendRedirect("./");
+		response.setContentType("application/json");
+		response.getWriter().write("succ");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

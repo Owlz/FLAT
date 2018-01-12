@@ -18,8 +18,7 @@ import applicationLogic.model.RecensioneManager;
 public class VisualizzaAreaUtenteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente u = new Utente();
 		u.setUsername(request.getParameter("id"));
 		u = GestioneAccountManager.getUtente(u);
@@ -33,7 +32,7 @@ public class VisualizzaAreaUtenteController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/");
 
 		else { // caso standard
-			ArrayList<Recensione> listaRecUtente = RecensioneManager.getRecensioniByUtente(u);
+			ArrayList<Recensione> listaRecUtente = RecensioneManager.get(u);
 
 			request.setAttribute("recensioniUtente", listaRecUtente);
 			request.setAttribute("datiUtente", u);

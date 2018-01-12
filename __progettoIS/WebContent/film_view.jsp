@@ -36,7 +36,7 @@ accedi per utilizzare la watchlist
 	<h2>La tua recensione:</h2>
 	<div id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
 			<h3>Titolo: <i><%=recUtente.getTitolo() %></i> (Voto: <i><%=recUtente.getVoto() %></i>)</h3>
-			<p><%=recUtente.getRecensione() %></p>
+			<p><%=recUtente.getTesto() %></p>
 		</div>
 <% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
 	<form method="post" action="addrecensione" style="background-color: #b77cf1">
@@ -67,7 +67,7 @@ accedi per utilizzare la watchlist
 		<% if(x.getUtente().equals(utente)) continue; %>
 		<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
 			<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
-			<p><%=x.getRecensione() %></p>
+			<p><%=x.getTesto() %></p>
 		</div>
 	<% } %>
 <% } %>

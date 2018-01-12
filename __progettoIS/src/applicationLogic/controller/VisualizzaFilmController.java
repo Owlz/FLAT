@@ -28,7 +28,7 @@ public class VisualizzaFilmController extends HttpServlet {
 		Film f = RicercaManager.ricercaFilm(FilmLocal.generateByStringId(idStringa));
 		
 		// ottengo una lista di recensioni del film attuale
-		ArrayList<Recensione> listaRec = RecensioneManager.getRecensioniByFilm(f);
+		ArrayList<Recensione> listaRec = RecensioneManager.get(f);
 		
 		String watchlist = "false";
 		if(u != null){	
@@ -36,7 +36,7 @@ public class VisualizzaFilmController extends HttpServlet {
 			watchlist = WatchlistManager.checkFilmInWatchlist(f, u) ? "true" : "false";
 			
 			//controllo se l'utente ha recensito il film attuale
-			Recensione recUtente = RecensioneManager.getRecensione(u, f);
+			Recensione recUtente = RecensioneManager.get(u, f);
 			if(listaRec.contains(recUtente)) request.setAttribute("recUtente", recUtente);
 			else request.setAttribute("recUtente", null);
 		}

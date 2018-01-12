@@ -9,12 +9,12 @@ import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.FilmRemote;
 
 public class FilmLocalDAO {
-	private static final String INSERT_FILM = "INSERT INTO `films` (`id`, `titolo`, `locandina`, `titolo_orig`) VALUES (?, ?, ?, ?);";
-	private static final String GET_FILM = "SELECT * FROM `films` WHERE `id`=?";
+	private static final String INSERT = "INSERT INTO `films` (`id`, `titolo`, `locandina`, `titolo_orig`) VALUES (?, ?, ?, ?);";
+	private static final String SELECT = "SELECT * FROM `films` WHERE `id`=?";
 	
-	public static void insertFilm(FilmRemote fOut) throws SQLException {
+	public static void insert(FilmRemote fOut) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
-		PreparedStatement pst = con.prepareStatement(INSERT_FILM);
+		PreparedStatement pst = con.prepareStatement(INSERT);
 		pst.setInt(1, fOut.getId());
 		pst.setString(2, fOut.getTitolo());
 		pst.setString(3, fOut.getLocandina());
@@ -26,9 +26,9 @@ public class FilmLocalDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
-	public static FilmLocal getFilm(FilmLocal f) throws SQLException {
+	public static FilmLocal select(FilmLocal f) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
-		PreparedStatement pst = con.prepareStatement(GET_FILM);
+		PreparedStatement pst = con.prepareStatement(SELECT);
 		pst.setInt(1, f.getId());
 		ResultSet rs = pst.executeQuery();
 		con.commit();
