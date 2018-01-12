@@ -10,7 +10,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title><%=film.getTitolo() %> (<%=film.getDataDiUscita().substring(0, 4) %>)</title>
+<title><%=film.getTitolo() %> (<%=(film.getDataDiUscita()!= null) ? film.getDataDiUscita().substring(0, 4) : "" %>)</title>
 <%@include file="includes/_import.jsp" %>
 </head>
 <body>
