@@ -16,10 +16,10 @@ public class DBConnection {
 	// Variabili
 	public static final String NOME_DRIVER = "com.mysql.jdbc.Driver";
 	public static final String NOME_DATABASE = "is_progetto";
-	public static final String LINK_DATABASE = "jdbc:mysql://localhost/" + NOME_DATABASE
+	public static final String LINK_DATABASE = "jdbc:mysql://localhost:3306/" + NOME_DATABASE
 			+ "?verifyServerCertificate=false&useSSL=true";
 	public static final String USR_DATABASE = "root";
-	public static final String PSW_DATABASE = "password";
+	public static final String PSW_DATABASE = "admin";
 
 	private static ArrayList<Connection> connPool;
 
