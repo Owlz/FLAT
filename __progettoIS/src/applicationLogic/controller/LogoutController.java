@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,21 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Implementazione della gestione della Homepage lato server
- * @author Luca
- * @since 1.0
- */
-@WebServlet("")
-public class HomepageController extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("home_view.jsp").forward(request, response);
+		HttpSession sessione = request.getSession(false);
+		
+		if (sessione != null)
+	         sessione.invalidate();
+		
+		response.sendRedirect("./");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

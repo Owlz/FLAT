@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonPresenti;
 import applicationLogic.exception.DatiNonValidi;
-import applicationLogic.managers.AutenticazioneManager;
-import applicationLogic.models.Utente;
+import applicationLogic.model.AutenticazioneManager;
 
 /**
  * Implementazione del controllo dati del login lato server
@@ -32,12 +32,12 @@ public class CheckLoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 			
 		} catch (DatiNonPresenti e) {
-			request.getSession().setAttribute("errore", "login fallito, dati non presenti (username errato) -> " + e.getCampo());
-			response.sendRedirect(request.getContextPath() + "/login");
+			request.setAttribute("errore", "login fallito, dati non presenti (username errato) -> " + e.getCampo());
+			request.getRequestDispatcher("login").forward(request, response);
 			
 		} catch (DatiNonValidi e) {
-			request.getSession().setAttribute("errore", "login fallito, dati non validi (username azzeccato ma password errata)");
-			response.sendRedirect(request.getContextPath() + "/login");
+			request.setAttribute("errore", "login fallito, dati non validi (username azzeccato ma password errata)");
+			request.getRequestDispatcher("login").forward(request, response);
 		}
 	}
 	

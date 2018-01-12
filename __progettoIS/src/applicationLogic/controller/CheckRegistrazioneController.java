@@ -1,4 +1,4 @@
-package applicationLogic.controllers;
+package applicationLogic.controller;
 
 import java.io.IOException;
 
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.exception.DatiOccupati;
-import applicationLogic.managers.RegistrazioneManager;
-import applicationLogic.models.Utente;
+import applicationLogic.model.RegistrazioneManager;
 
 /**
  * Implementazione del controllo della registrazione lato server
@@ -34,15 +34,17 @@ public class CheckRegistrazioneController extends HttpServlet {
 
 		try {
 			u = RegistrazioneManager.aggiungiUtente(u);
+			
+			request.getSession().setAttribute("utente", u);
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 
 		} catch (DatiNonValidi e) {
-			request.getSession().setAttribute("errore", "registrazione fallita (dati non validi e/o campi vuoti)");
-			response.sendRedirect(request.getContextPath() + "/registrazione");
+			request.setAttribute("errore", "registrazione fallita (dati non validi e/o campi vuoti)");
+			request.getRequestDispatcher("registrazione").forward(request, response);
 
 		} catch (DatiOccupati e) {
-			request.getSession().setAttribute("errore", "registrazione fallita (dati occupati) -> " + e.getCampo());
-			response.sendRedirect(request.getContextPath() + "/registrazione");
+			request.setAttribute("errore", "registrazione fallita (dati occupati) -> " + e.getCampo());
+			request.getRequestDispatcher("registrazione").forward(request, response);
 		}
 	}
 

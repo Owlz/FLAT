@@ -1,9 +1,9 @@
-package applicationLogic.managers;
+package applicationLogic.model;
 
 import java.sql.SQLException;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiOccupati;
-import applicationLogic.models.Utente;
 import storage.database.UtenteDAO;
 
 /**
@@ -11,8 +11,8 @@ import storage.database.UtenteDAO;
  * @author Luca
  * @since 1.0
  */
-public class AreaUtenteManager {
-	private AreaUtenteManager() {/*Costruttore vuoto e privato poichè non istanziabile*/}
+public class GestioneAccountManager {
+	private GestioneAccountManager() {/*Costruttore vuoto e privato poichè non istanziabile*/}
 
 	/**
 	 * Permette di ottenere tutte le informazioni di un utente

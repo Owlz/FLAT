@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import applicationLogic.models.Utente;
+import applicationLogic.bean.Utente;
 
 public class UtenteDAO {
 	private static final String GET_UTENTE = "SELECT * FROM utenti WHERE username = ?";
@@ -31,14 +31,13 @@ public class UtenteDAO {
 	}
 
 	public static Utente getUtente(Utente utente) throws SQLException {
-		Utente utFinal = null;
-
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(GET_UTENTE);
 		pst.setString(1, utente.getUsername());
 		ResultSet rs = pst.executeQuery();
 		con.commit();
 
+		Utente utFinal = null;
 		while (rs.next()) {
 			String username = rs.getString("username");
 
@@ -65,7 +64,8 @@ public class UtenteDAO {
 		}
 
 		DBConnection.riaggiungiConnessione(con);
-		return utFinal;
+		if(utFinal == null) return null;
+		else return utFinal;
 	}
 
 	public static Utente aggiornaUtente(Utente utente) throws SQLException {

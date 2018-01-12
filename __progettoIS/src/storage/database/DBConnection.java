@@ -37,7 +37,6 @@ public class DBConnection {
 		Connection con = DriverManager.getConnection(LINK_DATABASE, USR_DATABASE, PSW_DATABASE);
 		return con;
 	}
-
 	/**
 	 * Ritorna (e all'occorrenza crea) una connessione con il database
 	 * @return un oggetto di tipo "Connection"

@@ -1,10 +1,10 @@
-package applicationLogic.managers;
+package applicationLogic.model;
 
 import java.sql.SQLException;
 
+import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.exception.DatiOccupati;
-import applicationLogic.models.Utente;
 import storage.database.UtenteDAO;
 
 /**
@@ -30,7 +30,7 @@ public class RegistrazioneManager {
 	 *             nel caso i dati inseriti siano già occupati nel database
 	 */
 	public static Utente aggiungiUtente(Utente utente) throws DatiNonValidi, DatiOccupati {
-
+		/* TODO: qui si controllano i campi della registrazione */
 		if (utente.getUsername().equals("")
 				|| utente.getPassword().equals("")
 				|| utente.getNome().equals("")
