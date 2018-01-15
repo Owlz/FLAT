@@ -10,68 +10,92 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title><%=film.getTitolo() %> (<%=(film.getDataDiUscita()!= null) ? film.getDataDiUscita().substring(0, 4) : "" %>)</title>
-<%@include file="includes/_import.jsp" %>
+	<title><%=film.getTitolo() %> (<%=(film.getDataDiUscita()!= null) ? film.getDataDiUscita().substring(0, 4) : "" %>)</title>
+	<%@include file="includes/_import.jsp" %>
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
+	<link rel="stylesheet" href="css/film_view.css" type="text/css">	
 </head>
+
 <body>
+<!--       ********************      NavBar      ********************           -->
 <jsp:include page="includes/_header.jsp"/>
-<%=film.getTitolo() %>
-<br>
-<%=film.getDescrizione() %>
-<img height=100px width=75px src="http://image.tmdb.org/t/p/w500<%=film.getLocandina() %>"/>
-<br/>
-<br/>
-<br/>
-<% if(utente.getRuolo().equals("visitatore")) { %>
-accedi per utilizzare la watchlist
-<% } else if (inWatchlist.equals("true")) { %>
-<div id="watchlist" style="color: blue;" onClick="remove('<%=film.getId() %>')">Rimuovi dalla watchlist</div>
-<% } else { %>
-<div id="watchlist" style="color: red;" onClick="add('<%=film.getId() %>')">Aggiungi alla watchlist</div>
-<% } %>
 
-<br>
-<br>
-<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
-	<h2>La tua recensione:</h2>
-	<div id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
-			<h3>Titolo: <i><%=recUtente.getTitolo() %></i> (Voto: <i><%=recUtente.getVoto() %></i>)</h3>
-			<p><%=recUtente.getTesto() %></p>
-		</div>
-<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
-	<form method="post" action="addrecensione" style="background-color: #b77cf1">
-		Voto (obbligatorio): 
-			<select name="voto">
-				<option selected="selected" value="0">--</option>
-				<% int x = 11; while(x --> 1) { %>
-					<option value="<%= x %>"><%= x %></option>
-				<% } %>
-  			</select>
-  		<br/>
-  		Titolo (opzionale):
-  			<input type="text" name="titolo">
-  		<br/>
-  		Testo (opzionale):
-  			 <textarea rows="10" cols="20" name="recensione"></textarea> 
-  		<br/>
- 		 <input type="hidden" name="idFilm" value="<%=film.getId() %>">
-  		<input type="submit" value="invia la recensione">
-	</form>
-<% } else {%>
-	<h2> Solo gli utenti registrati possono inserire le recensioni</h2>
-<% } %>
-<hr/>
-<% if(listaRec.size() > 0){ %>
-	<h2>Lista delle recensioni: </h2>
-	<% for(Recensione x: listaRec){ %>
-		<% if(x.getUtente().equals(utente)) continue; %>
-		<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
-			<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
-			<p><%=x.getTesto() %></p>
-		</div>
+
+<!--       ********************      Container     ********************           -->
+<div id="container">
+	
+	<div id="aside">
+	
+		<h4><%=film.getTitolo() %></h4>
+		
+		<img src="http://image.tmdb.org/t/p/w500<%=film.getLocandina() %>"/>
+		
+		<% if(utente.getRuolo().equals("visitatore")) { %>
+			accedi per utilizzare la watchlist
+			<% } else if (inWatchlist.equals("true")) { %>
+			<div id="watchlist" style="color: blue;" onClick="remove('<%=film.getId() %>')">Rimuovi dalla watchlist</div>
+			<% } else { %>
+			<div id="watchlist" style="color: red;" onClick="add('<%=film.getId() %>')">Aggiungi alla watchlist</div>
+		<% } %>
+		
+	</div>
+
+	<div id="content">
+	
+		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
+			<h2>La tua recensione:</h2>
+			<div id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
+				<h3>Titolo: <i><%=recUtente.getTitolo() %></i> (Voto: <i><%=recUtente.getVoto() %></i>)</h3>
+				<p><%=recUtente.getTesto() %></p>
+			</div>
+		<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
+			<form method="post" action="addrecensione" style="background-color: #b77cf1">
+				Voto (obbligatorio): 
+					<select name="voto">
+						<option selected="selected" value="0">--</option>
+						<% int x = 11; while(x --> 1) { %>
+							<option value="<%= x %>"><%= x %></option>
+						<% } %>
+		  			</select>
+		  		<br/>
+		  		Titolo (opzionale):
+		  			<input type="text" name="titolo">
+		  		<br/>
+		  		Testo (opzionale):
+		  			 <textarea rows="10" cols="20" name="recensione"></textarea> 
+		  		<br/>
+		 		 <input type="hidden" name="idFilm" value="<%=film.getId() %>">
+		  		<input type="submit" value="invia la recensione">
+			</form>
+		<% } else {%>
+			<h2> Solo gli utenti registrati possono inserire le recensioni</h2>
 	<% } %>
-<% } %>
+	<hr/>
+	
+	<% if(listaRec.size() > 0){ %>
+		<h2>Lista delle recensioni: </h2>
+		<% for(Recensione x: listaRec){ %>
+			<% if(x.getUtente().equals(utente)) continue; %>
+			<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
+				<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
+				<p><%=x.getTesto() %></p>
+			</div>
+		<% } %>
+	<% } %>
+	
+	</div>
 
+
+
+</div>
+
+<div id="footer">
+	<h2>Trama:</h2>
+	<p><%=film.getDescrizione() %></p>
+</div>
+
+
+<jsp:include page="includes/_import.jsp"/>
 <script>
 function add(id){
 	let xml = new XMLHttpRequest();

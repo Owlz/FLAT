@@ -1,20 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="applicationLogic.bean.FilmLocal, java.util.*"%>
     
+    <jsp:useBean id="film" scope="request" class="applicationLogic.bean.FilmRemote"/>
 	<% ArrayList<FilmLocal> watchlist = (ArrayList<FilmLocal>) request.getAttribute("watchlist"); %>
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>La tua Watchlist</title>
-	<%@include file="includes/_import.jsp" %>
+	<title>La Tua Watchlist</title>
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
+	<link rel="stylesheet" href="css/watchlist_view.css" type="text/css">
 </head>
+
 <body>
-	<%@include file="includes/_header.jsp" %>
+<!--       ********************      NavBar      ********************           -->
+<jsp:include page="includes/_header.jsp"/>
+
+
+<!--       ********************      Container     ********************           -->
+<div id="container">
+	<h2>La Tua Watchlist:</h2>
+	
 	<ul>
-	<% for(FilmLocal x: watchlist){ %>
-		<li><img height="50px" width="50px" src="http://image.tmdb.org/t/p/w500<%=x.getLocandina() %>"> <%=x.getId()%> - <%=x.getTitolo()%> - <%=x.getTitoloOriginale()%> </li>
-	<%} %>		
+		<% for(FilmLocal x: watchlist){ %>
+			<li><div class="elemento">
+				<img width="150px" src="http://image.tmdb.org/t/p/w500<%=x.getLocandina() %>">
+				<h4><%=x.getTitolo()%></h4>
+				<button onClick="remove('<%=x.getId() %>')">Rimuovi dalla watchlist</button>
+			</div></li>
+		<%} %>		
 	</ul>
+</div>
+	
+	
+<jsp:include page="includes/_import.jsp"/>	
 </body>
 </html>
