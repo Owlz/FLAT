@@ -40,11 +40,11 @@ public class CheckRegistrazioneController extends HttpServlet {
 
 		} catch (DatiNonValidi e) {
 			request.setAttribute("errore", "registrazione fallita (dati non validi e/o campi vuoti)");
-			request.getRequestDispatcher("registrazione").forward(request, response);
+			request.getRequestDispatcher("registrazione_view.jsp").forward(request, response);
 
 		} catch (DatiOccupati e) {
 			request.setAttribute("errore", "registrazione fallita (dati occupati)");
-			request.getRequestDispatcher("registrazione").forward(request, response);
+			request.getRequestDispatcher("registrazione_view.jsp").forward(request, response);
 		}
 	}
 

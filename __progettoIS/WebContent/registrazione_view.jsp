@@ -12,27 +12,23 @@
 </head>
 <body>
 <!--       ********************      NavBar      ********************           -->
-
 <jsp:include page="includes/_header.jsp"/>
-
 
 <!--       ********************      Container     ********************           -->
 <div id="container">
 	<% if(errore.equals("registrazione fallita (dati non validi e/o campi vuoti)")){ %>
 	
 		<div id="popUPErrore">
-			<button id="close" OnClick="closePopUp()">X</button>
 			<p>È stato riscontrato un errore nei dati immessi</p>
-			<button id="ok" OnClick=" location.href='logout'">Torna alla pagina precedente</button>
+			<button id="ok" OnClick="closePopUp()">Torna alla pagina precedente</button>
 		</div>
 		
 	<% }%>
 	<% if(errore.equals("registrazione fallita (dati occupati)")){ %>
 		
 		<div id="popUPErrore">
-			<button id="close" OnClick="closePopUp()">X</button>
 			<p>Alcuni dei dati inseriti sono già presenti sul database</p>
-			<button id="ok" OnClick=" location.href='logout'">Conferma</button>
+			<button id="ok" OnClick="closePopUp()">Conferma</button>
 		</div>
 		
 	<% }%>

@@ -74,24 +74,13 @@ nav li a:hover {
 /* --------------------------  ERRORE  -------------------------------- */
 
 #popUPErrore {
-	display: none;
+	display: flex;
 	flex-direction: column;
-	width: 200px;
+	width: 400px;
 	height: 200px;
 	background-color: white;
     border: 2px solid;
 	position: absolute;
-    margin-top: 15%;
-    margin-left: 45%;
-}
-
-#close {
-	position: absolute;
-    border: 2px solid;
-    right: 0;
-    background: transparent;
-    width: 25px;
-    cursor: pointer;
 }
 
 #popUPErrore p {
@@ -101,7 +90,7 @@ nav li a:hover {
 
 #ok {
 	width: 50%;
-    margin-left: 50px;
+    margin-left: 100px;
     margin-top: 20px;
     cursor: pointer;
 }
