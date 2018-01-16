@@ -48,9 +48,35 @@ nav li a:hover {
 
 /* --------------------------  CONFERMA  -------------------------------- */
 
-#conferma {
+#popUPConferma {
 	display: none;
+	flex-direction: column;
 	width: 200px;
 	height: 200px;
-	background-color: green;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: 15%;
+    margin-left: 45%;
+}
+
+#close {
+	position: absolute;
+    border: 2px solid;
+    right: 0;
+    background: transparent;
+    width: 25px;
+    cursor: pointer;
+}
+
+#conferma p {
+	text-align: center;
+	padding-top: 40px;
+}
+
+#ok {
+	width: 50%;
+    margin-left: 50px;
+    margin-top: 20px;
+    cursor: pointer;
 }

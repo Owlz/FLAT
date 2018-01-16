@@ -11,7 +11,7 @@ public class DatiOccupati extends Exception {
 	public DatiOccupati(String message) {
 		super("Dati già in uso: " + ottieniCampo(message));
 		this.campo = ottieniCampo(message);
-		/* TODO: qui le cose si ripetono due volte, fa brutto ma è l'unico modo */
+		/* TODO: qui le cose si ripetono due volte, è brutto ma è l'unico modo */
 	}
 
 	private static String ottieniCampo(String str) {
