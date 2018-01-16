@@ -10,7 +10,7 @@
 	
 	<ul>
 		<% if(!utente.getRuolo().equals("visitatore")){ %>
-			<li><a href="logout">Logout</a></li>
+			<li><a OnClick="openPopUp()" href="#">Logout</a></li>
 			<li><a href="utente?id=<%= utente.getUsername() %>">Benvenuto <%= utente.getUsername() %></a></li>
 		<% }else{  %>
 			<li><a href="registrazione">Registrati</a></li>
@@ -18,3 +18,22 @@
 		<% } %>
 	</ul>
 </nav>
+
+<div id="conferma">
+	Vuoi veramente uscire?
+
+
+</div>
+
+<script>
+function openPopUp() {
+	
+	var div_conferma = document.getElementById('conferma');
+
+	div_conferma.style.display='block';
+ 	
+};
+
+
+
+</script>

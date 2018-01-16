@@ -45,3 +45,12 @@ nav li a {
 nav li a:hover {
     background-color: #111111;
 }
+
+/* --------------------------  CONFERMA  -------------------------------- */
+
+#conferma {
+	display: none;
+	width: 200px;
+	height: 200px;
+	background-color: green;
+}

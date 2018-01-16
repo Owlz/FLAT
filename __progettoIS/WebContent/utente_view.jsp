@@ -41,7 +41,12 @@
 		<% } else { %>
 			<p> La tua lista di recensioni </p>
 			<% for(Recensione x: listaRec){ %>
-				<%=x.getFilm().getId() %> - <%=x.getTitolo() %> - <%=x.getVoto() %> <strong onClick="remove(this,<%=x.getId() %>)">Rimuovi</strong> <br/>
+				Film: <%=x.getTitolo() %> - Voto: <%=x.getVoto() %>
+<%-- 				Totale voti: <%=x.getVotiTotali() %> --%>
+				Recensione: <%=x.getTesto() %>
+				
+					
+				<strong onClick="remove(this,<%=x.getId() %>)">Rimuovi</strong> <br/>
 			<% } %>
 		<% } %>
 		

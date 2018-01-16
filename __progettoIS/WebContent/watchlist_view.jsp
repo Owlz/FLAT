@@ -27,13 +27,32 @@
 			<li><div class="elemento">
 				<img width="150px" src="http://image.tmdb.org/t/p/w500<%=x.getLocandina() %>">
 				<h4><%=x.getTitolo()%></h4>
-				<button onClick="remove('<%=x.getId() %>')">Rimuovi dalla watchlist</button>
+				<button onClick="remove('<%=x.getId() %>',this)">Rimuovi dalla watchlist</button>
 			</div></li>
 		<%} %>		
 	</ul>
 </div>
 	
 	
-<jsp:include page="includes/_import.jsp"/>	
+<jsp:include page="includes/_import.jsp"/>
+<script>
+function remove(id, elemento){
+	let xml = new XMLHttpRequest();
+	let url = "removewatchlist?id="+id;
+	
+	xml.open("get", url, true);
+	xml.send();
+	
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				elemento.parentNode.parentNode.remove();
+			} else {
+				elemento.innerHTML = "errore, riprova";
+			} 
+		}
+	}
+}
+</script>
 </body>
 </html>
