@@ -43,7 +43,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	<div id="content">
 	
 		<% if(listaRec.size() > 0){ %>
-			<h2>Lista delle recensioni: </h2>
+			<h2>Recensioni: </h2>
 			<% for(Recensione x: listaRec){ %>
 				<% if(x.getUtente().equals(utente)) continue; %>
 				<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
@@ -60,24 +60,29 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 				<p><%=recUtente.getTesto() %></p>
 			</div>
 		<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra la form per inserirla*/ { %>
-			<form method="post" action="addrecensione" style="background-color: #b77cf1">
-				Voto (obbligatorio): 
-					<select name="voto">
-						<option selected="selected" value="0">--</option>
-						<% int x = 11; while(x --> 1) { %>
-							<option value="<%= x %>"><%= x %></option>
-						<% } %>
-		  			</select>
-		  		<br/>
-		  		Titolo (opzionale):
-		  			<input type="text" name="titolo">
-		  		<br/>
-		  		Testo (opzionale):
-		  			 <textarea rows="10" cols="20" name="recensione"></textarea> 
-		  		<br/>
-		 		 <input type="hidden" name="idFilm" value="<%=film.getId() %>">
-		  		<input type="submit" value="invia la recensione">
-			</form>
+		
+			<button id="newRecensione" OnClick="openForm()">Scrivi recensione</button>
+			
+			<div id="spazioFormRecensione">
+				<form method="post" action="addrecensione" style="background-color: #b77cf1">
+					Voto (obbligatorio): 
+						<select name="voto">
+							<option selected="selected" value="0">--</option>
+							<% int x = 11; while(x --> 1) { %>
+								<option value="<%= x %>"><%= x %></option>
+							<% } %>
+			  			</select>
+			  		<br/>
+			  		Titolo (opzionale):
+			  			<input type="text" name="titolo">
+			  		<br/>
+			  		Testo (opzionale):
+			  			 <textarea rows="10" cols="20" name="recensione"></textarea> 
+			  		<br/>
+			 		 <input type="hidden" name="idFilm" value="<%=film.getId() %>">
+			  		<input type="submit" value="invia la recensione">
+				</form>
+			</div>
 		<% } else {%>
 			<h2> Solo gli utenti registrati possono inserire le recensioni</h2>
 	<% } %>
@@ -99,6 +104,14 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 
 <jsp:include page="includes/_import.jsp"/>
 <script>
+function openForm() {
+	var bottone = document.getElementById('newRecensione');
+	bottone.style.display='none';
+	
+	var div_form = document.getElementById('spazioFormRecensione');
+	div_form.style.display='block';
+}
+
 function add(id){
 	let xml = new XMLHttpRequest();
 	let url = "addwatchlist?id="+id;

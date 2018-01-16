@@ -61,6 +61,11 @@ body {
     border: inset;
 }
 
+#spazioFormRecensione {
+	display: none;
+}
+
+
 #footer {
     width: 79%;
     padding-left: 10%;
