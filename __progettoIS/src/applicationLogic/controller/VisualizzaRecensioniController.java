@@ -25,8 +25,9 @@ public class VisualizzaRecensioniController extends HttpServlet {
 		}else if(ord != null && ord.equals("segn")){
 			listaRecensioni.sort(Recensione.COMP_BY_SEGNALATA);
 		}
+
 		request.setAttribute("listaRec", listaRecensioni);
-		request.getRequestDispatcher("gestioneSegnalazioni_view.jsp").forward(request, response);
+		request.getRequestDispatcher("gestioneRecensioni_view.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

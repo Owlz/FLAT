@@ -31,8 +31,8 @@ public class AutenticazioneManager {
 			if(uDB == null)
 				throw new DatiNonPresenti();
 			
-			else if(!uDB.getPassword().equals(u.getPassword()))
-				throw new DatiNonValidi(uDB.getUsername()); 
+			else if(u == null || !uDB.getPassword().equals(u.getPassword()))
+				throw new DatiNonValidi(); 
 			
 			else
 				return uDB;
