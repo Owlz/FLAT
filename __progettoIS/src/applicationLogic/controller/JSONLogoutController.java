@@ -19,7 +19,7 @@ public class JSONLogoutController extends HttpServlet {
 	         sessione.invalidate();
 		
 		response.setContentType("application/json");
-		response.getWriter().write("succ");
+		response.sendRedirect("home_view.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

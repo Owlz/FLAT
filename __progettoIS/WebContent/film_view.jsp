@@ -42,6 +42,17 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 
 	<div id="content">
 	
+		<% if(listaRec.size() > 0){ %>
+			<h2>Lista delle recensioni: </h2>
+			<% for(Recensione x: listaRec){ %>
+				<% if(x.getUtente().equals(utente)) continue; %>
+				<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
+					<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
+					<p><%=x.getTesto() %></p>
+				</div>
+			<% } %>
+		<% } %>
+	
 		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
 			<h2>La tua recensione:</h2>
 			<div id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
@@ -72,16 +83,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	<% } %>
 	<hr/>
 	
-	<% if(listaRec.size() > 0){ %>
-		<h2>Lista delle recensioni: </h2>
-		<% for(Recensione x: listaRec){ %>
-			<% if(x.getUtente().equals(utente)) continue; %>
-			<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
-				<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
-				<p><%=x.getTesto() %></p>
-			</div>
-		<% } %>
-	<% } %>
+
 	
 	</div>
 
