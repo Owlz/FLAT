@@ -17,9 +17,11 @@ public class VisualizzaRecensioniController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Recensione> listaSegnalate = RecensioneManager.getSegnalate();
+		ArrayList<Recensione> listaRecensioni = RecensioneManager.getAll();
+		String ord = request.getParameter("ord");
 		
-		request.setAttribute("listaSegnalate", listaSegnalate);
+		if(ord.equals("")){}
+		request.setAttribute("listaRec", listaRecensioni);
 		request.getRequestDispatcher("gestioneSegnalazioni_view.jsp").forward(request, response);
 	}
 

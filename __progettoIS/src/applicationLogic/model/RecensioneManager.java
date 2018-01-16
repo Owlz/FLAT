@@ -134,4 +134,13 @@ public class RecensioneManager {
 			return false;
 		}
 	}
+
+	public static ArrayList<Recensione> getAll() {
+		try{
+			return RecensioneDAO.select();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return new ArrayList<Recensione>();
+		}
+	}
 }
