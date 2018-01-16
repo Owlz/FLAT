@@ -23,6 +23,4 @@ public class DatiOccupati extends Exception {
 
 	public String getCampo() { return campo; }
 	public void setCampo(String campo) { this.campo = campo; }
-
-
 }

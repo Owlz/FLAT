@@ -30,6 +30,10 @@
 		<a href="cambiodati">Modifica Dati</a>
 		<a href="watchlist">La tua watchlist</a>
 	<% } %>
+	<% if(datiUtente.equals(utente) && datiUtente.getRuolo().equals("moderatore")){ %>
+		<a href="mostrasegnalate">Gestione Segnalazioni</a>
+		<a href="mostrarecensioni">Gestione Recensioni</a>
+	<% } %>
 </div>
 
 

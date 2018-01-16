@@ -4,11 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import applicationLogic.bean.Film;
+import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.Recensione;
 import applicationLogic.bean.Utente;
+import applicationLogic.bean.Voto;
 import applicationLogic.exception.DatiTroppoBrevi;
 import applicationLogic.exception.VotoMancante;
+import storage.database.FilmLocalDAO;
 import storage.database.RecensioneDAO;
+import storage.database.VotoDAO;
 
 public class RecensioneManager {
 	private RecensioneManager() {/*Costruttore vuoto e privato poichè non istanziabile*/}
@@ -36,11 +40,31 @@ public class RecensioneManager {
 		}
 	}
 	
+	public static ArrayList<Recensione> getSegnalate() {
+		try{
+			return RecensioneDAO.selectBySegnalate();			
+		}catch(SQLException e){
+			e.printStackTrace();
+			return new ArrayList<Recensione>();	
+		}
+	}
+	
 	public static Recensione get(Recensione r) {
 		try{			
 			return RecensioneDAO.selectById(r);
-			
 		} catch (SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Recensione getCompleta(Recensione r) {
+		r = get(r);
+		if(r == null) return null;
+		try{
+			r.setFilm(FilmLocalDAO.select((FilmLocal) r.getFilm()));
+			return r;
+		}catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -85,6 +109,27 @@ public class RecensioneManager {
 			return true;
 			
 		} catch (SQLException e) { // non dovrebbero succedere mai ma provo lo stesso
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean vota(Recensione r, Voto v) {
+		try{
+			v = VotoDAO.insert(v, r);
+			if(v.getId() != -1)	return true;
+			else return false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean segnala(Recensione r) {
+		try{
+			RecensioneDAO.updateSegnalazione(r);
+			return true;
+		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
