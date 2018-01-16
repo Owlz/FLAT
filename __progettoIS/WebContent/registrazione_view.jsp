@@ -22,8 +22,8 @@
 	
 		<div id="popUPErrore">
 			<button id="close" OnClick="closePopUp()">X</button>
-			<p>Dati non validi</p>
-			<button id="ok" OnClick=" location.href='logout'">Conferma</button>
+			<p>È stato riscontrato un errore nei dati immessi</p>
+			<button id="ok" OnClick=" location.href='logout'">Torna alla pagina precedente</button>
 		</div>
 		
 	<% }%>
