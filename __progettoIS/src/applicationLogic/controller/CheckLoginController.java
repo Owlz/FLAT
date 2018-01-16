@@ -33,7 +33,7 @@ public class CheckLoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 			
 		} catch (DatiNonPresenti e) {
-			request.setAttribute("errore", "login fallito, dati non presenti (username errato) -> " + e.getCampo());
+			request.setAttribute("errore", "login fallito, dati non presenti (username errato)");
 			request.getRequestDispatcher("login").forward(request, response);
 			
 		} catch (DatiNonValidi e) {

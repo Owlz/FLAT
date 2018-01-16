@@ -29,7 +29,7 @@ public class AutenticazioneManager {
 			uDB = UtenteDAO.select(u);
 			
 			if(uDB == null)
-				throw new DatiNonPresenti(u.getUsername());
+				throw new DatiNonPresenti();
 			
 			else if(!uDB.getPassword().equals(u.getPassword()))
 				throw new DatiNonValidi(uDB.getUsername()); 

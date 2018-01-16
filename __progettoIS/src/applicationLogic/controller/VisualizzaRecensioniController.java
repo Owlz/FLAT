@@ -20,7 +20,11 @@ public class VisualizzaRecensioniController extends HttpServlet {
 		ArrayList<Recensione> listaRecensioni = RecensioneManager.getAll();
 		String ord = request.getParameter("ord");
 		
-		if(ord.equals("")){}
+		if(ord != null && ord.equals("data")){
+			listaRecensioni.sort(Recensione.COMP_BY_DATA);
+		}else if(ord != null && ord.equals("segn")){
+			listaRecensioni.sort(Recensione.COMP_BY_SEGNALATA);
+		}
 		request.setAttribute("listaRec", listaRecensioni);
 		request.getRequestDispatcher("gestioneSegnalazioni_view.jsp").forward(request, response);
 	}
