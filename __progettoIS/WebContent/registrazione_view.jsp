@@ -18,8 +18,23 @@
 
 <!--       ********************      Container     ********************           -->
 <div id="container">
-	<% if(!errore.equals("")){ %>
-		<p><%=errore%></p>
+	<% if(errore.equals("registrazione fallita (dati non validi e/o campi vuoti)")){ %>
+	
+		<div id="popUPErrore">
+			<button id="close" OnClick="closePopUp()">X</button>
+			<p>Dati non validi</p>
+			<button id="ok" OnClick=" location.href='logout'">Conferma</button>
+		</div>
+		
+	<% }%>
+	<% if(errore.equals("registrazione fallita (dati occupati)")){ %>
+		
+		<div id="popUPErrore">
+			<button id="close" OnClick="closePopUp()">X</button>
+			<p>Alcuni dei dati inseriti sono già presenti sul database</p>
+			<button id="ok" OnClick=" location.href='logout'">Conferma</button>
+		</div>
+		
 	<% }%>
 	<form action="checkregistrazione" method="post">
 		Nome <input type="text" name="nome"><br/>
@@ -33,5 +48,14 @@
 </div>
 
 <jsp:include page="includes/_import.jsp"/>
+<script>
+function closePopUp() {
+	
+	var div_errore = document.getElementById('popUPErrore');
+	div_errore.style.display='none';
+ 	
+};
+
+</script>
 </body>
 </html>
