@@ -31,7 +31,7 @@ public class CheckCambioDatiController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + uNew.getUsername());
 
 		} catch (DatiOccupati e) {
-			request.getSession().setAttribute("errore", "cambio dati fallito (dati occupati) -> " + e.getCampo());
+			request.getSession().setAttribute("errore", "cambio dati fallito (dati occupati)");
 			response.sendRedirect(request.getContextPath() + "/cambiodati");
 		}
 	}

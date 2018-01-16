@@ -43,7 +43,7 @@ public class CheckRegistrazioneController extends HttpServlet {
 			request.getRequestDispatcher("registrazione").forward(request, response);
 
 		} catch (DatiOccupati e) {
-			request.setAttribute("errore", "registrazione fallita (dati occupati) -> " + e.getCampo());
+			request.setAttribute("errore", "registrazione fallita (dati occupati)");
 			request.getRequestDispatcher("registrazione").forward(request, response);
 		}
 	}

@@ -41,7 +41,7 @@ public class GestioneAccountManager {
 			Utente u = UtenteDAO.update(uAtt);
 			return u;
 		}catch (SQLException e) {
-			throw new DatiOccupati(e.getMessage());
+			throw new DatiOccupati();
 		}
 	}
 	
