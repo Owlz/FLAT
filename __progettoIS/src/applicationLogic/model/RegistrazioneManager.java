@@ -43,7 +43,7 @@ public class RegistrazioneManager {
 			try {
 				return UtenteDAO.insert(utente);
 			} catch (SQLException e) {
-				throw new DatiOccupati(e.getMessage());
+				throw new DatiOccupati();
 			}
 		}
 	}
