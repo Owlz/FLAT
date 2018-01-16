@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import applicationLogic.bean.Recensione;
 import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/mostrasegnalate")
+@WebServlet("/mostrarecensioni")
 public class VisualizzaRecensioniController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
