@@ -17,7 +17,9 @@ public class RecensioneDAO {
 	private static final String SELECT_BY_FILM = "SELECT * FROM `recensioni` WHERE `idFilm`=?";
 	private static final String SELECT_BY_UTENTE_AND_FILM = "SELECT * FROM `recensioni` WHERE `idFilm`=? AND `usernameUtente`=?";
 	private static final String SELECT_BY_ID = "SELECT * FROM `recensioni` WHERE `id_recensione`=?";
+	private static final String SELECT_BY_SEGNALAZIONE = "SELECT * FROM `recensioni` WHERE `segnalata`=1";
 	private static final String INSERT = "INSERT INTO `recensioni` (`idFilm`, `usernameUtente`, `voto_recensione`, `testo_recensione`, `titolo_recensione`) VALUES (?, ?, ?, ?, ?);";
+	private static final String INSERT_SEGNALAZIONE = "UPDATE `recensioni` SET `segnalata`=? WHERE `id_recensione`=?";
 	private static final String DELETE = "DELETE FROM `recensioni` WHERE `id_recensione`=?";
 
 	public static Recensione selectById(Recensione r) throws SQLException {
@@ -199,5 +201,50 @@ public class RecensioneDAO {
 		con.commit();
 
 		DBConnection.riaggiungiConnessione(con);
+	}
+
+	public static void updateSegnalazione(Recensione r) throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(INSERT_SEGNALAZIONE);
+		pst.setBoolean(1, r.isSegnalata());
+		pst.setInt(2, r.getId());
+
+		pst.executeUpdate();
+		con.commit();
+
+		DBConnection.riaggiungiConnessione(con);
+	}
+
+	public static ArrayList<Recensione> selectBySegnalate() throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(SELECT_BY_SEGNALAZIONE);
+
+		ResultSet rs = pst.executeQuery();
+		con.commit();
+
+		ArrayList<Recensione> listaRec = new ArrayList<Recensione>();
+
+		while (rs.next()) {
+			int id = rs.getInt("id_recensione");
+			Utente u = new Utente(rs.getString("usernameUtente"));
+			Film f = new FilmLocal(rs.getInt("idFilm"));
+			int voto = rs.getInt("voto_recensione");
+			String titolo = rs.getString("titolo_recensione");
+			String recensione = rs.getString("testo_recensione");
+			boolean segnalata = rs.getBoolean("segnalata");
+
+			ArrayList<Voto> voti;
+			try {
+				voti = VotoDAO.selectByIdReview(new Recensione(id));
+			} catch (SQLException e) {
+				voti = null;
+			}
+
+			Recensione r = new Recensione(id, f, u, voto, titolo, recensione, voti, segnalata);
+			listaRec.add(r);
+		}
+
+		DBConnection.riaggiungiConnessione(con);
+		return listaRec;
 	}
 }

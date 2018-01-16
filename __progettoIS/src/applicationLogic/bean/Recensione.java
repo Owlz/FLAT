@@ -47,6 +47,13 @@ public class Recensione {
 	public void setVoti(ArrayList<Voto> voti) { this.voti = voti; }
 	public void setSegnalata(boolean segnalata) { this.segnalata = segnalata; }
 
+	public int getVotiTotali(){
+		int y = 0;
+		for(Voto x: this.voti){
+			y = y + x.getVoto();
+		}
+		return y;
+	}
 	
 	@Override
 	public String toString() {

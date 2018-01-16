@@ -11,21 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import applicationLogic.bean.Recensione;
 import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/recensione")
-public class VisualizzaRecensioneController extends HttpServlet {
+@WebServlet("/segnala")
+public class JSONSegnalaRecensioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idRecensione = request.getParameter("id");
 		Recensione r = Recensione.generateByStringId(idRecensione);
-		r = RecensioneManager.getCompleta(r);
-		
-		request.setAttribute("recensione", r);
-		request.getRequestDispatcher("recensione_view.jsp").forward(request, response);
+		r.setSegnalata(true);
+
+		response.setContentType("application/json");
+		if (RecensioneManager.segnala(r)) {
+			response.getWriter().write("succ");
+		} else {
+			response.getWriter().write("errore");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
