@@ -1,6 +1,7 @@
 package applicationLogic.bean;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Recensione {
 	private int id;
@@ -11,6 +12,21 @@ public class Recensione {
 	private String testo;	
 	private ArrayList<Voto> voti;
 	private boolean segnalata;
+	
+	public static final Comparator<Recensione> COMP_BY_DATA = new Comparator<Recensione>() {
+		@Override
+		public int compare(Recensione o1, Recensione o2) {
+			return o2.getId() - o1.getId();
+		}
+	};
+	public static final Comparator<Recensione> COMP_BY_SEGNALATA = new Comparator<Recensione>() {
+		@Override
+		public int compare(Recensione o1, Recensione o2) {
+			if(o1.isSegnalata() && o2.isSegnalata()) return 0;
+			else if(o1.isSegnalata() && !o2.isSegnalata()) return -1;
+			else return 1;
+		}
+	};
 	
 	public Recensione() {}
 	
