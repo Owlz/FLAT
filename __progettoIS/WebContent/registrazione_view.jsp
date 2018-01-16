@@ -46,12 +46,9 @@
 <jsp:include page="includes/_import.jsp"/>
 <script>
 function closePopUp() {
-	
 	var div_errore = document.getElementById('popUPErrore');
 	div_errore.style.display='none';
- 	
 };
-
 </script>
 </body>
 </html>
