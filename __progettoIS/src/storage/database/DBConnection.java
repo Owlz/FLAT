@@ -19,7 +19,7 @@ public class DBConnection {
 	public static final String LINK_DATABASE = "jdbc:mysql://localhost:3306/" + NOME_DATABASE
 			+ "?verifyServerCertificate=false&useSSL=true";
 	public static final String USR_DATABASE = "root";
-	public static final String PSW_DATABASE = "password";
+	public static final String PSW_DATABASE = "admin";
 
 	private static ArrayList<Connection> connPool;
 

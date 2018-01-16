@@ -33,6 +33,29 @@ body {
 	margin-bottom: 25px;
 }
 
+.addWatchlist {
+	color: black;
+    border: 2px solid;
+    margin-bottom: 25px;
+    width: 200px;
+    text-align: center;
+    height: 32px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+
+.inWatchlist {
+	color: black;
+    border: 2px solid;
+    margin-bottom: 25px;
+    width: 200px;
+    text-align: center;
+    height: 32px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+
+
 /* #aside > div { */
 /* 	width: 100%; */
 /* 	margin-top: 1.25em; 		20px/16px = 1.25em */
@@ -61,8 +84,51 @@ body {
     border: inset;
 }
 
+#testo {
+	padding-right: 30px;
+}
+
+#pulsantiAzione {
+	position: relative;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 30px;
+    height: 110px;
+    left: 845px;
+    top: -67px;
+    cursor: pointer;
+}
+
+
+
 #spazioFormRecensione {
 	display: none;
+	flex-direction: column;
+	width: 700px;
+    height: 300px;
+    margin-left: 25%;
+    margin-top: -21%;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+}
+
+#spazioFormRecensione form{
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+#submit {
+	margin-left: 35%;
+    background-color: white;
+    border: 2px solid;
+    height: 30px;
+    width: 180px;
+    cursor: pointer;
+    margin-top: 25px;
 }
 
 
