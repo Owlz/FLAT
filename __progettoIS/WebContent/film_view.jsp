@@ -48,22 +48,26 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 			<% for(Recensione x: listaRec){ %>
 				<% if(x.getUtente().equals(utente)) continue; %>
 				<div class="boxRecensione" id="rec--<%=x.getUtente().getUsername() %>">
-					<h3>Titolo: <i><%=x.getTitolo() %></i> ( Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i> )</h3>
+					<h3>Titolo: <i><%=x.getTitolo() %></i> 
+					<br/>
+					( Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i> )</h3>
 					<p id="testo"><%=x.getTesto() %></p>
 				</div>
-					<div id="pulsantiAzione">
-						<i class="fa fa-flag" aria-hidden="true"></i>
-						<i class="fa fa-thumbs-up" aria-hidden="true"></i>
-						<i class="fa fa-thumbs-down" aria-hidden="true"></i>
-					</div>
+				<div id="pulsantiAzione">
+					<i class="fa fa-flag" aria-hidden="true"></i>
+					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+					<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+				</div>
 			<% } %>
 		<% } %>
 	
 		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
 			<h2>La tua recensione:</h2>
-			<div id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
-				<h3>Titolo: <i><%=recUtente.getTitolo() %></i> (Voto: <i><%=recUtente.getVoto() %></i>)</h3>
-				<p><%=recUtente.getTesto() %></p>
+			<div class="boxRecensione personale" id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
+				<h3>Titolo: <i><%=recUtente.getTitolo() %></i>
+				<br/>
+				( Voto: <i><%=recUtente.getVoto() %></i> )</h3>
+				<p id="testo"><%=recUtente.getTesto() %></p>
 			</div>
 		<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra il bottone per inserirla*/ { %>
 		

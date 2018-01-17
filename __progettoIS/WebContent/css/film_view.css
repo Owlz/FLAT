@@ -24,6 +24,7 @@ body {
 	justify-content: space-around;
 	align-items: center;
 	width: 30%;
+	height: 100%;
     padding: 0.625em;
     border: inset;
 }
@@ -94,6 +95,10 @@ body {
     margin-bottom: -70px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.personale {
+	margin-bottom: 0px;
 }
 
 .boxRecensione h3 {
