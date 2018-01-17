@@ -47,16 +47,15 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 			<h2>Recensioni: </h2>
 			<% for(Recensione x: listaRec){ %>
 				<% if(x.getUtente().equals(utente)) continue; %>
-				<div id="rec--<%=x.getUtente().getUsername() %>-<%=x.getFilm().getId() %>" style="background-color: #7daaf2">
-					<h3>Titolo: <i><%=x.getTitolo() %></i> (Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i>)</h3>
+				<div class="boxRecensione" id="rec--<%=x.getUtente().getUsername() %>">
+					<h3>Titolo: <i><%=x.getTitolo() %></i> ( Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i> )</h3>
 					<p id="testo"><%=x.getTesto() %></p>
-					
+				</div>
 					<div id="pulsantiAzione">
 						<i class="fa fa-flag" aria-hidden="true"></i>
 						<i class="fa fa-thumbs-up" aria-hidden="true"></i>
 						<i class="fa fa-thumbs-down" aria-hidden="true"></i>
 					</div>
-				</div>
 			<% } %>
 		<% } %>
 	
