@@ -48,7 +48,7 @@
 			<h4> La tua lista di recensioni </h4>
 			<% for(Recensione x: listaRec){ %>
 			
-				<div class="boxRecensione" id="rec--<%=x.getUtente().getUsername() %>">
+				<div class="boxRecensione" id="<%=x.getId() %>">
 					<h3>Film: <i><%=((FilmLocal) x.getFilm()).getTitolo()%></i>
 					<br/>
 					Titolo: <i><%=x.getTitolo()%></i>
@@ -89,9 +89,9 @@ function remove(elemento, id){
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
 				openPopUpRimozione();
-			} else {
-				x.innerHTML = "errore, riprova";
-			} 
+				elemento.remove();
+				document.getElementById(id).remove();
+			}
 		}
 	}
 }

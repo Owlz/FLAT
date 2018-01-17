@@ -103,6 +103,7 @@ body {
 	position: absolute;
     margin-top: 15%;
     margin-left: 45%;
+    z-index: 150;
 }
 
 #popUPConfermaRimozione p {

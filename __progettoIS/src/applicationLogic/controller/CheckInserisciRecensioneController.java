@@ -17,7 +17,7 @@ import applicationLogic.exception.VotoMancante;
 import applicationLogic.model.RecensioneManager;
 
 @WebServlet("/addrecensione")
-public class JSONInserisciRecensioneController extends HttpServlet {
+public class CheckInserisciRecensioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class JSONInserisciRecensioneController extends HttpServlet {
 		response.setContentType("application/json");
 		try {
 			RecensioneManager.addRecensione(r);
-			response.getWriter().write("succ");
+			response.sendRedirect(request.getContextPath() + "/film?id=" + request.getParameter("idFilm"));
 			
 		} catch (DatiTroppoBrevi e) {
 			response.getWriter().write(e.getMessage());
