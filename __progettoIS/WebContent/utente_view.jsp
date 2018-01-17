@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
+    pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, applicationLogic.bean.FilmLocal"%>
 <jsp:useBean id="datiUtente" class="applicationLogic.bean.Utente" scope="request"/>
 <% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("recensioniUtente"); %>
 <jsp:useBean id="utente" class="applicationLogic.bean.Utente" scope="session"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
 	<title>Area Utente</title>
 	<link rel="stylesheet" href="css/nav.css" type="text/css">
 	<link rel="stylesheet" href="css/utente_view.css" type="text/css">
+	<link rel="stylesheet" href="includes/fontawesome-5.0.4/web-fonts-with-css/css/fontawesome-all.css">
 </head>
 <body>
 <!--       ********************      NavBar      ********************           -->
@@ -43,20 +45,36 @@
 		<% if(listaRec.size() == 0){ %>
 			<p> Non hai ancora fatto recensioni</p> <br/>
 		<% } else { %>
-			<p> La tua lista di recensioni </p>
+			<h4> La tua lista di recensioni </h4>
 			<% for(Recensione x: listaRec){ %>
-				Film: <%=x.getTitolo() %> - Voto: <%=x.getVoto() %>
-<%-- 				Totale voti: <%=x.getVotiTotali() %> --%>
-				Recensione: <%=x.getTesto() %>
+			
+				<div class="boxRecensione" id="rec--<%=x.getUtente().getUsername() %>">
+					<h3>Film: <i><%=((FilmLocal) x.getFilm()).getTitolo()%></i>
+					<br/>
+					Titolo: <i><%=x.getTitolo()%></i>
+					<br/>
+					( Voto: <i><%=x.getVoto()%></i> )</h3>
+					<p id="testo"><%=x.getTesto()%></p>
+				</div>
+				<div id="pulsantiAzione">
+					<button class="removeButton" onClick="remove(this,<%=x.getId() %>)"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</div>
 				
-					
-				<strong onClick="remove(this,<%=x.getId() %>)">Rimuovi</strong> <br/>
+<%-- 				Totale voti: <%=x.getVotiTotali() %> --%>
+				
 			<% } %>
 		<% } %>
 		
 	<% } %>
 </div>
 
+<div id="popUPConfermaRimozione">
+
+	<p>Recensione rimossa</p>
+
+	<button id="ok" OnClick="closePopUpRimozione()">Conferma</button>
+
+</div>
 
 
 <script>
@@ -70,13 +88,27 @@ function remove(elemento, id){
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
-				elemento.innerHTML = "rimosso!";
+				openPopUpRimozione();
 			} else {
 				x.innerHTML = "errore, riprova";
 			} 
 		}
 	}
 }
+
+function openPopUpRimozione() {
+	
+	var div_conferma = document.getElementById('popUPConfermaRimozione');
+	div_conferma.style.display='flex';
+ 	
+};
+function closePopUpRimozione() {
+	
+	var div_conferma = document.getElementById('popUPConfermaRimozione');
+	div_conferma.style.display='none';
+ 	
+};
+
 </script>
 <jsp:include page="includes/_import.jsp"/>
 </body>

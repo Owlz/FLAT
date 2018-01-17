@@ -44,5 +44,75 @@ body {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	width: 65%;
+	width: 67%;
+}
+
+.boxRecensione {
+    background-color: #7daaf2;
+    width: 95%;
+    margin-left: -40px;
+    height: 255px;
+    max-width: 875px;
+    max-height: 255px;
+    margin-bottom: -70px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.boxRecensione h3 {
+	margin-left: 15px;
+}
+
+#testo {
+	padding-right: 40px;
+	padding-left: 15px;
+}
+
+#pulsantiAzione {
+    position: relative;
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 30px;
+    height: 110px;
+    top: -75px;
+    left: 428px;
+    cursor: pointer;
+}
+
+.removeButton{
+	background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+}
+
+/* ----------------------  CONFERMA RIMOZIONE  ---------------------------- */
+
+#popUPConfermaRimozione {
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: 15%;
+    margin-left: 45%;
+}
+
+#popUPConfermaRimozione p {
+	text-align: center;
+	padding-top: 40px;
+}
+
+#ok {
+	width: 50%;
+    margin-left: 50px;
+    margin-top: 20px;
+    cursor: pointer;
 }

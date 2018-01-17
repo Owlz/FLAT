@@ -23,6 +23,11 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 
 
 <!--       ********************      Container     ********************           -->
+
+<div id="sfondo">
+	<img src="http://image.tmdb.org/t/p/w1280<%=film.getBackdrop() %>"/>
+</div>
+
 <div id="container">
 	
 	<div id="aside">

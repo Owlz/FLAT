@@ -32,7 +32,7 @@ public class VisualizzaAreaUtenteController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/");
 
 		else { // caso standard
-			ArrayList<Recensione> listaRecUtente = RecensioneManager.get(u);
+			ArrayList<Recensione> listaRecUtente = RecensioneManager.getCompleta(u);
 
 			request.setAttribute("recensioniUtente", listaRecUtente);
 			request.setAttribute("datiUtente", u);

@@ -37,7 +37,7 @@ public class FilmRemoteDAO {
 						obj.optString("release_date"), 
 						obj.optDouble("vote_average"), 
 						obj.optInt("vote_count"),
-						obj.optString("backdrop"));
+						obj.optString("backdrop_path"));
 			
 			return fOut;
 			

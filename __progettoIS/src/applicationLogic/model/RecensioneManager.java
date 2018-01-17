@@ -69,6 +69,15 @@ public class RecensioneManager {
 			return null;
 		}
 	}
+	
+	public static ArrayList<Recensione> getCompleta(Utente u) {
+		ArrayList<Recensione> lista = get(u);
+		ArrayList<Recensione> out = new ArrayList<>();
+		
+		for(Recensione r: lista) out.add(getCompleta(r));
+		
+		return out;
+	}
 
 	public static Recensione get(Utente u, Film f) {
 		try{
