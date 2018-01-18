@@ -20,20 +20,33 @@ public class JSONVotoRecensioneController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente u = (Utente) request.getSession().getAttribute("utente");
 		
-		String idRecensione = request.getParameter("id");
-		String votoString = request.getParameter("v");
-		int votoInt = Integer.parseInt(votoString);
-		
-		Recensione r = Recensione.generateByStringId(idRecensione);
-		Voto v = new Voto(-1, votoInt, u);
+		String flag = request.getParameter("flag");
+		int voto = Integer.parseInt(request.getParameter("voto"));
 		
 		response.setContentType("application/json");
-		if(RecensioneManager.vota(r, v)){
-			response.getWriter().write("succ");
-		}else{
-			response.getWriter().write("fall");
-		}
 
+		if(flag.equals("rimuovi")){
+			int id = Integer.parseInt(request.getParameter("idVoto"));
+			Voto v = new Voto(id, voto, u);
+			if(RecensioneManager.rimuoviVoto(v)) response.getWriter().write("succ");
+			else response.getWriter().write("fall");
+		
+		}else if(flag.equals("modifica")){
+			int id = Integer.parseInt(request.getParameter("idVoto"));
+			Voto v = new Voto(id, voto, u);
+			
+			if(RecensioneManager.cambiaVoto(v)) response.getWriter().write("succ");
+			else response.getWriter().write("fall");
+
+		}else if(flag.equals("aggiungi")){
+			String idRecensione = request.getParameter("idRecensione");
+			Recensione r = Recensione.generateByStringId(idRecensione);
+			Voto v = new Voto(-1, voto, u);
+			v = RecensioneManager.inserisciVoto(r, v);
+			
+			if(v != null && v.getId() != -1) response.getWriter().write("succ " + v.getId());
+			else response.getWriter().write("fall");
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

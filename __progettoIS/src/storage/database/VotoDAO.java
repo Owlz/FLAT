@@ -14,6 +14,7 @@ public class VotoDAO {
 	private static final String SELECT_BY_REVIEW = "SELECT * FROM `voti_recensioni` WHERE `idRecensione`=?";
 	private static final String UPDATE_BY_ID = "UPDATE `voti_recensioni` SET `voto`=? WHERE `id_voto`=?";
 	private static final String INSERT = "INSERT INTO `voti_recensioni` (`idRecensione`, `usernameUtente`, `voto`) VALUES (?, ?, ?)";
+	private static final String DELETE = "DELETE FROM `voti_recensioni` WHERE `id_voto`=?";
 	
 	public static ArrayList<Voto> selectByIdReview(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
@@ -74,5 +75,16 @@ public class VotoDAO {
 			v.setId(id);
 		}
 		return v;
+	}
+
+	public static void remove(Voto v) throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(DELETE);
+		pst.setInt(1, v.getId());
+
+		pst.executeUpdate();
+		con.commit();
+
+		DBConnection.riaggiungiConnessione(con);
 	}
 }

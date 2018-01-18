@@ -123,11 +123,20 @@ public class RecensioneManager {
 		}
 	}
 
-	public static boolean vota(Recensione r, Voto v) {
+	public static Voto inserisciVoto(Recensione r, Voto v) {
 		try{
 			v = VotoDAO.insert(v, r);
-			if(v.getId() != -1)	return true;
-			else return false;
+			if(v.getId() != -1)	return v;
+			else return null;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static boolean cambiaVoto(Voto v) {
+		try{
+			VotoDAO.updateById(v);
+			return true;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -150,6 +159,16 @@ public class RecensioneManager {
 		}catch(SQLException e){
 			e.printStackTrace();
 			return new ArrayList<Recensione>();
+		}
+	}
+
+	public static boolean rimuoviVoto(Voto v) {
+		try{
+			VotoDAO.remove(v);
+			return true;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }
