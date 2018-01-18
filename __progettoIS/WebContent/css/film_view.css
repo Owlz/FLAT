@@ -210,6 +210,9 @@ body {
 }
 
 #ok {
+	background: white;
+    border: 2px solid;
+    height: 27px;
 	width: 50%;
     margin-left: 50px;
     margin-top: 20px;
@@ -234,11 +237,4 @@ body {
 #popUPErrore p {
 	text-align: center;
 	padding-top: 40px;
-}
-
-#ok {
-	width: 50%;
-    margin-left: 50px;
-    margin-top: 20px;
-    cursor: pointer;
 }
