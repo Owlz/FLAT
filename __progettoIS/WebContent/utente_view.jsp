@@ -17,7 +17,6 @@
 <!--       ********************      NavBar      ********************           -->
 <jsp:include page="includes/_header.jsp"/>
 
-
 <!--       ********************      Container     ********************           -->
 <div id="aside">
 	
@@ -28,7 +27,7 @@
 		<h4><%=datiUtente.getEmail()%> <span style="color:red">da togliere</span></h4>
 		<h4><%=datiUtente.getRuolo()%> <span style="color:red">da togliere</span></h4>
 
-	<% if(datiUtente.equals(utente)){ %>
+	<% if(datiUtente.equals(utente)){%>
 		<a href="cambiodati">Modifica Dati</a>
 		<a href="watchlist">La tua watchlist</a>
 	<% } %>

@@ -2,10 +2,8 @@ package storage.api;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import applicationLogic.bean.Film;
 import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.FilmRemote;

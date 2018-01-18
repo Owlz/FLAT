@@ -56,8 +56,8 @@ public class UtenteDAO {
 				utFinal.setCognome(cognome);
 				utFinal.setEmail(mail);
 
-				if (ruolo.equals("admin"))
-					utFinal.setRuolo("admin");
+				if (ruolo.equals("moderatore"))
+					utFinal.setRuolo("moderatore");
 				else
 					utFinal.setRuolo("utente");
 			}

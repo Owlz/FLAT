@@ -32,14 +32,18 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	
 	<div id="aside">
 	
-		<h4><%=film.getTitolo() %></h4>
+		<h2><%=film.getTitolo()%></h2>
+		<h6>Titolo originale: <i><%=film.getTitoloOriginale()%></i></h6>
+		<h6>Generi: <i><%=film.getGeneri()%></i></h6>
 		
-		<img src="http://image.tmdb.org/t/p/w500<%=film.getLocandina() %>"/>
+		<img src="http://image.tmdb.org/t/p/w500<%=film.getLocandina()%>"/>
+		
+		<h3 id="voto">Voto FLAT: <%=film.getVoto()%><span style="font-size: 13px; color: grey">/10</span></h3>
 		
 		<% if(utente.getRuolo().equals("visitatore")) { %>
-			accedi per utilizzare la watchlist
+			<h4 class="watchlist">Accedi per utilizzare la watchlist!</h4>
 			<% } else if (inWatchlist.equals("true")) { %>
-			<div id="in" class="inWatchlist">Già aggiunto alla watchlist</div>
+			<div id="in" class="inWatchlist"><i class="fa fa-check" aria-hidden="true"></i> Già aggiunto alla Watchlist</div>
 			<% } else { %>
 			<div id="add" class="addWatchlist" onClick="add('<%=film.getId() %>')">Aggiungi alla watchlist</div>
 		<% } %>
@@ -68,7 +72,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	
 		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
 			<h2>La tua recensione:</h2>
-			<div class="boxRecensione personale" id="rec--<%=recUtente.getUtente().getUsername() %>-<%=recUtente.getFilm().getId() %>" style="background-color: #b77cf1">
+			<div class="boxRecensione personale" id="rec--<%=recUtente.getUtente().getUsername() %>" style="background-color: #b77cf1">
 				<h3>Titolo: <i><%=recUtente.getTitolo() %></i>
 				<br/>
 				( Voto: <i><%=recUtente.getVoto() %></i> )</h3>
@@ -89,7 +93,8 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 
 <div id="spazioFormRecensione">
 	<button id="close" OnClick="closeForm()">X</button>
-	<form method="post" action="addrecensione">
+	
+	<form name="formRecensione" id="formRecensione" action="addrecensione" method="post" onSubmit="return controlloInserimento(this);">
 	  	Titolo (opzionale):
   			<input type="text" name="titolo">
 		Voto (obbligatorio): 
@@ -105,7 +110,11 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
   			 <textarea rows="10" cols="60" name="recensione"></textarea> 
   		<br/>
  		<input type="hidden" name="idFilm" value="<%=film.getId() %>">
-  		<input id="submit" type="submit" value="invia la recensione">
+ 		
+ 		
+<!--  	<input type="button" id="submit" onclick="controlloInserimento()" value="Invia la recensione"> -->
+ 		<button type="submit" id="submit">Invia la recensione</button>
+<!--   		<input id="submit" type="submit" value="invia la recensione"> -->
 	</form>
 </div>
 
@@ -114,6 +123,14 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	<p><%=film.getDescrizione() %></p>
 </div>
 
+<div id="popUPConfermaRecensione">
+
+	<p>Recensione Aggiunta</p>
+	<p id="test">adfbdf</p>
+
+	<button id="ok" OnClick="closePopUp()">Conferma</button>
+
+</div>
 
 <jsp:include page="includes/_import.jsp"/>
 <script>
@@ -133,6 +150,14 @@ function openForm() {
 	div_form.style.display='block';
 }
 
+function controlloInserimento(form) {
+	//Controlli da fare prima di chiamare la servlet
+	if(form["titolo"].value.length < 10) return false;
+	else return true;
+	
+}
+
+
 function add(id){
 	let xml = new XMLHttpRequest();
 	let url = "addwatchlist?id="+id;
@@ -146,12 +171,20 @@ function add(id){
 			if(xml.responseText === "succ"){
 				document.getElementById("add").classList.remove('addWatchlist');
 				document.getElementById("add").classList.add('inWatchlist');
+				document.getElementById("add").innerHTML= '<i class="fa fa-check" aria-hidden="true"></i> Già aggiunto alla Watchlist';
 			} else {
 				
 			} 
 		}
 	}
 }
+
+
+
+function closePopUp() {
+	var div_conferma = document.getElementById('popUPConfermaRecensione');
+	div_conferma.style.display='none';
+};
 </script>
 </body>
 </html>

@@ -34,14 +34,22 @@ body {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	width: 30%;
+	width: 31%;
 	height: 100%;
     padding: 0.625em;
     border: inset;
 }
 
 #aside img {
-	width: 250px;
+	width: 300px;
+	margin-bottom: 25px;
+}
+
+#voto {
+	margin-bottom: 25px;
+}
+
+.watchlist, .addWatchlist, .inWatchlist {
 	margin-bottom: 25px;
 }
 
@@ -57,16 +65,20 @@ body {
 }
 
 .inWatchlist {
-	color: black;
-    border: 2px solid;
-    margin-bottom: 25px;
-    width: 200px;
+    margin-bottom: 40px;
+    width: 320px;
     text-align: center;
-    height: 32px;
+    height: 30px;
     padding-top: 8px;
     cursor: pointer;
+    font-size: 20px;
+    color: green;
 }
 
+.inWatchlist i {
+	padding-right: 5px;
+	font-size: 40px;
+}
 
 /* #aside > div { */
 /* 	width: 100%; */
@@ -172,4 +184,29 @@ body {
 	border: inset;
 }
 
+/* --------------------------  CONFERMA RECENSIONE  ------------------------- */
 
+#popUPConfermaRecensione {
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: 15%;
+    margin-left: 45%;
+    z-index: 150;
+}
+
+#popUPConfermaRecensione p {
+	text-align: center;
+	padding-top: 40px;
+}
+
+#ok {
+	width: 50%;
+    margin-left: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+}
