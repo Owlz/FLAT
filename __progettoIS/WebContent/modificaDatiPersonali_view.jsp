@@ -14,6 +14,7 @@
 
 <body>
 <!--       ********************      NavBar      ********************           -->
+
 <jsp:include page="includes/_header.jsp"/>
 	
 <!--       ********************      Container     ********************           -->
@@ -31,6 +32,7 @@
 		<input type="submit" value="Conferma">
 	</form>
 </div>
-	
+
+<jsp:include page="includes/_import.jsp"/>
 </body>
 </html>

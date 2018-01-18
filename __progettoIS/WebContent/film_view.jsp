@@ -5,7 +5,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 <jsp:useBean id="utente" scope="session" class="applicationLogic.bean.Utente"/>
 <jsp:useBean id="inWatchlist" scope="request" class="java.lang.String"/>
 <jsp:useBean id="recUtente" scope="request" class="applicationLogic.bean.Recensione"/>
-<% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaRecensioni"); %>
+<%ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaRecensioni");%>
 
 <!DOCTYPE html>
 <html>
@@ -95,9 +95,9 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 	<button id="close" OnClick="closeForm()">X</button>
 	
 	<form name="formRecensione" id="formRecensione" action="addrecensione" method="post" onSubmit="return controlloInserimento(this);">
-	  	Titolo (opzionale):
+	  	<span id="descTitolo">Titolo: </span>
   			<input type="text" name="titolo">
-		Voto (obbligatorio): 
+		<span id="descVoto">Voto: </span>
 			<select name="voto">
 				<option selected="selected" value="0">--</option>
 				<% int x = 11; while(x --> 1) { %>
@@ -106,7 +106,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
   			</select>
   		<br/>
   		<br/>
-  		Testo (opzionale):
+  		<span id="descTesto">Testo: </span>
   			 <textarea rows="10" cols="60" name="recensione"></textarea> 
   		<br/>
  		<input type="hidden" name="idFilm" value="<%=film.getId() %>">
@@ -126,9 +126,16 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 <div id="popUPConfermaRecensione">
 
 	<p>Recensione Aggiunta</p>
-	<p id="test">adfbdf</p>
 
-	<button id="ok" OnClick="closePopUp()">Conferma</button>
+	<button id="ok" OnClick="closePopUpRecensione()">Conferma</button>
+
+</div>
+
+<div id="popUPErrore">
+
+	<p id="stringaErrore">Errore</p>
+
+	<button id="ok" OnClick="closePopUpErrore()">Conferma</button>
 
 </div>
 
@@ -137,23 +144,59 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 function closeForm() {
 	var bottone = document.getElementById('newRecensione');
 	bottone.style.display='block';
-	
 	var div_form = document.getElementById('spazioFormRecensione');
 	div_form.style.display='none';
 };
-
 function openForm() {
 	var bottone = document.getElementById('newRecensione');
 	bottone.style.display='none';
-	
 	var div_form = document.getElementById('spazioFormRecensione');
 	div_form.style.display='block';
 }
 
 function controlloInserimento(form) {
 	//Controlli da fare prima di chiamare la servlet
-	if(form["titolo"].value.length < 10) return false;
-	else return true;
+	
+	//Azzero eventuali errori precedenti
+	document.getElementById("descTitolo").style.color= "black";
+	document.getElementsByName("titolo")[0].style.color= "black";
+	document.getElementsByName("titolo")[0].style.borderColor="";
+	document.getElementById("descVoto").style.color= "black";
+	document.getElementsByName("voto")[0].style.color= "black";
+	document.getElementsByName("voto")[0].style.borderColor="black";
+	document.getElementById("descTesto").style.color= "black";
+	document.getElementsByName("recensione")[0].style.color= "black";
+	document.getElementsByName("recensione")[0].style.borderColor="black";
+	
+	//Titolo breve e/o mancante
+	if(document.getElementsByName("titolo")[0].value.length < 5) {
+		document.getElementById("descTitolo").style.color= "red";
+		document.getElementsByName("titolo")[0].style.color= "red";
+		document.getElementsByName("titolo")[0].style.borderColor="red";
+		openPopUpErrore("Titolo troppo breve o mancante.");
+		return false;
+	}
+	
+	//Voto mancante
+	if(document.getElementsByName("voto")[0].value === "0") {
+		document.getElementById("descVoto").style.color= "red";
+		document.getElementsByName("voto")[0].style.color= "red";
+		document.getElementsByName("voto")[0].style.borderColor="red";
+		openPopUpErrore("Voto mancante");
+		return false;
+	}
+	
+	//Recensione breve e/o mancante
+	if(document.getElementsByName("recensione")[0].value.length < 20) {
+		document.getElementById("descTesto").style.color= "red";
+		document.getElementsByName("recensione")[0].style.color= "red";
+		document.getElementsByName("recensione")[0].style.borderColor="red";
+		openPopUpErrore("Recensione troppo breve o mancante.");
+		return false;
+	}
+	
+	openPopUpRecensione();
+	return true;
 	
 }
 
@@ -178,10 +221,21 @@ function add(id){
 		}
 	}
 }
+function openPopUpErrore(string) {
+	var div_errore = document.getElementById('popUPErrore');
+	document.getElementById("stringaErrore").innerHTML= string;
+	div_errore.style.display='flex';
+};
+function closePopUpErrore() {
+	var div_conferma = document.getElementById('popUPErrore');
+	div_conferma.style.display='none';
+};
 
-
-
-function closePopUp() {
+function openPopUpRecensione() {
+	var div_conferma = document.getElementById('popUPConfermaRecensione');
+	div_conferma.style.display='flex';
+};
+function closePopUpRecensione() {
 	var div_conferma = document.getElementById('popUPConfermaRecensione');
 	div_conferma.style.display='none';
 };
