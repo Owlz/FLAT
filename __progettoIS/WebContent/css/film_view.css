@@ -229,7 +229,7 @@ body {
 	background-color: white;
     border: 2px solid;
 	position: absolute;
-    margin-top: 15%;
+    margin-top: -45%;
     margin-left: 45%;
     z-index: 150;
 }

@@ -174,15 +174,13 @@ function inserisciVoto(idRecensione, voto, bottone){
 
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
-			console.log(xml.responseText);
 			if(xml.responseText !== "fall"){
+				
 				//Valido per entrambi
 				bottone.setAttribute( "onClick", "rimuoviVoto(" + xml.responseText.substring(4) + ", this);" );
 				
-				console.log(voto)
-				console.log("é ugualea 1 ? " + (voto === "1") )
 				//In base a quale hai cliccato
-				if (voto === "1") {
+				if (voto == "1") {
 					bottone.style.color = 'green';
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1," + xml.responseText.substring(4) + ", this);" );
 				} else {
@@ -210,23 +208,19 @@ function aggiornaVoto(voto, idVoto, bottone){
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
 				
-				
-				if (voto === "+1") { //Se ha cliccato su sopra
+				if (voto == "+1") { //Se ha cliccato su sopra
 					document.getElementById('sopra' + idRecensione).style.color = 'green';
 					document.getElementById('sotto' + idRecensione).style.color = 'blue';
-					
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
-				} else if (voto === "-1") { //Se ha cliccato su sotto
+				} else if (voto == "-1") { //Se ha cliccato su sotto
 					document.getElementById('sopra' + idRecensione).style.color = 'blue';
 					document.getElementById('sotto' + idRecensione).style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 				}
-				
-			} else {
-				
-			} 
+
+			}
 		}
 	}
 }
