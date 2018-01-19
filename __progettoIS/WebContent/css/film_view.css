@@ -143,7 +143,7 @@ body {
     width: 30px;
     height: 110px;
     top: -120px;
-    left: 423px;
+    left: 47%;
     cursor: pointer;
 }
 
@@ -217,6 +217,26 @@ body {
     margin-left: 50px;
     margin-top: 20px;
     cursor: pointer;
+}
+
+/* --------------------------  CONFERMA SEGNALAZIONE  ------------------------- */
+
+#popUPConfermaSegnalazione {
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: 15%;
+    margin-left: 45%;
+    z-index: 150;
+}
+
+#popUPConfermaSegnalazione p {
+	text-align: center;
+	padding-top: 40px;
 }
 
 /* --------------------------  POPUP ERRORE ------------------------- */

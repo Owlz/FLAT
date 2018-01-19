@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
+pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, applicationLogic.bean.Voto"%>
 
 <jsp:useBean id="film" scope="request" class="applicationLogic.bean.FilmRemote"/>
 <jsp:useBean id="utente" scope="session" class="applicationLogic.bean.Utente"/>
@@ -63,9 +63,32 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 					<p id="testo"><%=x.getTesto() %></p>
 				</div>
 				<div id="pulsantiAzione">
-					<i class="fa fa-flag" aria-hidden="true"></i>
-					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
-					<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+					<i onClick="segnala('<%=x.getId()%>')" class="fa fa-flag" aria-hidden="true"></i>
+					
+					<!-- Scorro la lista di chi ha votato per vedere se l'utente ha già votato la recensione -->
+					<% boolean flag = false; %>
+					<% for (Voto y: x.getVoti()) { %> 
+					
+						<% if (y.getUtente().equals(utente)) { %>	<!-- Se l'utente ha già votato -->
+							<% flag = true; %>
+							<% if (y.getVoto() == 1) { %>				<!-- Ha votato Up -->
+								<i id="sopra<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true" style="color:green"></i>
+								<i id="sotto<%=x.getId()%>" onClick="aggiornaVoto(-1,'<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
+							<% } else { %>								<!-- Ha votato Down -->
+								<i id="sopra<%=x.getId()%>" onClick="aggiornaVoto(+1,'<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
+								<i id="sotto<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true" style="color:red"></i>
+							<% } %>
+											
+						<% }  %> 								
+						<!-- Se l'utente non ha mai votato li inserisco dopo -->	
+						<% if (flag) break;%>
+						
+					<% } %>
+					
+					<% if (!flag) {%>
+						<i id="sopra<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '+1', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
+						<i id="sotto<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '-1', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
+					<% } %>
 				</div>
 			<% } %>
 		<% } %>
@@ -110,11 +133,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
   			 <textarea rows="10" cols="60" name="recensione"></textarea> 
   		<br/>
  		<input type="hidden" name="idFilm" value="<%=film.getId() %>">
- 		
- 		
-<!--  	<input type="button" id="submit" onclick="controlloInserimento()" value="Invia la recensione"> -->
  		<button type="submit" id="submit">Invia la recensione</button>
-<!--   		<input id="submit" type="submit" value="invia la recensione"> -->
 	</form>
 </div>
 
@@ -126,21 +145,138 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione"%>
 <div id="popUPConfermaRecensione">
 
 	<p>Recensione Aggiunta</p>
-
 	<button id="ok" OnClick="closePopUpRecensione()">Conferma</button>
 
+</div>
+
+<div id="popUPConfermaSegnalazione">
+
+	<p>Recensione Segnalata</p>
+	<button id="ok" OnClick="closePopUpSegnalazione()">Conferma</button>
+	
 </div>
 
 <div id="popUPErrore">
 
 	<p id="stringaErrore">Errore</p>
-
 	<button id="ok" OnClick="closePopUpErrore()">Conferma</button>
 
 </div>
 
 <jsp:include page="includes/_import.jsp"/>
 <script>
+function inserisciVoto(idRecensione, voto, bottone){
+	let xml = new XMLHttpRequest();
+	let url = "vota?flag=aggiungi&voto="+ voto +"&idRecensione=" + idRecensione;
+	
+	xml.open("get", url, true);
+	xml.send();
+
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			console.log(xml.responseText);
+			if(xml.responseText !== "fall"){
+				//Valido per entrambi
+				bottone.setAttribute( "onClick", "rimuoviVoto(" + xml.responseText.substring(4) + ", this);" );
+				
+				console.log(voto)
+				console.log("é ugualea 1 ? " + (voto === "1") )
+				//In base a quale hai cliccato
+				if (voto === "1") {
+					bottone.style.color = 'green';
+					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1," + xml.responseText.substring(4) + ", this);" );
+				} else {
+					bottone.style.color = 'red';
+					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1," + xml.responseText.substring(4) + ", this);" );
+				}
+				
+			} else {
+				
+			} 
+		}
+	}
+}
+
+function aggiornaVoto(voto, idVoto, bottone){
+	let xml = new XMLHttpRequest();
+	let url = "vota?flag=modifica&idVoto=" + idVoto + "&voto=" + voto;
+	
+	xml.open("get", url, true);
+	xml.send();
+	
+	var idRecensione = bottone.id.substring(5);
+	
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				
+				
+				if (voto === "+1") { //Se ha cliccato su sopra
+					document.getElementById('sopra' + idRecensione).style.color = 'green';
+					document.getElementById('sotto' + idRecensione).style.color = 'blue';
+					
+					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
+					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
+				} else if (voto === "-1") { //Se ha cliccato su sotto
+					document.getElementById('sopra' + idRecensione).style.color = 'blue';
+					document.getElementById('sotto' + idRecensione).style.color = 'red';
+					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
+					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
+				}
+				
+			} else {
+				
+			} 
+		}
+	}
+}
+
+function rimuoviVoto(idVoto, bottone){
+	let xml = new XMLHttpRequest();
+	let url = "vota?flag=rimuovi&idVoto=" + idVoto;
+	
+	xml.open("get", url, true);
+	xml.send();
+
+	var idRecensione = bottone.id.substring(5);
+	
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				bottone.style.color = 'blue';
+				document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", +1, this);" );
+				document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", -1, this);" );
+			} else {
+				
+			} 
+		}
+	}
+}
+
+
+function segnala(id){
+	let xml = new XMLHttpRequest();
+	let url = "segnala?id="+id;
+	
+	xml.open("get", url, true);
+	xml.send();
+
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				var div_conferma = document.getElementById('popUPConfermaSegnalazione');
+				div_conferma.style.display='flex';
+			} else {
+				
+			} 
+		}
+	}
+}
+
+
+
+
+
 function closeForm() {
 	var bottone = document.getElementById('newRecensione');
 	bottone.style.display='block';
@@ -237,6 +373,10 @@ function openPopUpRecensione() {
 };
 function closePopUpRecensione() {
 	var div_conferma = document.getElementById('popUPConfermaRecensione');
+	div_conferma.style.display='none';
+};
+function closePopUpSegnalazione() {
+	var div_conferma = document.getElementById('popUPConfermaSegnalazione');
 	div_conferma.style.display='none';
 };
 </script>
