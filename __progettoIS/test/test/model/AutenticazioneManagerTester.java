@@ -24,4 +24,6 @@ public class AutenticazioneManagerTester {
 		assert(output.getRuolo().equals(AutenticazioneManager.autenticaUtente(input).getRuolo()));
 		assert(output.equals(AutenticazioneManager.autenticaUtente(input)));
 	}
+	
+	/* mancano i casi dove fallisce */
 }

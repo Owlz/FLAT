@@ -15,24 +15,7 @@ TESTO : <%=recensione.getTesto() %><br/>
 Voti <%= recensione.getVoti() %> <br/>
 Segnala: <p onClick="segnala('<%=recensione.getId() %>')">Segnala recensione</p>
 
-<p id="like" onClick="vota(this, '<%=recensione.getId() %>', '1')">Pollice su</p> - <p id="dislike" onClick="vota(this, '<%=recensione.getId() %>', '-1')">Pollice su</p>
 <script>
-<% // TODO: this %>
-<!-- function vota(el, id, v){
-	let xml = new XMLHttpRequest();
-	let url = "vota?id="+id+"&v=" + v;
-	
-	xml.open("get", url, true);
-	xml.send();
-
-	
-	xml.onreadystatechange = function() {
-		if (xml.readyState == 4 && xml.status == 200) {
-			if(xml.responseText === "succ") console.log(xml);
-		}
-	}
-} -->
-
 function segnala(id){
 	let xml = new XMLHttpRequest();
 	let url = "segnala?id=" + id;
