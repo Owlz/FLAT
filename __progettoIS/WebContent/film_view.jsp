@@ -117,7 +117,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 <div id="spazioFormRecensione">
 	<button id="close" OnClick="closeForm()">X</button>
 	
-	<form name="formRecensione" id="formRecensione" action="addrecensione" method="post" onSubmit="return controlloInserimento(this);">
+	<form name="formRecensione" id="formRecensione" method="post" onSubmit="return controlloInserimento(this, '<%=film.getId() %>');">
 	  	<span id="descTitolo">Titolo: </span>
   			<input type="text" name="titolo">
 		<span id="descVoto">Voto: </span>
@@ -178,7 +178,6 @@ function inserisciVoto(idRecensione, voto, bottone){
 				
 				//Valido per entrambi
 				bottone.setAttribute( "onClick", "rimuoviVoto(" + xml.responseText.substring(4) + ", this);" );
-				
 				//In base a quale hai cliccato
 				if (voto == "1") {
 					bottone.style.color = 'green';
@@ -284,7 +283,7 @@ function openForm() {
 	div_form.style.display='block';
 }
 
-function controlloInserimento(form) {
+function controlloInserimento(form, idFilm) {
 	//Controlli da fare prima di chiamare la servlet
 	
 	//Azzero eventuali errori precedenti
@@ -326,8 +325,8 @@ function controlloInserimento(form) {
 	}
 	
 	openPopUpRecensione();
+	addRecensione(idFilm);
 	return true;
-	
 }
 
 
@@ -351,6 +350,34 @@ function add(id){
 		}
 	}
 }
+
+function addRecensione(idFilm){
+	let xml = new XMLHttpRequest();
+	//Prendo i dati dalla form
+    var x = document.getElementById("voto").selectedIndex;
+	voto = document.getElementsByTagName("option")[x].value;
+    var titolo = document.getElementsByName("titolo")[0].value;
+    var recensione = document.getElementsByName("recensione")[0].value;
+	
+	let url = "addrecensione?voto=" + voto + "&titolo=" + titolo + "&recensione=" + recensione + "&idFilm=" + idFilm;
+	
+	xml.open("get", url, true);
+	xml.send();
+
+	
+	xml.onreadystatechange = function() {
+		if (xml.readyState == 4 && xml.status == 200) {
+			if(xml.responseText === "succ"){
+				openPopUpRecensione();
+			} else {
+				
+			} 
+		}
+	}
+}
+
+
+
 function openPopUpErrore(string) {
 	var div_errore = document.getElementById('popUPErrore');
 	document.getElementById("stringaErrore").innerHTML= string;

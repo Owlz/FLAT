@@ -141,10 +141,12 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 30px;
-    height: 110px;
-    top: -120px;
+    height: 150px;
+    font-size: 25px;
+    top: -140px;
     left: 47%;
     cursor: pointer;
+    
 }
 
 
