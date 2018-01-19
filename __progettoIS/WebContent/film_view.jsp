@@ -117,11 +117,11 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 <div id="spazioFormRecensione">
 	<button id="close" OnClick="closeForm()">X</button>
 	
-	<form name="formRecensione" id="formRecensione" method="post" onSubmit="return controlloInserimento(this, '<%=film.getId() %>');">
+	<form name="formRecensione" id="formRecensione" method="post" onSubmit="event.preventDefault(); controlloInserimento(this);">
 	  	<span id="descTitolo">Titolo: </span>
   			<input type="text" name="titolo">
 		<span id="descVoto">Voto: </span>
-			<select name="voto">
+			<select id="votoSelect" name="voto">
 				<option selected="selected" value="0">--</option>
 				<% int x = 11; while(x --> 1) { %>
 					<option value="<%= x %>"><%= x %></option>
@@ -283,7 +283,7 @@ function openForm() {
 	div_form.style.display='block';
 }
 
-function controlloInserimento(form, idFilm) {
+function controlloInserimento(form) {
 	//Controlli da fare prima di chiamare la servlet
 	
 	//Azzero eventuali errori precedenti
@@ -325,8 +325,8 @@ function controlloInserimento(form, idFilm) {
 	}
 	
 	openPopUpRecensione();
-	addRecensione(idFilm);
-	return true;
+	addRecensione(form);
+	return false;
 }
 
 
@@ -350,30 +350,39 @@ function add(id){
 		}
 	}
 }
+function postAjax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
 
-function addRecensione(idFilm){
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    return xhr;
+}
+
+function addRecensione(form){
 	let xml = new XMLHttpRequest();
 	//Prendo i dati dalla form
-    var x = document.getElementById("voto").selectedIndex;
-	voto = document.getElementsByTagName("option")[x].value;
+    var voto = document.getElementById("votoSelect").value;
     var titolo = document.getElementsByName("titolo")[0].value;
     var recensione = document.getElementsByName("recensione")[0].value;
-	
-	let url = "addrecensione?voto=" + voto + "&titolo=" + titolo + "&recensione=" + recensione + "&idFilm=" + idFilm;
-	
-	xml.open("get", url, true);
-	xml.send();
+    let idFilm = form["idFilm"].value;
 
-	
-	xml.onreadystatechange = function() {
-		if (xml.readyState == 4 && xml.status == 200) {
-			if(xml.responseText === "succ"){
-				openPopUpRecensione();
-			} else {
-				
-			} 
-		}
-	}
+    postAjax('addrecensione', {
+    	voto: voto,
+    	titolo: titolo,
+    	recensione: recensione,
+    	idFilm: idFilm
+    }, function(data) {
+    	openPopUpRecensione();
+    	console.log(data); 							/* <!-- -----------------------TESTING------------------ --> */
+    });
 }
 
 
