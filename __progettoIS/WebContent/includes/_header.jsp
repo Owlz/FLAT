@@ -6,7 +6,7 @@
 		<a onClick='href="home_view.jsp"'><img src="img/logo.png" height="50" alt="logo"></a>
 	</div>
 	
-	<select class="js-example-basic-single" name="film" style="width: 300px;"></select>
+	<select class="js-example-basic-single" name="film" style="width: 620px;"></select>
 	
 	<ul>
 		<% if(!utente.getRuolo().equals("visitatore")){ %>
