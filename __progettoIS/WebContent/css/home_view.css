@@ -54,6 +54,7 @@ body {
 }
 .cella figure img {
 	width: 100%;
+	height: 300px;
 	position: relative;
 	transition: transform 0.4s;
 }

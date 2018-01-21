@@ -1,24 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione"%>
-
 <% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaSegnalate"); %>
+
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Gestione Segnalazioni</title>
-	<%@include file="includes/_import.jsp"%></head>
+	<link rel="stylesheet" href="css/nav.css" type="text/css">
+	<link rel="stylesheet" href="css/gestioneSegnalazioni_view.css" type="text/css">
+</head>
+
 <body>
-	<%@include file="includes/_header.jsp"%></head>
+<!--       ********************      NavBar      ********************           -->
+<jsp:include page="includes/_header.jsp"/>
+
+<!--       ********************      Container     ********************           -->
+<div id="container">
+	<h2>Ultime Recensioni Segnalate:</h2>
+
 	<% for(Recensione x: listaRec){ %>
-		<div id="<%=x.getId() %>" style="background-color: red">
-			<p><%=x.getTesto() %></p>
-			<p>Voto del film: <%=x.getVoto() %></p>
-			<p>Voti totali: <%=x.getVotiTotali() %></p>
-			<p style="background-color: blue;" onClick="removeRecensione('<%=x.getId() %>')"> Rimuovi questa recensione </p>
-			<p style="background-color: green;" onClick="removeSegnalazione('<%=x.getId() %>')"> Rimuovi questa segnalazione </p>
+		<div class="elemento" id="<%=x.getId() %>">
+			<div class="corpo">
+				<h4><i>Titolo:</i> "<%=x.getTitolo() %>"</h4>
+				<p><i style="font-weight: bold">Testo:</i> <%=x.getTesto() %></p>
+			</div>
+			<div class="voti">
+				<p><i style="font-weight: bold">Voto del film:</i> <%=x.getVoto() %></p>
+				<p><i style="font-weight: bold">Somma voti utenti:</i> <%=x.getVotiTotali() %></p>
+			</div>
+			<div class="bottoni">
+				<button onClick="removeRecensione('<%=x.getId() %>')">Rimuovi Recensione</button>
+				<button onClick="removeSegnalazione('<%=x.getId() %>')">Ignora segnalazione</button>
+			</div>
 		</div>
 	<% } %>
-	
+
+
+</div>
+
+
+<jsp:include page="includes/_import.jsp"/>
 <script>
 function removeRecensione(id){
 	let xml = new XMLHttpRequest();

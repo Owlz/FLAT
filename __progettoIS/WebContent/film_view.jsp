@@ -179,7 +179,7 @@ function inserisciVoto(idRecensione, voto, bottone){
 				//Valido per entrambi
 				bottone.setAttribute( "onClick", "rimuoviVoto(" + xml.responseText.substring(4) + ", this);" );
 				//In base a quale hai cliccato
-				if (voto == "1") {
+				if (voto == "+1") {
 					bottone.style.color = 'green';
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1," + xml.responseText.substring(4) + ", this);" );
 				} else {
@@ -404,6 +404,7 @@ function openPopUpRecensione() {
 function closePopUpRecensione() {
 	var div_conferma = document.getElementById('popUPConfermaRecensione');
 	div_conferma.style.display='none';
+	closeForm();
 };
 function closePopUpSegnalazione() {
 	var div_conferma = document.getElementById('popUPConfermaSegnalazione');

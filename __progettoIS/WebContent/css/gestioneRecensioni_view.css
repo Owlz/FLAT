@@ -1,0 +1,123 @@
+@CHARSET "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+/* --------------------------  BODY ------------------------------ */
+
+body {
+	font-size: 100%;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+}
+
+/* --------------------------  NAVBAR -------------------------------- */
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: inset;
+	border-bottom: inset;
+	width: 100%;
+	height: 60px;
+	z-index: 1;
+    background-color: #333333;
+}
+
+#spazioLogo {
+	margin-left: 20px;
+}
+
+nav ul {
+	list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 20px;
+    height: 60px;
+    overflow: hidden;
+ 	float: right;
+}
+
+nav li {
+    float: right;
+    padding-top: 10px;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #111111;
+}
+
+
+/* --------------------------  CONTAINER   -------------------------------- */
+#container {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: inset;
+}
+
+#ordina {
+    display: flex;
+    justify-content: center;
+    width: 1200px;
+    border: 1px solid black;
+}
+
+#ordina select {
+    height: 35px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#container ul {
+	list-style: none;
+}
+
+.elemento {
+	display: flex;
+	justify-content: space-between;
+	width: 1200px;
+    height: 250px;
+	border: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.elemento .corpo {
+	width: 850px;
+	overflow-y: auto;
+}
+
+.corpo p {
+	text-align: left;
+	padding: 20px;
+}
+
+.elemento .voti {
+	padding-top: 2%;
+}
+
+.elemento .bottoni {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.elemento button {
+    background-color: white;
+    border-color: black;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+}
