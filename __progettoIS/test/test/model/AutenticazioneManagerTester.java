@@ -1,29 +1,64 @@
 package test.model;
 
+import java.sql.SQLException;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonPresenti;
 import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.model.AutenticazioneManager;
+import storage.database.UtenteDAO;
 
 public class AutenticazioneManagerTester {
+	private final static Utente ORACOLO = new Utente("Nome", "Cognome", "tester01", "password", "mail@mail.it", "utente");
+	
 	public AutenticazioneManagerTester(){}
 	
-	@Test
-    public void inserimentoUtenteNelDatabase() throws DatiNonPresenti, DatiNonValidi {
-		Utente input = new Utente();
-		input.setUsername("utente1");
-		input.setPassword("utente1");
-		
-		Utente output = new Utente();
-		output.setUsername("utente1");
-		output.setPassword("utente1");
-		output.setRuolo("utente");
-		
-		assert(output.getRuolo().equals(AutenticazioneManager.autenticaUtente(input).getRuolo()));
-		assert(output.equals(AutenticazioneManager.autenticaUtente(input)));
+	@BeforeClass
+	public static void inserisiUtenteDiTesting() throws SQLException{
+		UtenteDAO.insert(ORACOLO);
 	}
 	
-	/* mancano i casi dove fallisce */
+	@AfterClass
+	public static void rimuoviUtenteDiTesting() throws SQLException{
+		UtenteDAO.delete(ORACOLO);
+	}
+	
+	@Test
+    public void ControlloUtenteNelDatabaseSuccesso() throws DatiNonPresenti, DatiNonValidi {
+		Utente input = new Utente();
+		input.setUsername("tester01");
+		input.setPassword("password");
+		
+		assert(ORACOLO.equals(AutenticazioneManager.autenticaUtente(input)));
+	}
+	
+	@Test(expected = DatiNonPresenti.class)
+    public void ControlloUtenteNelDatabaseNoUsername() throws DatiNonPresenti, DatiNonValidi {
+		Utente input = new Utente();
+		input.setPassword("password");
+		
+		assert(ORACOLO.equals(AutenticazioneManager.autenticaUtente(input)));
+	}
+	
+	@Test(expected = DatiNonPresenti.class)
+    public void ControlloUtenteNelDatabaseUsernameInesistente() throws DatiNonPresenti, DatiNonValidi {
+		Utente input = new Utente();
+		input.setUsername("tester02");
+		input.setPassword("password");
+		
+		assert(ORACOLO.equals(AutenticazioneManager.autenticaUtente(input)));
+	}
+	
+	@Test(expected = DatiNonValidi.class)
+    public void ControlloUtenteNelDatabasePasswordErrata() throws DatiNonPresenti, DatiNonValidi {
+		Utente input = new Utente();
+		input.setUsername("tester01");
+		input.setPassword("password2");
+		
+		assert(ORACOLO.equals(AutenticazioneManager.autenticaUtente(input)));
+	}
 }

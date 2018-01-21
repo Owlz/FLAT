@@ -11,7 +11,8 @@ public class UtenteDAO {
 	private static final String SELECT = "SELECT * FROM utenti WHERE username = ?";
 	private static final String INSERT = "INSERT INTO utenti (`username`, `password`, `nome`, `cognome`, `email`, `ruolo`) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE utenti SET `password` = ?, `nome` = ?, `cognome` = ?, `email` = ? WHERE `username` = ?";
-
+	private static final String DELETE = "DELETE FROM `utenti` WHERE `username`=?";
+	
 	public static Utente insert(Utente utente) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(INSERT);
@@ -84,4 +85,14 @@ public class UtenteDAO {
 		return utente;
 	}
 
+	public static void delete(Utente u) throws SQLException {
+		Connection con = DBConnection.ottieniConnessione();
+		PreparedStatement pst = con.prepareStatement(DELETE);
+		pst.setString(1, u.getUsername());
+
+		pst.executeUpdate();
+		con.commit();
+
+		DBConnection.riaggiungiConnessione(con);
+	}
 }
