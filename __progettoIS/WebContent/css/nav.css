@@ -81,4 +81,8 @@ nav li a:hover {
     margin-left: 50px;
     margin-top: 20px;
     cursor: pointer;
+    outline: none;
+    border: solid black;
+    padding: 10px;
+    background-color: white;
 }
