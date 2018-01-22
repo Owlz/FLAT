@@ -71,34 +71,38 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 					<h3>Totale voti utenti: <i><%=x.getVotiTotali()%></i></h3>
 					<button class="moreButton" onClick="location.href='recensione?id=<%=x.getId()%>'">[Visualizza altro...]</button>
 				</div>
+				
 				<div id="pulsantiAzione">
-					<i onClick="segnala('<%=x.getId()%>')" class="fa fa-flag" aria-hidden="true"></i>
-					
-					<!-- Scorro la lista di chi ha votato per vedere se l'utente ha già votato la recensione -->
-					<% boolean flag = false; %>
-					<% for (Voto y: x.getVoti()) { %> 
-					
-						<% if (y.getUtente().equals(utente)) { %>	<!-- Se l'utente ha già votato -->
-							<% flag = true; %>
-							<% if (y.getVoto() == 1) { %>				<!-- Ha votato Up -->
-								<i id="sopra<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true" style="color:green"></i>
-								<i id="sotto<%=x.getId()%>" onClick="aggiornaVoto(-1,'<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
-							<% } else { %>								<!-- Ha votato Down -->
-								<i id="sopra<%=x.getId()%>" onClick="aggiornaVoto(+1,'<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
-								<i id="sotto<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true" style="color:red"></i>
-							<% } %>
-											
-						<% }  %> 								
-						<!-- Se l'utente non ha mai votato li inserisco dopo -->	
-						<% if (flag) break;%>
+					<% if(!utente.getRuolo().equals("visitatore")) { %>
+						<i onClick="segnala('<%=x.getId()%>')" class="fa fa-flag" aria-hidden="true"></i>
 						
-					<% } %>
-					
-					<% if (!flag) {%>
-						<i id="sopra<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '+1', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
-						<i id="sotto<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '-1', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
+						<!-- Scorro la lista di chi ha votato per vedere se l'utente ha già votato la recensione -->
+						<% boolean flag = false; %>
+						<% for (Voto y: x.getVoti()) { %> 
+						
+							<% if (y.getUtente().equals(utente)) { %>	<!-- Se l'utente ha già votato -->
+								<% flag = true; %>
+								<% if (y.getVoto() == 1) { %>				<!-- Ha votato Up -->
+									<i id="sopra<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true" style="color:green"></i>
+									<i id="sotto<%=x.getId()%>" onClick="aggiornaVoto(-1,'<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
+								<% } else { %>								<!-- Ha votato Down -->
+									<i id="sopra<%=x.getId()%>" onClick="aggiornaVoto(+1,'<%=y.getId()%>', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
+									<i id="sotto<%=x.getId()%>" onClick="rimuoviVoto('<%=y.getId()%>', this)" class="fa fa-thumbs-down" aria-hidden="true" style="color:red"></i>
+								<% } %>
+												
+							<% }  %> 								
+							<!-- Se l'utente non ha mai votato li inserisco dopo -->	
+							<% if (flag) break;%>
+							
+						<% } %>
+						
+						<% if (!flag) {%>
+							<i id="sopra<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '+1', this)" class="fa fa-thumbs-up" aria-hidden="true"></i>
+							<i id="sotto<%=x.getId()%>" onClick="inserisciVoto('<%=x.getId()%>', '-1', this)" class="fa fa-thumbs-down" aria-hidden="true"></i>
+						<% } %>
 					<% } %>
 				</div>
+				
 			<% } %>
 		<% } %>
 	
