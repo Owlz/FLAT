@@ -26,6 +26,14 @@ body {
 	padding: 25px;
 }
 
+#submit {
+    margin-top: 15px;
+    outline: none;
+    border: solid black;
+    padding: 10px;
+    background-color: white;
+}
+
 /* --------------------------  ERRORE  -------------------------------- */
 
 #popUPErrore {

@@ -39,7 +39,7 @@
 		Nome Utente <input type="text" name="username"><br/>
 		Password <input type="password" name="password"><br/>
 		Conferma Password <input type="password" name="confermaPassword"><br/>
-		<input type="submit" value="Registrati">
+		<button type="submit" id="submit">Registrati</button>
 	</form>
 </div>
 

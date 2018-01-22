@@ -108,3 +108,43 @@ nav li a:hover {
     cursor: pointer;
     outline: none;
 }
+
+/* --------------------------  RIMUOVI RECENSIONE  ------------------------- */
+
+#popUpRimuoviRecensione {
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: -25%;
+    margin-left: 45%;
+    z-index: 150;
+}
+
+#popUpRimuoviRecensione p {
+	text-align: center;
+	padding-top: 40px;
+}
+
+/* --------------------------  IGNORA SEGNALAZIONE  ------------------------- */
+
+#popUpIgnoraSegnalazione {
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	background-color: white;
+    border: 2px solid;
+	position: absolute;
+    margin-top: -25%;
+    margin-left: 45%;
+    z-index: 150;
+}
+
+#popUpIgnoraSegnalazione p {
+	text-align: center;
+	padding-top: 40px;
+}

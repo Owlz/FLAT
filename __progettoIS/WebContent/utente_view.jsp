@@ -23,9 +23,6 @@
 		<h4><%=datiUtente.getNome()%></h4>
 		<h4><%=datiUtente.getCognome()%></h4>
 		<h4><%=datiUtente.getUsername()%></h4>
-		<h4><%=datiUtente.getPassword()%> <span style="color:red">da togliere</span></h4>
-		<h4><%=datiUtente.getEmail()%> <span style="color:red">da togliere</span></h4>
-		<h4><%=datiUtente.getRuolo()%> <span style="color:red">da togliere</span></h4>
 
 	<% if(datiUtente.equals(utente)){%>
 		<a href="cambiodati">Modifica Dati</a>

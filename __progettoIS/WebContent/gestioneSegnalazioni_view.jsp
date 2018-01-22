@@ -35,7 +35,7 @@
 				<p><i style="font-weight: bold">Somma voti utenti:</i> <%=x.getVotiTotali() %></p>
 			</div>
 			<div class="bottoni">
-				<button onClick="removeRecensione('<%=x.getId() %>')">Rimuovi Recensione</button>
+				<button onClick="removeRecensione('<%=x.getId() %>')">Rimuovi recensione</button>
 				<button onClick="removeSegnalazione('<%=x.getId() %>')">Ignora segnalazione</button>
 			</div>
 		</div>
@@ -44,6 +44,19 @@
 
 </div>
 
+<div id="popUpRimuoviRecensione">
+
+	<p>Recensione rimossa</p>
+	<button id="ok" OnClick="closePopUpRecensione()">Conferma</button>
+
+</div>
+
+<div id="popUpIgnoraSegnalazione">
+
+	<p>Segnalazione ignorata</p>
+	<button id="ok" OnClick="closePopUpSegnalazione()">Conferma</button>
+
+</div>
 
 <jsp:include page="includes/_import.jsp"/>
 <script>
@@ -59,6 +72,7 @@ function removeRecensione(id){
 			if(xml.responseText === "succ"){
 				let x = document.getElementById(id);
 				x.remove();
+				openPopUpRecensione();
 			}else{
 				let x = document.getElementById(id);
 				x.innerHTML = "errore";
@@ -78,6 +92,7 @@ function removeSegnalazione(id){
 			if(xml.responseText === "succ"){
 				let x = document.getElementById(id);
 				x.remove();
+				openPopUpSegnalazione();
 			}else{
 				let x = document.getElementById(id);
 				x.innerHTML = "errore";
@@ -85,6 +100,23 @@ function removeSegnalazione(id){
 		}
 	}
 }
+
+function openPopUpRecensione() {
+	var div_confermaR = document.getElementById('popUpRimuoviRecensione');
+	div_confermaR.style.display='flex';
+};
+function closePopUpRecensione() {
+	var div_confermaR = document.getElementById('popUpRimuoviRecensione');
+	div_confermaR.style.display='none';
+};
+function openPopUpSegnalazione() {
+	var div_confermaS = document.getElementById('popUpIgnoraSegnalazione');
+	div_confermaS.style.display='flex';
+};
+function closePopUpSegnalazione() {
+	var div_confermaS = document.getElementById('popUpIgnoraSegnalazione');
+	div_confermaS.style.display='none';
+};
 </script>
 </body>
 </html>

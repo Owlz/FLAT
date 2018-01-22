@@ -10,52 +10,6 @@ body {
 	margin: 0;
 }
 
-/* --------------------------  NAVBAR -------------------------------- */
-
-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-top: inset;
-	border-bottom: inset;
-	width: 100%;
-	height: 60px;
-	z-index: 1;
-    background-color: #333333;
-}
-
-#spazioLogo {
-	margin-left: 20px;
-}
-
-nav ul {
-	list-style: none;
-    margin: 0;
-    padding: 0;
-    padding-right: 20px;
-    height: 60px;
-    overflow: hidden;
- 	float: right;
-}
-
-nav li {
-    float: right;
-    padding-top: 10px;
-}
-
-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-}
-
-nav li a:hover {
-    background-color: #111111;
-}
-
-
 /* --------------------------  CONTAINER   -------------------------------- */
 #container {
     width: 100%;
@@ -67,19 +21,6 @@ nav li a:hover {
     border: inset;
 }
 
-#ordina {
-    display: flex;
-    justify-content: center;
-    width: 1200px;
-    border: 1px solid black;
-}
-
-#ordina select {
-    height: 35px;
-    margin-top: 15px;
-    margin-left: 15px;
-}
-
 #container ul {
 	list-style: none;
 }
@@ -88,7 +29,7 @@ nav li a:hover {
 	display: flex;
 	justify-content: space-between;
 	width: 1200px;
-    height: 250px;
+    height: 600px;
 	border: 1px solid black;
 	margin-bottom: 10px;
 }
@@ -96,6 +37,7 @@ nav li a:hover {
 .elemento .corpo {
 	width: 850px;
 	overflow-y: auto;
+	border-right: 1px solid;
 }
 
 .corpo p {
@@ -107,10 +49,19 @@ nav li a:hover {
 	padding-top: 2%;
 }
 
-.elemento .bottoni {
-	display: flex;
+#pulsantiAzione {
+    position: relative;
+    color: blue;
+    display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
+    width: 30px;
+    height: 150px;
+    font-size: 25px;
+    top: 193px;
+    left: -14%;
+    cursor: pointer;
 }
 
 .elemento button {
@@ -122,9 +73,9 @@ nav li a:hover {
     outline: none;
 }
 
-/* --------------------------  RIMUOVI RECENSIONE  ------------------------- */
+/* --------------------------  CONFERMA SEGNALAZIONE  ------------------------- */
 
-#popUpRimuoviRecensione {
+#popUPConfermaSegnalazione {
 	display: none;
 	flex-direction: column;
 	width: 200px;
@@ -132,12 +83,12 @@ nav li a:hover {
 	background-color: white;
     border: 2px solid;
 	position: absolute;
-    margin-top: -45%;
+    margin-top: -30%;
     margin-left: 45%;
     z-index: 150;
 }
 
-#popUpRimuoviRecensione p {
+#popUPConfermaSegnalazione p {
 	text-align: center;
 	padding-top: 40px;
 }

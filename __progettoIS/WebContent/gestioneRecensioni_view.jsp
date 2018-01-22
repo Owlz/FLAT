@@ -50,10 +50,17 @@
 	<% } %>
 	
 </div>	
+
+<div id="popUpRimuoviRecensione">
+
+	<p>Recensione rimossa</p>
+	<button id="ok" OnClick="closePopUpRecensione()">Conferma</button>
+
+</div>
 	
 <jsp:include page="includes/_import.jsp"/>
-<script>	
-	function removeRecensione(id){
+<script>
+function removeRecensione(id){
 	let xml = new XMLHttpRequest();
 	let url = "removerecensioneadmin?id="+id;
 	
@@ -65,6 +72,7 @@
 			if(xml.responseText === "succ"){
 				let x = document.getElementById(id);
 				x.remove();
+				openPopUpRecensione();
 			}else{
 				let x = document.getElementById(id);
 				x.innerHTML = "errore";
@@ -72,6 +80,16 @@
 		}
 	}
 }
+
+
+function openPopUpRecensione() {
+	var div_confermaR = document.getElementById('popUpRimuoviRecensione');
+	div_confermaR.style.display='flex';
+};
+function closePopUpRecensione() {
+	var div_confermaR = document.getElementById('popUpRimuoviRecensione');
+	div_confermaR.style.display='none';
+};
 </script>
 </body>
 </html>
