@@ -17,7 +17,7 @@
 
 <!--       ********************      Container     ********************           -->
 <div id="container">
-	<h2>Ultime Recensioni Segnalate:</h2>
+	<h2>Recensioni Segnalate:</h2>
 
 	<% for(Recensione x: listaRec){ %>
 		<div class="elemento" id="<%=x.getId() %>">

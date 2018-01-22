@@ -405,6 +405,7 @@ function closePopUpRecensione() {
 	var div_conferma = document.getElementById('popUPConfermaRecensione');
 	div_conferma.style.display='none';
 	closeForm();
+	location.reload();
 };
 function closePopUpSegnalazione() {
 	var div_conferma = document.getElementById('popUPConfermaSegnalazione');
