@@ -66,6 +66,14 @@ public class Utente {
 				+ (email != null ? "email=" + email + ", " : "") + (ruolo != null ? "ruolo=" + ruolo : "") + "]";
 	}
 
+	/**
+	 * Equals utilizzato per testare se l'username coincide
+	 * È tutto ciò di cui abbiamo bisogno nella piattaforma
+	 * per testare l'eguaglianza fra classi Utente.
+	 * 
+	 * @see equalsComplete per la versione complea
+	 * @param object da testare con l'attuale utente
+	 */
 	@Override
 	public boolean equals(Object o){
 	    if (o == null) return false;
@@ -75,5 +83,44 @@ public class Utente {
 	    Utente u = (Utente) o;
 	    if (this.username.equals(u.getUsername())) return true;
 	    else return false;
-	}	
+	}
+
+	/**
+	 * Equals utilizzato per il testing dell'intera classe
+	 * @param object da testare con l'attuale utente
+	 */
+	public boolean equalsComplete(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (!(obj instanceof Utente)) return false;
+		Utente other = (Utente) obj;
+		
+		if (cognome == null) {
+			if (other.cognome != null) return false;
+		} else if (!cognome.equals(other.cognome)) return false;
+		
+		if (email == null) {
+			if (other.email != null) return false;
+		} else if (!email.equals(other.email)) return false; 
+		
+		if (nome == null) {
+			if (other.nome != null) return false;
+		} else if (!nome.equals(other.nome)) return false;
+		
+		if (password == null) {
+			if (other.password != null) return false;
+		} else if (!password.equals(other.password)) return false;
+		
+		if (ruolo == null) {
+			if (other.ruolo != null) return false;
+		} else if (!ruolo.equals(other.ruolo)) return false;
+		
+		if (username == null) {
+			if (other.username != null) return false;
+		} else if (!username.equals(other.username))  return false;
+		
+		return true;
+	}
+	
+	
 }

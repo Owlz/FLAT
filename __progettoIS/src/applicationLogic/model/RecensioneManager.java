@@ -17,7 +17,7 @@ import storage.database.VotoDAO;
 public class RecensioneManager {
 	private RecensioneManager() {/*Costruttore vuoto e privato poichè non istanziabile*/}
 
-	public static void addRecensione(Recensione r) throws DatiTroppoBrevi, VotoMancante{
+	public static Recensione addRecensione(Recensione r) throws DatiTroppoBrevi, VotoMancante{
 		/* TODO: rendere decente questo controllo */
 		int LUNGHEZZA_MINIMA_REVIEW = 20;
 		int LUNGHEZZA_MINIMA_TITOLO = 5;
@@ -28,24 +28,29 @@ public class RecensioneManager {
 		if(!r.getTitolo().equals("") && r.getTitolo().length() < LUNGHEZZA_MINIMA_TITOLO)
 			throw new DatiTroppoBrevi("Il titolo della recensione non può essere meno di "+ LUNGHEZZA_MINIMA_TITOLO +" caratteri");
 		
-		if(r.getVoto() == 0)
+		if(r.getVoto() == 0 )
 			throw new VotoMancante();
 		
 		try {
-			RecensioneDAO.insert(r);
+			return RecensioneDAO.insert(r);
 		} catch (SQLException e) {
 			// query mal scritta o dati inseriti non corretti, non dovrebbe mai succedere
 			// quindi è corretto non fare nulla 
-			e.printStackTrace();	
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
 	public static ArrayList<Recensione> getSegnalate() {
+		ArrayList<Recensione> out = new ArrayList<Recensione>();
 		try{
-			return RecensioneDAO.selectBySegnalate();			
+			for(Recensione r: RecensioneDAO.selectBySegnalate()){
+				out.add(RecensioneManager.getCompleta(r));
+			}
+			return out;
 		}catch(SQLException e){
 			e.printStackTrace();
-			return new ArrayList<Recensione>();	
+			return out;	
 		}
 	}
 	
