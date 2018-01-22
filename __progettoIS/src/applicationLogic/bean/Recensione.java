@@ -28,6 +28,13 @@ public class Recensione {
 		}
 	};
 	
+	public static final Comparator<Recensione> COMP_BY_VOTI = new Comparator<Recensione>() {
+		@Override
+		public int compare(Recensione o1, Recensione o2) {
+			return o1.getVotiTotali() - o2.getVotiTotali();
+		}
+	};
+	
 	public Recensione() {}
 	
 	public Recensione(int id) {
