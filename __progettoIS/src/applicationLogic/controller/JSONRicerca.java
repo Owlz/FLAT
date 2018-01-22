@@ -16,7 +16,7 @@ import applicationLogic.bean.Film;
 import applicationLogic.model.RicercaManager;
 
 @WebServlet("/ricerca")
-public class JSONRicercaController extends HttpServlet {
+public class JSONRicerca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,33 +1,25 @@
 package applicationLogic.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import applicationLogic.bean.Film;
-import applicationLogic.bean.FilmLocal;
-import applicationLogic.bean.Utente;
-import applicationLogic.model.WatchlistManager;
-
-@WebServlet("/removewatchlist")
-public class JSONRimuoviWatchlistController extends HttpServlet {
+@WebServlet("/logout")
+public class JSONLogout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utente utente = (Utente) request.getSession().getAttribute("utente");
+		HttpSession sessione = request.getSession(false);
 		
-		String idFilm = request.getParameter("id");
-		Film f = FilmLocal.generateByStringId(idFilm);
+		if (sessione != null)
+	         sessione.invalidate();
 		
 		response.setContentType("application/json");
-		if(WatchlistManager.removeWatchlist(f, utente))
-			response.getWriter().write("succ");
-		else
-			response.getWriter().write("fall");
+		response.sendRedirect("home_view.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

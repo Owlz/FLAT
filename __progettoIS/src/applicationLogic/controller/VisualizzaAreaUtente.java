@@ -15,7 +15,7 @@ import applicationLogic.model.GestioneAccountManager;
 import applicationLogic.model.RecensioneManager;
 
 @WebServlet("/utente")
-public class VisualizzaAreaUtenteController extends HttpServlet {
+public class VisualizzaAreaUtente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

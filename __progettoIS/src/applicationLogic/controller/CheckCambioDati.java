@@ -13,7 +13,7 @@ import applicationLogic.exception.DatiOccupati;
 import applicationLogic.model.GestioneAccountManager;
 
 @WebServlet("/controllocambiodati")
-public class CheckCambioDatiController extends HttpServlet {
+public class CheckCambioDati extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -14,7 +14,7 @@ import applicationLogic.bean.Utente;
 import applicationLogic.model.WatchlistManager;
 
 @WebServlet("/addwatchlist")
-public class JSONInserisciWatchlistController extends HttpServlet {
+public class JSONInserisciWatchlist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

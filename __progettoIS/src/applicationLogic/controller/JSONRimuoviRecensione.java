@@ -9,19 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import applicationLogic.bean.Recensione;
+import applicationLogic.bean.Utente;
 import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/recensione")
-public class VisualizzaRecensioneController extends HttpServlet {
+@WebServlet("/removerecensione")
+public class JSONRimuoviRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utente utente = (Utente) request.getSession().getAttribute("utente");
+		
 		String idRecensione = request.getParameter("id");
 		Recensione r = Recensione.generateByStringId(idRecensione);
-		r = RecensioneManager.getCompleta(r);
+		r = RecensioneManager.get(r);
 		
-		request.setAttribute("recensione", r);
-		request.getRequestDispatcher("recensione_view.jsp").forward(request, response);
+		response.setContentType("application/json");
+		if(utente != null && utente.getUsername().equals(r.getUtente().getUsername()) && RecensioneManager.rimuovi(r))
+			response.getWriter().write("succ");
+		else
+			response.getWriter().write("fall");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

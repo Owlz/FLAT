@@ -1,25 +1,27 @@
 package applicationLogic.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/logout")
-public class JSONLogoutController extends HttpServlet {
+import applicationLogic.bean.Recensione;
+import applicationLogic.model.RecensioneManager;
+
+@WebServlet("/recensione")
+public class VisualizzaRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sessione = request.getSession(false);
+		String idRecensione = request.getParameter("id");
+		Recensione r = Recensione.generateByStringId(idRecensione);
+		r = RecensioneManager.getCompleta(r);
 		
-		if (sessione != null)
-	         sessione.invalidate();
-		
-		response.setContentType("application/json");
-		response.sendRedirect("home_view.jsp");
+		request.setAttribute("recensione", r);
+		request.getRequestDispatcher("recensione_view.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

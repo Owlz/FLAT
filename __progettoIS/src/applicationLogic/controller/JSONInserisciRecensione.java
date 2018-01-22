@@ -17,7 +17,7 @@ import applicationLogic.exception.VotoMancante;
 import applicationLogic.model.RecensioneManager;
 
 @WebServlet("/addrecensione")
-public class JSONInserisciRecensioneController extends HttpServlet {
+public class JSONInserisciRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

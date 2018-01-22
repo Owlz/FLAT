@@ -1,7 +1,6 @@
 package applicationLogic.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import applicationLogic.bean.FilmLocal;
-import applicationLogic.bean.Utente;
-import applicationLogic.model.WatchlistManager;
+import applicationLogic.bean.Recensione;
+import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/watchlist")
-public class VisualizzaWatchlistController extends HttpServlet {
+@WebServlet("/removesegnalazione")
+public class JSONRimuoviRecensioneAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utente u = (Utente) request.getSession().getAttribute("utente");
-		ArrayList<FilmLocal> watchlist = WatchlistManager.getWatchlist(u);
+		String idRecensione = request.getParameter("id");
+		Recensione r = Recensione.generateByStringId(idRecensione);
+		r = RecensioneManager.get(r);
+		r.setSegnalata(false);
 		
-		request.setAttribute("watchlist", watchlist);
-		request.getRequestDispatcher("watchlist_view.jsp").forward(request, response);
+		response.setContentType("application/json");
+		if(RecensioneManager.segnala(r))
+			response.getWriter().write("succ");
+		else
+			response.getWriter().write("fall");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

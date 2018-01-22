@@ -8,27 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import applicationLogic.bean.Recensione;
-import applicationLogic.model.RecensioneManager;
-
-@WebServlet("/removerecensioneadmin")
-public class JSONRimuoviSegnalazioneController extends HttpServlet {
+/**
+ * Implementazione della gestione della visualizzazione della
+ * pagina di Login lato server
+ * @author Luca
+ * @since 1.0
+ */
+@WebServlet("/login")
+public class VisualizzaLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idRecensione = request.getParameter("id");
-		Recensione r = Recensione.generateByStringId(idRecensione);
-		r = RecensioneManager.get(r);
-		
-		response.setContentType("application/json");
-		if(RecensioneManager.rimuovi(r))
-			response.getWriter().write("succ");
-		else
-			response.getWriter().write("fall");
+		request.getRequestDispatcher("login_view.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

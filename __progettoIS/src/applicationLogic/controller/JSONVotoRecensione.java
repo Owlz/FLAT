@@ -14,7 +14,7 @@ import applicationLogic.bean.Voto;
 import applicationLogic.model.RecensioneManager;
 
 @WebServlet("/vota")
-public class JSONVotoRecensioneController extends HttpServlet {
+public class JSONVotoRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

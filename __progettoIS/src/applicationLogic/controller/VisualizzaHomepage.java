@@ -21,7 +21,7 @@ import applicationLogic.model.RicercaManager;
  * @since 1.0
  */
 @WebServlet("")
-public class VisualizzaHomepageController extends HttpServlet {
+public class VisualizzaHomepage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
