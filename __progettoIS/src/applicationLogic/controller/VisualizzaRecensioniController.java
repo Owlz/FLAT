@@ -23,10 +23,12 @@ public class VisualizzaRecensioniController extends HttpServlet {
 		}
 		String ord = request.getParameter("ord");
 		
-		if(ord != null && ord.equals("data")){
-			listaRecensioni.sort(Recensione.COMP_BY_DATA);
-		}else if(ord != null && ord.equals("segn")){
+		if(ord != null && ord.equals("segn")){
 			listaRecensioni.sort(Recensione.COMP_BY_SEGNALATA);
+		}else if(ord != null && ord.equals("voti")){
+			listaRecensioni.sort(Recensione.COMP_BY_VOTI);
+		}else{
+			listaRecensioni.sort(Recensione.COMP_BY_DATA);
 		}
 
 		request.setAttribute("listaRec", listaRecensioni);

@@ -21,11 +21,13 @@
 	
 	<div id="ordina">
 		<h4>Ordina: </h4>
-		<select>
-			<option>Per ora non funzionano, per provare vai su "/mostrarecensioni?ord=data|segn"</option>
-			<option>Ordina per data (nuove prima, vecchie dopo)</option>
-			<option>Ordina per segnalazioni (segnalate prima)</option>
-		</select>
+		<form method="get" action="mostrarecensioni">
+			<select name="ord" onchange="this.form.submit()">
+				<option value="segn" <% if(request.getParameter("ord") != null && request.getParameter("ord").equals("segn")) out.print("selected=\"selected\""); %>>segnalazioni (segnalate prima)</option>
+				<option value="voti"  <% if(request.getParameter("ord") != null && request.getParameter("ord").equals("voti")) out.print("selected=\"selected\""); %>>voti (più voti negativi prima)</option>
+				<option value="data"  <% if((request.getParameter("ord") != null && !request.getParameter("ord").equals("segn") && !request.getParameter("ord").equals("voti")) || request.getParameter("ord") == null) out.print("selected=\"selected\""); %>>data (nuove prima, vecchie dopo)</option>
+			</select>
+		</form>
 	</div>
 	<% for(Recensione x: listaRec) { %>
 		<div class="elemento" id="<%=x.getId()%>">
