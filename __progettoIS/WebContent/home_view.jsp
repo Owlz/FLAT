@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
  pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione, applicationLogic.bean.FilmLocal, applicationLogic.bean.Utente"%>
 <% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaRec"); %>
-<% ArrayList<FilmLocal> listaLoc = (ArrayList<FilmLocal>) request.getAttribute("listaLoc");
-System.out.println("Lato client: " + listaLoc);%>
+<% ArrayList<FilmLocal> listaLoc = (ArrayList<FilmLocal>) request.getAttribute("listaLoc");%>
 
 <!DOCTYPE html>
 <html>
@@ -45,30 +44,27 @@ System.out.println("Lato client: " + listaLoc);%>
 	
 	<div id="aside">
 		
-		<div class="aside_title">
-			<h4>Ultime recensioni</h4>
+		<div id="aside_title">
+			<h4>Ultime recensioni inserite: </h4>
 		</div>
 		
-		<div class="aside_box">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				Praesent aliquam sapien non congue lobortis. Sed est tellus,
-				faucibus ac vestibulum in, posuere vel orci.</p>
-			<img alt="esempio" src="img/esempio.jpg" id="esempio" width="100" height="100">
-		</div>
-
-		<div class="aside_box">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				Praesent aliquam sapien non congue lobortis. Sed est tellus,
-				faucibus ac vestibulum in, posuere vel orci.</p>
-			<img alt="esempio" src="img/esempio.jpg" id="esempio" width="100" height="100">
-		</div>
-
-		<div class="aside_box">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				Praesent aliquam sapien non congue lobortis. Sed est tellus,
-				faucibus ac vestibulum in, posuere vel orci.</p>
-			<img alt="esempio" src="img/esempio.jpg" id="esempio" width="100" height="100">
-		</div>
+		<% for(Recensione y: listaRec){ %>
+			<div class="boxRecensione" id="rec--<%=y.getUtente().getUsername() %>">
+				<h3>Film: <i><%=((FilmLocal) y.getFilm()).getTitolo()%></i></h3>
+				<h3>Titolo: <i><%=y.getTitolo() %></i>
+				<br/>
+				( Voto: <i><%=y.getVoto() %></i> - Autore: <i><%=y.getUtente().getUsername() %></i> )</h3>
+				<p id="testo">
+					<% if (y.getTesto().length() > 250) {
+						out.print(y.getTesto().substring(0,250)+ " ...");
+					} else {
+						out.print(y.getTesto());
+					}
+					%>
+				</p>
+				<button class="moreButton" onClick="location.href='recensione?id=<%=y.getId()%>'">[Visualizza altro...]</button>
+			</div>
+		<%} %>
 	</div>
 	
 </div>

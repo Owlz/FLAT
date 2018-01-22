@@ -30,9 +30,11 @@ public class VisualizzaHomepageController extends HttpServlet {
 			listaRecensioni.add(RecensioneManager.getCompleta(r));
 		}
 		listaRecensioni.sort(Recensione.COMP_BY_DATA);
-		for (int j = 2; j < listaRecensioni.size(); j++) {
-		    listaRecensioni.remove(j);
-		}
+		ArrayList<Recensione> listaRecensioniScelte = new ArrayList<Recensione>();
+		listaRecensioniScelte.add(listaRecensioni.get(0));
+		listaRecensioniScelte.add(listaRecensioni.get(1));
+		listaRecensioniScelte.add(listaRecensioni.get(2));
+		
 		Integer[] lista = new Integer[]{1359, 680, 808, 489, 429, 652, 4133, 629, 181808, 429189, 68718, 278, 11778, 313369, 389, 18785, 161, 1402, 393, 111, 103, 83542, 603, 293660, 4176, 1116, 55931, 274};
 		ArrayList<Integer> listaFilmFavoriti = new ArrayList<Integer>(Arrays.asList(lista));
 		int listaFilmScelti[] = new int[9];
@@ -48,8 +50,8 @@ public class VisualizzaHomepageController extends HttpServlet {
 		for(Integer x: listaFilmScelti){
 			film.add(RicercaManager.ricercaLocale(new FilmLocal(x)));
 		}
-		System.out.println("Lato server: " + film);
-		request.setAttribute("listaRec", listaRecensioni);
+
+		request.setAttribute("listaRec", listaRecensioniScelte);
 		request.setAttribute("listaLoc", film);
 		
 		request.getRequestDispatcher("home_view.jsp").forward(request, response);
