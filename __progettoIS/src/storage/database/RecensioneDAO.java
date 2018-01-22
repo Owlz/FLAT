@@ -17,7 +17,7 @@ public class RecensioneDAO {
 	private static final String SELECT_BY_FILM = "SELECT * FROM `recensioni` WHERE `idFilm`=?";
 	private static final String SELECT_BY_UTENTE_AND_FILM = "SELECT * FROM `recensioni` WHERE `idFilm`=? AND `usernameUtente`=?";
 	private static final String SELECT_BY_ID = "SELECT * FROM `recensioni` WHERE `id_recensione`=?";
-	private static final String SELECT_BY_SEGNALAZIONE = "SELECT * FROM `recensioni` WHERE `segnalata`=1";
+	private static final String SELECT_BY_SEGNALAZIONE = "SELECT * FROM `recensioni` WHERE `segnalata`=1 ORDER BY id_recensione DESC";
 	private static final String SELECT = "SELECT * FROM `recensioni`";
 	private static final String INSERT = "INSERT INTO `recensioni` (`idFilm`, `usernameUtente`, `voto_recensione`, `testo_recensione`, `titolo_recensione`) VALUES (?, ?, ?, ?, ?);";
 	private static final String INSERT_SEGNALAZIONE = "UPDATE `recensioni` SET `segnalata`=? WHERE `id_recensione`=?";

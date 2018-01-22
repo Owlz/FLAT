@@ -17,7 +17,10 @@ public class VisualizzaRecensioniController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Recensione> listaRecensioni = RecensioneManager.getAll();
+		ArrayList<Recensione> listaRecensioni = new ArrayList<Recensione>();
+		for(Recensione r: RecensioneManager.getAll()){
+			listaRecensioni.add(RecensioneManager.getCompleta(r));
+		}
 		String ord = request.getParameter("ord");
 		
 		if(ord != null && ord.equals("data")){
