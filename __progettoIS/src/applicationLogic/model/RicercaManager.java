@@ -2,7 +2,6 @@ package applicationLogic.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import applicationLogic.bean.Film;
 import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.FilmRemote;
