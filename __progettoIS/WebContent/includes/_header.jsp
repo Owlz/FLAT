@@ -3,7 +3,7 @@
 <!--       ********************      NavBar      ********************           -->
 <nav id="nav">
 	<div id="spazioLogo">
-		<a onClick='href="home_view.jsp"'><img src="img/logo.png" height="50" alt="logo"></a>
+		<a href="home_view.jsp"><img src="img/logo.png" height="50" alt="logo"></a>
 	</div>
 	
 	<select class="js-example-basic-single" name="film" style="width: 620px;"></select>
