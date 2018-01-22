@@ -32,7 +32,13 @@
 		<%} %>		
 	</ul>
 </div>
-	
+
+<div id="popUpRimuoviWatchlist">
+
+	<p>Rimosso dalla watchlist</p>
+	<button id="ok" OnClick="closePopUpWatchlist()">Conferma</button>
+
+</div>
 	
 <jsp:include page="includes/_import.jsp"/>
 <script>
@@ -47,12 +53,23 @@ function remove(id, elemento){
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
 				elemento.parentNode.parentNode.remove();
+				openPopUpWatchlist();
 			} else {
 				elemento.innerHTML = "errore, riprova";
 			} 
 		}
 	}
 }
+
+
+function openPopUpWatchlist() {
+	var div_confermaR = document.getElementById('popUpRimuoviWatchlist');
+	div_confermaR.style.display='flex';
+};
+function closePopUpWatchlist() {
+	var div_confermaR = document.getElementById('popUpRimuoviWatchlist');
+	div_confermaR.style.display='none';
+};
 </script>
 </body>
 </html>

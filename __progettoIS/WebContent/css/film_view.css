@@ -80,23 +80,6 @@ body {
 	font-size: 40px;
 }
 
-/* #aside > div { */
-/* 	width: 100%; */
-/* 	margin-top: 1.25em; 		20px/16px = 1.25em */
-/* 	margin-bottom: 1.25em;		20px/16px = 1.25em */
-/* 	display: flex; */
-/* 	flex-direction: column; */
-/* 	justify-content: space-around; */
-/* 	align-items: center; */
-/* } */
-
-/* #aside > div > p { */
-/* 	width: 90%; */
-/* 	font-size: small; */
-/* 	color: #191717; */
-/* } */
-
-
 
 #content {
 	display: flex;
@@ -156,6 +139,15 @@ body {
     top: -140px;
     left: 47%;
     cursor: pointer;
+}
+
+#newRecensione {
+	background-color: white;
+    border-color: black;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
 }
 
 
