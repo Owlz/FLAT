@@ -60,7 +60,16 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 					<h3>Titolo: <i><%=x.getTitolo() %></i> 
 					<br/>
 					( Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i> )</h3>
-					<p id="testo"><%=x.getTesto() %></p>
+					<p id="testo">
+						<% if (x.getTesto().length() > 250) {
+							out.print(x.getTesto().substring(0,250)+ " ...");
+						} else {
+							out.print(x.getTesto());
+						}
+						%>
+					</p>
+					<h3>Totale voti utenti: <i><%=x.getVotiTotali()%></i></h3>
+					<button class="moreButton" onClick="location.href='recensione?id=<%=x.getId()%>'">[Visualizza altro...]</button>
 				</div>
 				<div id="pulsantiAzione">
 					<i onClick="segnala('<%=x.getId()%>')" class="fa fa-flag" aria-hidden="true"></i>

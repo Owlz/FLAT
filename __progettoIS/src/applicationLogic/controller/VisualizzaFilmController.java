@@ -40,7 +40,9 @@ public class VisualizzaFilmController extends HttpServlet {
 			if(listaRec.contains(recUtente)) request.setAttribute("recUtente", recUtente);
 			else request.setAttribute("recUtente", null);
 		}
-
+		
+		listaRec.sort(Recensione.COMP_BY_VOTI_POSITIVI);
+		
 		request.setAttribute("inWatchlist", watchlist);
 		request.setAttribute("listaRecensioni", listaRec);	// controllare se "size > 0"
 		request.setAttribute("film", f);
