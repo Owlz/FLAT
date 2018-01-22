@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione, applicationLogic.bean.FilmLocal, applicationLogic.bean.Utente"%>
 <% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaSegnalate"); %>
 
 <!DOCTYPE html>
@@ -21,9 +21,14 @@
 
 	<% for(Recensione x: listaRec){ %>
 		<div class="elemento" id="<%=x.getId() %>">
+			
 			<div class="corpo">
 				<h4><i>Titolo:</i> "<%=x.getTitolo() %>"</h4>
-				<p><i style="font-weight: bold">Testo:</i> <%=x.getTesto() %></p>
+				<p> 
+					<i style="font-weight: bold">Film:</i> <%=((FilmLocal) x.getFilm()).getTitolo()%> <br/>
+					<i style="font-weight: bold">Autore:</i> <%=x.getUtente().getUsername()%> <br/>
+					<i style="font-weight: bold">Testo:</i> <%=x.getTesto()%>
+				</p>
 			</div>
 			<div class="voti">
 				<p><i style="font-weight: bold">Voto del film:</i> <%=x.getVoto() %></p>
