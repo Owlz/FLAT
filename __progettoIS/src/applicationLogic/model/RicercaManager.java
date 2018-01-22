@@ -52,4 +52,12 @@ public class RicercaManager {
 					"Errore richiesta - Backdrop");
 		}
 	}
+	
+	public static FilmLocal ricercaLocale(Film f){
+		try{
+			return FilmLocalDAO.select((FilmLocal) f);
+		}catch (SQLException e) {
+			return null;
+		}
+	}
 }

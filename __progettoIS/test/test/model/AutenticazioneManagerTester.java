@@ -35,7 +35,7 @@ public class AutenticazioneManagerTester {
 		input.setUsername("tester01");
 		input.setPassword("password");
 
-		assert (ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
+		assert(ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
 	}
 
 	@Test(expected = DatiNonPresenti.class)
@@ -43,7 +43,7 @@ public class AutenticazioneManagerTester {
 		Utente input = new Utente();
 		input.setPassword("password");
 
-		assert (ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
+		assert(ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
 	}
 
 	@Test(expected = DatiNonPresenti.class)
@@ -52,7 +52,7 @@ public class AutenticazioneManagerTester {
 		input.setUsername("tester02");
 		input.setPassword("password");
 
-		assert (ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
+		assert(ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
 	}
 
 	@Test(expected = DatiNonValidi.class)
@@ -61,6 +61,6 @@ public class AutenticazioneManagerTester {
 		input.setUsername("tester01");
 		input.setPassword("password2");
 
-		assert (ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
+		assert(ORACOLO.equalsComplete(AutenticazioneManager.autenticaUtente(input)));
 	}
 }

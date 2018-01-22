@@ -24,7 +24,7 @@
 <!-- 		<main class="wrapper" id="wrapper"> -->
 <!-- 			<div class="griglia"> -->
 			
-<%--  			<% for(Recensione x: listaRec){ %> --%>
+<%--  			<% for(FilmLocal x: listaLoc){ %> --%>
 <%-- 			<div class="cella" onClick=" location.href='Item?id='+'<%= x.getId() %>'"> --%>
 <!-- 				<figure> -->
 <%-- 					<img src="img/prodotti/<%=x.getImmagine() %>" alt="<%= x.getNome() %>"> --%>
