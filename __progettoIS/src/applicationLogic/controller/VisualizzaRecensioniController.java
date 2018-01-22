@@ -26,7 +26,7 @@ public class VisualizzaRecensioniController extends HttpServlet {
 		if(ord != null && ord.equals("segn")){
 			listaRecensioni.sort(Recensione.COMP_BY_SEGNALATA);
 		}else if(ord != null && ord.equals("voti")){
-			listaRecensioni.sort(Recensione.COMP_BY_VOTI);
+			listaRecensioni.sort(Recensione.COMP_BY_VOTI_NEGATIVI);
 		}else{
 			listaRecensioni.sort(Recensione.COMP_BY_DATA);
 		}
