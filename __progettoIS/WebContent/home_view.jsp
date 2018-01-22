@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
- pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione, applicationLogic.bean.FilmLocal, applicationLogic.bean.Utente, applicationLogic.bean.FilmLocal"%>
+ pageEncoding="UTF-8" import="java.util.ArrayList, applicationLogic.bean.Recensione, applicationLogic.bean.FilmLocal, applicationLogic.bean.Utente"%>
 <% ArrayList<Recensione> listaRec = (ArrayList<Recensione>) request.getAttribute("listaRec"); %>
+<% ArrayList<FilmLocal> listaLoc = (ArrayList<FilmLocal>) request.getAttribute("listaLoc");
+System.out.println("Lato client: " + listaLoc);%>
 
 <!DOCTYPE html>
 <html>
@@ -22,117 +24,20 @@
 
 <div id="container">
 
-<!-- 		<main class="wrapper" id="wrapper"> -->
-<!-- 			<div class="griglia"> -->
-			
-<%--  			<% for(FilmLocal x: listaLoc){ %> --%>
-<%-- 			<div class="cella" onClick=" location.href='Item?id='+'<%= x.getId() %>'"> --%>
-<!-- 				<figure> -->
-<%-- 					<img src="img/prodotti/<%=x.getImmagine() %>" alt="<%= x.getNome() %>"> --%>
-<!-- 					<figcaption class="figcaption"> -->
-<%-- 						<h3><%= x.getNome() %></h3> --%>
-<%-- 						<a onClick="AggiungiAlCarrello('<%= x.getId() %>')">Aggiungi</a> --%>
-<!-- 					</figcaption> -->
-<!-- 				</figure> -->
-<!-- 			</div> -->
-<%-- 			<%} %> --%>
-			
-<!-- 			</div> -->
-<!-- 		</main> -->
-	
 	<main class="wrapper" id="wrapper">
 		<div class="griglia">
-			
-			<div class="cella" onClick="">
+		
+		<% for(FilmLocal x: listaLoc){ %>
+			<div class="cella" onClick=" location.href='film?id=<%=x.getId()%>'">
 				<figure>
-					<img src="img/esempio.jpg">
+					<img src="http://image.tmdb.org/t/p/w500<%=x.getLocandina()%>" alt="<%=x.getTitolo()%>">
 					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
+						<a href="film?id=<%= x.getId() %>"><%=x.getTitolo()%></a>
 					</figcaption>
 				</figure>
 			</div>
-				
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-				
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="cella" onClick="">
-				<figure>
-					<img src="img/esempio.jpg">
-					<figcaption class="figcaption">
-						<h3>Nome film</h3>
-						<a onClick="">Watch</a>
-					</figcaption>
-				</figure>
-			</div>
-			
+		<%} %>
+		
 		</div>
 	</main>
 	

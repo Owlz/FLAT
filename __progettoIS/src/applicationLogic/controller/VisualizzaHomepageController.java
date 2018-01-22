@@ -48,9 +48,10 @@ public class VisualizzaHomepageController extends HttpServlet {
 		for(Integer x: listaFilmScelti){
 			film.add(RicercaManager.ricercaLocale(new FilmLocal(x)));
 		}
-		
+		System.out.println("Lato server: " + film);
 		request.setAttribute("listaRec", listaRecensioni);
-		request.setAttribute("filmLoc", film);
+		request.setAttribute("listaLoc", film);
+		
 		request.getRequestDispatcher("home_view.jsp").forward(request, response);
 	}
 
