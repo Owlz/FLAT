@@ -26,7 +26,11 @@ public class CheckRegistrazione extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente u = new Utente();
 		u.setUsername(request.getParameter("username").trim());
-		u.setPassword(request.getParameter("password").trim());
+		
+		if(request.getParameter("password").trim().equals(request.getParameter("confermaPassword").trim()))
+			u.setPassword(request.getParameter("password").trim());
+		else u.setPassword("");
+		
 		u.setNome(request.getParameter("nome").trim());
 		u.setCognome(request.getParameter("cognome").trim());
 		u.setEmail(request.getParameter("email").trim());

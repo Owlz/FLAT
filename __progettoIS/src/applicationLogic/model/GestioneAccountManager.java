@@ -3,6 +3,7 @@ package applicationLogic.model;
 import java.sql.SQLException;
 
 import applicationLogic.bean.Utente;
+import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.exception.DatiOccupati;
 import storage.database.UtenteDAO;
 
@@ -30,19 +31,31 @@ public class GestioneAccountManager {
 			return utenteReturn;
 	}
 	
-	public static Utente aggiornaUtente(Utente uNew, Utente uAtt) throws DatiOccupati {
+	public static Utente aggiornaUtente(Utente uNew, Utente uAtt) throws DatiNonValidi{
+		
+		String nome = uNew.getNome();
+		String patternNome = "^[a-z A-Z]{2,15}$";
+		
+		String cognome = uNew.getCognome();
+		String patternCognome = "^[a-z A-Z]{2,15}$";
+		
+		String passwd = uNew.getPassword(); 
+		String patternPassword = "^[a-zA-Z0-9._-]{3,15}$";
+	      
+		if(!nome.matches(patternNome) || !cognome.matches(patternCognome) || !passwd.matches(patternPassword))
+			throw new DatiNonValidi();
 		
 		if(uNew.getNome() != null && !uNew.getNome().equals("")) uAtt.setNome(uNew.getNome());
 		if(uNew.getCognome() != null && !uNew.getCognome().equals("")) uAtt.setCognome(uNew.getCognome());
-		if(uNew.getEmail() != null && !uNew.getEmail().equals("")) uAtt.setEmail(uNew.getEmail());
 		if(uNew.getPassword() != null && !uNew.getPassword().equals("")) uAtt.setPassword(uNew.getPassword());
 
 		try{
 			Utente u = UtenteDAO.update(uAtt);
 			return u;
 		}catch (SQLException e) {
-			throw new DatiOccupati();
+			throw new DatiNonValidi();
 		}
+	
 	}
 	
 	

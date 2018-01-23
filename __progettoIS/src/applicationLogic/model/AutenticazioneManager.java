@@ -25,15 +25,21 @@ public class AutenticazioneManager {
 	public static Utente autenticaUtente(Utente u) throws DatiNonPresenti, DatiNonValidi{
 		Utente uDB;
 		try {
-			/* TODO: qui si controllano i campi del login */
+			String user = u.getUsername();
+			String pattern1 = "^[a-z A-Z]{2,15}$";
+			
+			String passwd = u.getPassword(); 
+			String pattern2 = "^[a-zA-Z0-9._-]{3,15}$";
+		      
+			if(!user.matches(pattern1) || !passwd.matches(pattern2))
+				throw new DatiNonValidi();
+			
 			uDB = UtenteDAO.select(u);
 			
 			if(uDB == null)
 				throw new DatiNonPresenti();
-			
 			else if(u == null || !uDB.getPassword().equals(u.getPassword()))
-				throw new DatiNonValidi(); 
-			
+				throw new DatiNonValidi();
 			else
 				return uDB;
 			

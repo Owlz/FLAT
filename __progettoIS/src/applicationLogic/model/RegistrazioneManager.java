@@ -30,15 +30,23 @@ public class RegistrazioneManager {
 	 *             nel caso i dati inseriti siano già occupati nel database
 	 */
 	public static Utente aggiungiUtente(Utente utente) throws DatiNonValidi, DatiOccupati {
-		/* TODO: qui si controllano i campi della registrazione */
-		if (utente.getUsername().equals("")
-				|| utente.getPassword().equals("")
-				|| utente.getNome().equals("")
-				|| utente.getCognome().equals("")
-				|| utente.getEmail().equals("")) {
-
+		String nome = utente.getNome();
+		String patternNome = "^[a-z A-Z]{2,15}$";
+		
+		String cognome = utente.getCognome();
+		String patternCognome = "^[a-z A-Z]{2,15}$";
+		
+		String email = utente.getEmail();
+		String patternEMail = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		
+		String user = utente.getUsername();
+		String patternUser = "^[a-zA-Z._]{3,15}$";
+		
+		String passwd = utente.getPassword(); 
+		String patternPassword = "^[a-zA-Z0-9._-]{3,15}$";
+	      
+		if(!nome.matches(patternNome) || !cognome.matches(patternCognome) || !email.matches(patternEMail) || !user.matches(patternUser) || !passwd.matches(patternPassword)) {
 			throw new DatiNonValidi();
-
 		} else {
 			try {
 				return UtenteDAO.insert(utente);

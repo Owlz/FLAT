@@ -26,7 +26,6 @@
 		<label>Nome: <input type="text" value="<%=utente.getNome()%>" onfocus="if (this.value=='<%=utente.getNome()%>') this.value = ''" name="nome"></label>
 		<label>Cognome: <input type="text" value="<%=utente.getCognome()%>" onfocus="if (this.value=='<%=utente.getCognome()%>') this.value = ''" name="cognome"></label>
 		<label>Password: <input type="text" value="<%=utente.getPassword()%>" onfocus="if (this.value=='<%=utente.getPassword()%>') this.value = ''" name="password"></label>
-		<label>Email: <input type="text" value="<%=utente.getEmail()%>" onfocus="if (this.value=='<%=utente.getEmail()%>') this.value = ''" name="email"></label>
 		<p> Modifica le informazioni che vorresti cambiare e clicca su "Conferma", altrimenti su "Annulla". </p>
 		<div>
 			<button type="submit" id="submit" value="Annulla">Annulla</button>

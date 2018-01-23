@@ -1,15 +1,13 @@
 package applicationLogic.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import applicationLogic.bean.Utente;
-import applicationLogic.exception.DatiOccupati;
+import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.model.GestioneAccountManager;
 
 @WebServlet("/controllocambiodati")
@@ -30,7 +28,7 @@ public class CheckCambioDati extends HttpServlet {
 			request.getSession().setAttribute("utente", uNew);
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + uNew.getUsername());
 
-		} catch (DatiOccupati e) {
+		} catch (DatiNonValidi e) {
 			request.getSession().setAttribute("errore", "cambio dati fallito (dati occupati)");
 			response.sendRedirect(request.getContextPath() + "/cambiodati");
 		}
