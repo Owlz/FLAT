@@ -16,6 +16,7 @@ body {
 	width: 100%;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 30px;
 }
 
 #content {
@@ -43,12 +44,14 @@ body {
 	cursor: pointer;
 	outline: none;
 	z-index: 100;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /*stile hover*/
 .cella figure {
 	width: 100%;
 	margin: 0;
+	margin-bottom: -5px;
 	position: relative;
 	overflow: hidden;
 }
@@ -70,7 +73,7 @@ body {
 .cella figcaption {
 	position: absolute;
 	left: 0;
-	background: transparent;
+	background: #f1f1f1;
 	color: #1b1b1b;
 	height: auto;
 	width: 100%;
@@ -113,6 +116,7 @@ body {
 
 .boxRecensione {
 	border: solid;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #aside > div {

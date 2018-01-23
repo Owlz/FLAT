@@ -29,6 +29,7 @@ public class VisualizzaHomepage extends HttpServlet {
 		for(Recensione r: RecensioneManager.getAll()){
 			listaRecensioni.add(RecensioneManager.getCompleta(r));
 		}
+
 		listaRecensioni.sort(Recensione.COMP_BY_DATA);
 		ArrayList<Recensione> listaRecensioniScelte = new ArrayList<Recensione>();
 		listaRecensioniScelte.add(listaRecensioni.get(0));

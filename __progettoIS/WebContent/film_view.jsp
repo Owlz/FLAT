@@ -10,7 +10,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%=film.getTitolo() %> (<%=(film.getDataDiUscita()!= null) ? film.getDataDiUscita().substring(0, 4) : "" %>)</title>
+	<title><%=film.getTitolo() %> <%=(film.getDataDiUscita()!= null && film.getDataDiUscita().length() > 4) ? "(" + film.getDataDiUscita().substring(0, 4) + ")" : "" %>)</title>
 	<%@include file="includes/_import.jsp" %>
 	<link rel="stylesheet" href="css/nav.css" type="text/css">
 	<link rel="stylesheet" href="css/film_view.css" type="text/css">
@@ -33,10 +33,21 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 	<div id="aside">
 	
 		<h2><%=film.getTitolo()%></h2>
-		<h6>Titolo originale: <i><%=film.getTitoloOriginale()%></i></h6>
-		<h6>Generi: <i><%=film.getGeneri()%></i></h6>
+			
+		<% if (film.getTitoloOriginale() != null && film.getTitoloOriginale().length() > 0) {%>
+			<h6><span style="font-size: 13px; color: grey">Titolo originale: </span><i><%=film.getTitoloOriginale()%></i></h6>
+		<% } %>
+		<% if (film.getGeneri() != null && film.getGeneri().size() > 0) {%>
+			<h6><span style="font-size: 13px; color: grey">Generi: </span><i><%=film.getGeneri().toString().substring(1, film.getGeneri().toString().length()-1)%></i></h6>
+		<% } %>	
+		<% if (film.getDataDiUscita() != null && film.getDataDiUscita().length() > 0) {%>
+			<h6><span style="font-size: 13px; color: grey">Anno:</span> <%=film.getDataDiUscita()%></h6>
+		<% } %>
+		<% if (film.getLinguaOriginale() != null && film.getLinguaOriginale().length() > 0) {%>	
+			<h6><span style="font-size: 13px; color: grey">Lingua:</span> <%=film.getLinguaOriginale()%></h6>
+		<% } %>
 		
-		<img src="http://image.tmdb.org/t/p/w500<%=film.getLocandina()%>"/>
+		<img src="http://image.tmdb.org/t/p/w500<%=film.getLocandina()%>" alt="Locandina non trovata" onerror="this.src='img/imagefound.png';"/>
 		
 		<h3 id="voto">Voto FLAT: <%=film.getVoto()%><span style="font-size: 13px; color: grey">/10</span></h3>
 		

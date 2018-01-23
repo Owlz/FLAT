@@ -46,8 +46,6 @@ public class JSONVotoRecensione extends HttpServlet {
 			Voto v = new Voto(-1, voto, u);
 			v = RecensioneManager.inserisciVoto(r, v);
 			
-			System.out.println(v.getId() +" - "+ v);
-			
 			if(v != null && v.getId() != -1) response.getWriter().write("succ" + v.getId());
 			
 			else response.getWriter().write("fall");

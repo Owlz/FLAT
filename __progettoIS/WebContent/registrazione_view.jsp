@@ -33,12 +33,12 @@
 		
 	<% }%>
 	<form action="checkregistrazione" method="post">
-		Nome <input type="text" name="nome"><br/>
-		Cognome <input type="text" name="cognome"><br/>
-		Indirizzo Email <input type="email" name="email"><br/>
-		Nome Utente <input type="text" name="username"><br/>
-		Password <input type="password" name="password"><br/>
-		Conferma Password <input type="password" name="confermaPassword"><br/>
+		<label>Nome: <input type="text" name="nome"></label>
+		<label>Cognome: <input type="text" name="cognome"></label>
+		<label>Indirizzo Email: <input type="email" name="email"></label>
+		<label>Nome Utente: <input type="text" name="username"></label>
+		<label>Password: <input type="password" name="password"></label>
+		<label>Conferma Password: <input type="password" name="confermaPassword"></label>
 		<button type="submit" id="submit">Registrati</button>
 	</form>
 </div>

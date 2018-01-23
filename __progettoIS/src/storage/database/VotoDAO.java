@@ -37,6 +37,7 @@ public class VotoDAO {
 			
 			listaVoti.add(v);
 		}
+		DBConnection.riaggiungiConnessione(con);
 		return listaVoti;
 	}
 	

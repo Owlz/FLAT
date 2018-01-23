@@ -20,9 +20,9 @@
 <!--       ********************      Container     ********************           -->
 <div id="aside">
 	
-		<h4><%=datiUtente.getNome()%></h4>
-		<h4><%=datiUtente.getCognome()%></h4>
-		<h4><%=datiUtente.getUsername()%></h4>
+		<h4><span style="font-size: 13px; color: grey">Nome:</span> <%=datiUtente.getNome()%> <%=datiUtente.getCognome()%></h4>
+		
+		<h4><span style="font-size: 13px; color: grey">Username:</span> <%=datiUtente.getUsername()%></h4>
 
 	<% if(datiUtente.equals(utente)){%>
 		<a href="cambiodati">Modifica Dati</a>

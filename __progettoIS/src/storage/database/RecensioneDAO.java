@@ -58,6 +58,7 @@ public class RecensioneDAO {
 			momentaneo.setVoti(voti);
 			momentaneo.setSegnalata(segnalata);
 		}
+		DBConnection.riaggiungiConnessione(con);
 		return momentaneo;
 	}
 
@@ -98,6 +99,7 @@ public class RecensioneDAO {
 			momentaneo.setVoti(voti);
 			momentaneo.setSegnalata(segnalata);
 		}
+		DBConnection.riaggiungiConnessione(con);
 		return momentaneo;
 	}
 
