@@ -16,6 +16,7 @@ public class CheckCambioDati extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente uNew = new Utente();
+		
 		Utente uAtt = (Utente) request.getSession().getAttribute("utente");
 		
 		uNew.setPassword(request.getParameter("password").trim());
