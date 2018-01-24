@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import applicationLogic.bean.Recensione;
 import applicationLogic.model.RecensioneManager;
 
-@WebServlet("/removesegnalazione")
+@WebServlet("/removerecensioneadmin")
 public class JSONRimuoviRecensioneAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,10 +19,9 @@ public class JSONRimuoviRecensioneAdmin extends HttpServlet {
 		String idRecensione = request.getParameter("id");
 		Recensione r = Recensione.generateByStringId(idRecensione);
 		r = RecensioneManager.get(r);
-		r.setSegnalata(false);
 		
 		response.setContentType("application/json");
-		if(RecensioneManager.segnala(r))
+		if(RecensioneManager.rimuovi(r))
 			response.getWriter().write("succ");
 		else
 			response.getWriter().write("fall");

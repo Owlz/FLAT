@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import applicationLogic.bean.Utente;
-import applicationLogic.exception.DatiOccupati;
+import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.model.GestioneAccountManager;
 import storage.database.UtenteDAO;
 
@@ -61,7 +61,7 @@ public class GestioneAccountManagerTester {
 	}
 
 	@Test
-	public void modificaDatiPersonaliSuccesso() throws DatiOccupati {
+	public void modificaDatiPersonaliSuccesso() throws DatiNonValidi {
 		Utente input = new Utente();
 		input.setNome("NomeNuovo");
 		input.setCognome("CognomeNuovo");
@@ -78,7 +78,7 @@ public class GestioneAccountManagerTester {
 	}
 
 	@Test
-	public void modificaDatiPersonaliMinimale() throws DatiOccupati {
+	public void modificaDatiPersonaliMinimale() throws DatiNonValidi {
 		Utente input = new Utente();
 		input.setNome("NomeNuovo");
 
@@ -89,8 +89,8 @@ public class GestioneAccountManagerTester {
 	}
 	
 	@Ignore
-	@Test(expected = DatiOccupati.class)
-	public void modificaDatiPersonaliFallimento() throws DatiOccupati {
+	@Test(expected = DatiNonValidi.class)
+	public void modificaDatiPersonaliFallimento() throws DatiNonValidi {
 		/* TODO: potrebbe essere da ripensare */
 		Utente input = new Utente();
 		input.setEmail("utente1@mail.it");
