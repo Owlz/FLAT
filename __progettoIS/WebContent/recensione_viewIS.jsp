@@ -193,20 +193,16 @@ function closePopUpSegnalazione() {
 
 // Script per il modificatore del testo
 document.getElementById('misuraPiccola').onclick = function() {
-	var misura = window.getComputedStyle(document.getElementById("scritte")).fontSize;
-	misura = parseInt(misura.substring(0, 2));
-	misura = misura - 4;
-	misura = misura + "px";
-	document.getElementById('scritte').style.fontSize = misura;
+	document.getElementById('scritte').style.fontSize = '16px';
 	document.getElementById('misuraPiccola').style.color= '#f5a015';
 	document.getElementById('misuraGrande').style.color= 'grey';
 }
 document.getElementById('misuraGrande').onclick = function() {
-	var misura = window.getComputedStyle(document.getElementById("scritte")).fontSize;
-	misura = parseInt(misura.substring(0, 2));
-	misura = misura + 4;
-	misura = misura + "px";
-	document.getElementById('scritte').style.fontSize = misura;
+	var misuraAttuale = document.getElementById('scritte').style.fontSize;
+	misuraAttuale = parseInt(misuraAttuale.substring(0, 2));
+	misuraAttuale = misuraAttuale + 4;
+	console.log(misuraAttuale);
+	document.getElementById('scritte').style.fontSize = '20px';
 	document.getElementById('misuraGrande').style.color= '#f5a015';
 	document.getElementById('misuraPiccola').style.color= 'grey';
 }

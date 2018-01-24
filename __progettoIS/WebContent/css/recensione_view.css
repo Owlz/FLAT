@@ -20,8 +20,28 @@ body {
     justify-content: space-between;
 }
 
-#container ul {
-	list-style: none;
+#misura {
+    margin-left: -53%;
+    margin-bottom: 5px;
+}
+
+#misura > span {
+	margin-right: 10px;
+	font-style: italic;
+}
+
+#misuraPiccola, #misuraGrande {
+	border-style: none;
+    outline-style: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: grey;
+    font-size: large;
+    font-weight: bold;
+}
+
+#misuraPiccola {
+	color: #f5a015;
 }
 
 .elemento {
@@ -44,6 +64,11 @@ body {
 .corpo p {
 	text-align: left;
 	padding: 20px;
+	transition: 0.6s;
+}
+
+#scritte {
+	font-size: 16px;
 }
 
 .elemento .voti {
