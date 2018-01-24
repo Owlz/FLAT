@@ -30,7 +30,8 @@ body {
 }
 
 #aside a{
-	border: inset black;
+	border-radius: 7px;
+	border: solid #f5a015;
 	padding: 10px;
 	margin: 15px;
 	text-decoration: none;
@@ -48,7 +49,9 @@ body {
 }
 
 .boxRecensione {
-    background-color: #7daaf2;
+    border-radius: 0px 15px;
+    border: solid black;
+    background-color: #fbc73c;
     width: 95%;
     margin-left: -40px;
     height: 255px;
@@ -62,6 +65,10 @@ body {
 
 .boxRecensione h3 {
 	margin-left: 15px;
+}
+
+#titoloRec{
+	margin-left: 40%;
 }
 
 #testo {
@@ -79,7 +86,7 @@ body {
     width: 30px;
     height: 110px;
     top: -75px;
-    left: 428px;
+    left: 455px;
     cursor: pointer;
 }
 
@@ -89,7 +96,7 @@ body {
     cursor: pointer;
     width: 25px;
     height: 25px;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 /* ----------------------  CONFERMA RIMOZIONE  ---------------------------- */

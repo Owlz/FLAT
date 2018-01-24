@@ -10,7 +10,6 @@ body {
 	margin: 0;
 }
 
-
 /* --------------------------  CONTAINER   -------------------------------- */
 #container {
 	width: 100%;
@@ -89,16 +88,16 @@ body {
 }
 
 .cella figcaption a {
-    text-align: center;
+	text-align: center;
     text-decoration: none;
     margin: 20px;
     padding: 10px;
     width: 80%;
-    border-radius: 2px;
-    border: 1px solid black;
+    border-radius: 7px;
+    border: 1px solid #f5a015;
     display: inline-block;
     background: white;
-    color: black;
+    color: #f5a015;
 }
 
 
@@ -117,6 +116,7 @@ body {
 .boxRecensione {
 	border: solid;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: white;
 }
 
 #aside > div {
@@ -140,7 +140,7 @@ body {
     margin-bottom: 5px;
     cursor: pointer;
     outline: none;
-    border: 1px solid black;
+    border: 1px solid #f5a015;
     padding: 10px;
     background-color: white;
 }

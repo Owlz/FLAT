@@ -24,7 +24,7 @@ body {
 	width: 350px;
 	display: flex;
 	flex-direction: column;
-	border: 2px solid black;
+	border: 2px solid #f5a015;
 	padding: 25px;
 	background-color: white;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -40,7 +40,6 @@ body {
     margin: 15px auto 0px;
     outline: none;
     cursor: pointer;
-    border: solid black;
     padding: 10px;
     background-color: white;
     width: 80px;
@@ -54,7 +53,8 @@ body {
 	width: 400px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+	border: solid #f5a015;
 	position: absolute;
 }
 

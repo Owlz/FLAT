@@ -24,7 +24,7 @@ body {
 #container form {
 	display: flex;
 	flex-direction: column;
-	border: 2px solid black;
+	border: 2px solid #f5a015;
 	padding: 25px;
 	background-color: white;
 	width: 260px;
@@ -41,7 +41,7 @@ body {
     margin: 15px auto 0px;
     cursor: pointer;
     outline: none;
-    border: solid black;
+    border: solid #f5a015;
     padding: 10px;
     background-color: white;
     width: 80px;
@@ -55,7 +55,8 @@ body {
 	width: 400px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+	border: solid #f5a015;
 	position: absolute;
 }
 

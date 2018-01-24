@@ -10,52 +10,6 @@ body {
 	margin: 0;
 }
 
-/* --------------------------  NAVBAR -------------------------------- */
-
-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-top: inset;
-	border-bottom: inset;
-	width: 100%;
-	height: 60px;
-	z-index: 1;
-    background-color: #333333;
-}
-
-#spazioLogo {
-	margin-left: 20px;
-}
-
-nav ul {
-	list-style: none;
-    margin: 0;
-    padding: 0;
-    padding-right: 20px;
-    height: 60px;
-    overflow: hidden;
- 	float: right;
-}
-
-nav li {
-    float: right;
-    padding-top: 10px;
-}
-
-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-}
-
-nav li a:hover {
-    background-color: #111111;
-}
-
-
 /* --------------------------  CONTAINER   -------------------------------- */
 #container {
     width: 100%;
@@ -72,6 +26,7 @@ nav li a:hover {
     justify-content: center;
     width: 1200px;
     border: 1px solid black;
+    background-color: white;
 }
 
 #ordina select {
@@ -91,6 +46,7 @@ nav li a:hover {
     height: 250px;
 	border: 1px solid black;
 	margin-bottom: 10px;
+	background-color: white;
 }
 
 .elemento .corpo {
@@ -115,7 +71,6 @@ nav li a:hover {
 
 .elemento button {
     background-color: white;
-    border-color: black;
     height: 40px;
     padding: 10px;
     cursor: pointer;

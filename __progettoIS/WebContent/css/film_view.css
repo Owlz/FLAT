@@ -40,8 +40,13 @@ body {
     border: inset;
 }
 
+#aside h6 {
+	margin-bottom: 0px;
+}
+
 #aside img {
 	width: 300px;
+	margin-top: 25px;
 	margin-bottom: 25px;
 }
 
@@ -54,8 +59,10 @@ body {
 }
 
 .addWatchlist {
-	color: black;
-    border: 2px solid;
+	border-radius: 7px;
+	border: solid #f5a015;
+	color: #f5a015;
+	background-color: white;
     margin-bottom: 25px;
     width: 200px;
     text-align: center;
@@ -144,7 +151,6 @@ body {
 
 #newRecensione {
 	background-color: white;
-    border-color: black;
     height: 40px;
     padding: 10px;
     cursor: pointer;

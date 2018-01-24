@@ -41,16 +41,17 @@
 		<% if(listaRec.size() == 0){ %>
 			<p> Non hai ancora fatto recensioni</p> <br/>
 		<% } else { %>
-			<h4> La tua lista di recensioni </h4>
+			<h2> La tua lista di recensioni </h2>
 			<% for(Recensione x: listaRec){ %>
 			
-				<div class="boxRecensione" id="<%=x.getId() %>">
-					<h3>Film: <i><%=((FilmLocal) x.getFilm()).getTitolo()%></i>
-					<br/>
-					Titolo: <i><%=x.getTitolo()%></i>
-					<br/>
-					( Voto: <i><%=x.getVoto()%></i> )</h3>
+				<div class="boxRecensione box effect7" id="<%=x.getId() %>">
+				
+					<h3 id="titoloRec"><span style="font-size: 13px; color: #777">Film:</span> <i><%=((FilmLocal) x.getFilm()).getTitolo()%></i></h3>
+					<h3><span style="font-size: 13px; color: #777">Titolo: </span> <i><%=x.getTitolo()%></i> &emsp;&emsp;
+						<span style="font-size: 13px; color: #777">Voto: </span> <i><%=x.getVoto()%>
+						<span style="font-size: 13px; color: #777">/10</span></i></h3>
 					<p id="testo"><%=x.getTesto()%></p>
+					
 				</div>
 				<div id="pulsantiAzione">
 					<button class="removeButton" onClick="remove(this,<%=x.getId() %>)"><i class="fa fa-times" aria-hidden="true"></i></button>

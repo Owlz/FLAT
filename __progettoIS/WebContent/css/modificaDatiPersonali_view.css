@@ -23,7 +23,8 @@ body {
 #container form {
 	display: flex;
 	flex-direction: column;
-	border: 2px solid black;
+    border-radius: 7px;
+	border: solid #f5a015;
 	padding: 25px;
 	background-color: white;
 	width: 350px;
@@ -40,7 +41,6 @@ body {
     margin: 15px 10px 0px;
     cursor: pointer;
     outline: none;
-    border: solid black;
     padding: 10px;
     background-color: white;
     width: 80px;

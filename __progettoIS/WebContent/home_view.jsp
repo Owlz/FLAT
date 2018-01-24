@@ -45,15 +45,18 @@
 	<div id="aside">
 		
 		<div id="aside_title">
-			<h4>Ultime recensioni inserite: </h4>
+			<h2>Ultime recensioni inserite: </h2>
 		</div>
 		
 		<% for(Recensione y: listaRec){ %>
 			<div class="boxRecensione" id="rec--<%=y.getUtente().getUsername() %>">
-				<h3>Film: <i><%=((FilmLocal) y.getFilm()).getTitolo()%></i></h3>
-				<h3>Titolo: <i><%=y.getTitolo() %></i>
+				<h3><span style="font-size: 13px; color: grey">Film:</span> <i><%=((FilmLocal) y.getFilm()).getTitolo()%></i></h3>
+				<h3><span style="font-size: 13px; color: grey">Titolo:</span> <i><%=y.getTitolo() %></i>
 				<br/>
-				( Voto: <i><%=y.getVoto() %></i> - Autore: <i><%=y.getUtente().getUsername() %></i> )</h3>
+				<span style="font-size: 13px; color: grey">( Voto:</span> <i><%=y.getVoto()%>
+				<span style="font-size: 13px; color: grey">/10</span></i>
+				<span style="font-size: 13px; color: grey"> - Autore:</span> <i><%=y.getUtente().getUsername() %></i>
+				<span style="font-size: 13px; color: grey"> )</span></h3>
 				<p id="testo">
 					<% if (y.getTesto().length() > 250) {
 						out.print(y.getTesto().substring(0,250)+ " ...");
