@@ -6,14 +6,19 @@
 
 <script type="text/javascript">
 function formatFilm (film) {
+	if (film.loading) return "Sto cercando..";
+	
     var baseUrl = "http://image.tmdb.org/t/p/w45";
     var $film = $(
       '<span><img src="' + baseUrl +  film.locandina + '" class="img-flag" /> ' + film.titolo + '</span>'
     );
+    if(film.titolo == "Errore richiesta"){
+    	$film = $('<span><img src="img/imagefound_small.png" class="img-flag" /> ' + film.titolo + '</span>');
+    }
     return $film;
   };
-
-  $(".js-example-basic-single")
+  
+$(".js-example-basic-single")
 	.select2({
 		ajax: {
 			url: "ricerca",
@@ -39,6 +44,7 @@ function formatFilm (film) {
 		templateResult: formatFilm
 	})
 	.on("select2:selecting", function(e) {
-		window.location.href = "film?id=" + e.params.args.data.id;
+		if(e.params.args.data.id == 0) window.location.href = "";
+		else window.location.href = "film?id=" + e.params.args.data.id;
 	});
 </script>

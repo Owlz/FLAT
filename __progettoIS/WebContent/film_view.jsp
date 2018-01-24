@@ -10,7 +10,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%=film.getTitolo() %> <%=(film.getDataDiUscita()!= null && film.getDataDiUscita().length() > 4) ? "(" + film.getDataDiUscita().substring(0, 4) + ")" : "" %>)</title>
+	<title><%=film.getTitolo() %> <%=(film.getDataDiUscita()!= null && film.getDataDiUscita().length() > 4) ? "(" + film.getDataDiUscita().substring(0, 4) + ")" : "" %></title>
 	<%@include file="includes/_import.jsp" %>
 	<link rel="stylesheet" href="css/nav.css" type="text/css">
 	<link rel="stylesheet" href="css/film_view.css" type="text/css">
