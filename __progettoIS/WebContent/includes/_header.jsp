@@ -11,7 +11,7 @@
 	<ul>
 		<% if(!utente.getRuolo().equals("visitatore")){ %>
 			<li><a OnClick="openPopUp()">Logout</a></li>
-			<li><a href="utente?id=<%= utente.getUsername() %>">Benvenuto <%= utente.getUsername() %></a></li>
+			<li><a href="utente?id=<%= utente.getUsername() %>">Benvenuto <i style="color:blue; text-decoration:underline" ><%= utente.getUsername() %></i></a></li>
 		<% }else{  %>
 			<li><a href="registrazione">Registrati</a></li>
 			<li><a href="login">Login</a></li>

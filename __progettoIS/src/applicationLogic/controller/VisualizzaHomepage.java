@@ -36,7 +36,7 @@ public class VisualizzaHomepage extends HttpServlet {
 		listaRecensioniScelte.add(listaRecensioni.get(1));
 		listaRecensioniScelte.add(listaRecensioni.get(2));
 		
-		Integer[] lista = new Integer[]{1359, 680, 808, 489, 429, 652, 4133, 629, 181808, 429189, 68718, 278, 11778, 313369, 389, 18785, 161, 1402, 393, 111, 103, 83542, 603, 293660, 4176, 1116, 55931, 274};
+		Integer[] lista = new Integer[]{7345, 856, 62, 110415, 254320, 157336, 1359, 680, 808, 489, 429, 652, 4133, 629, 181808, 429189, 68718, 278, 11778, 313369, 389, 18785, 161, 1402, 393, 111, 103, 83542, 603, 293660, 4176, 1116, 55931, 274};
 		ArrayList<Integer> listaFilmFavoriti = new ArrayList<Integer>(Arrays.asList(lista));
 		int listaFilmScelti[] = new int[9];
 

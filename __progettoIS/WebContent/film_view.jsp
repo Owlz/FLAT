@@ -56,7 +56,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 			<% } else if (inWatchlist.equals("true")) { %>
 			<div id="in" class="inWatchlist"><i class="fa fa-check" aria-hidden="true"></i> Già aggiunto alla Watchlist</div>
 			<% } else { %>
-			<div id="add" class="addWatchlist" onClick="add('<%=film.getId() %>')">Aggiungi alla watchlist</div>
+			<div id="add" class="addWatchlist" onClick="add('<%=film.getId() %>')"><i class="fa fa-plus" style="color: black" aria-hidden="true"></i>Aggiungi alla watchlist</div>
 		<% } %>
 		
 	</div>
