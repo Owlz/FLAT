@@ -87,6 +87,10 @@ body {
 	font-size: 40px;
 }
 
+.addWatchlist i {
+	padding-right: 5px;
+}
+
 
 #content {
 	display: flex;
