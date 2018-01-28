@@ -119,6 +119,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 			<% } %>
 		<% } %>
 	
+	
 		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
 			<h2>La tua recensione:</h2>
 			<div class="boxRecensione personale" id="rec--<%=recUtente.getUtente().getUsername() %>" style="background-color: #b77cf1">
