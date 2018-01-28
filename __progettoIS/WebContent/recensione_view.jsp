@@ -23,12 +23,6 @@
 
 	<h2>Recensione di  <%=recensione.getUtente().getUsername()%>:</h2>
 	
-	<div id="misura">
-		<span>Vuoi cambiare la dimensione del testo?</span>
-		<button id="misuraPiccola">a</button>
-		<button id="misuraGrande">A</button>
-	</div>
-	
 	<div class="elemento" id="<%=recensione.getId() %>">
 			
 		<div class="corpo">
@@ -129,11 +123,11 @@ function aggiornaVoto(voto, idVoto, bottone){
 				
 				if (voto == "+1") { //Se ha cliccato su sopra
 					document.getElementById('sopra' + idRecensione).style.color = 'green';
-					document.getElementById('sotto' + idRecensione).style.color = 'blue';
+					document.getElementById('sotto' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
 				} else if (voto == "-1") { //Se ha cliccato su sotto
-					document.getElementById('sopra' + idRecensione).style.color = 'blue';
+					document.getElementById('sopra' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sotto' + idRecensione).style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
@@ -156,7 +150,7 @@ function rimuoviVoto(idVoto, bottone){
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
-				bottone.style.color = 'blue';
+				bottone.style.color = '#f5a015';
 				document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", +1, this);" );
 				document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", -1, this);" );
 			} else {
@@ -189,26 +183,6 @@ function segnala(id){
 function closePopUpSegnalazione() {
 	var div_conferma = document.getElementById('popUPConfermaSegnalazione');
 	div_conferma.style.display='none';
-}
-
-// Script per il modificatore del testo
-document.getElementById('misuraPiccola').onclick = function() {
-	var misura = window.getComputedStyle(document.getElementById("scritte")).fontSize;
-	misura = parseInt(misura.substring(0, 2));
-	misura = misura - 4;
-	misura = misura + "px";
-	document.getElementById('scritte').style.fontSize = misura;
-	document.getElementById('misuraPiccola').style.color= '#f5a015';
-	document.getElementById('misuraGrande').style.color= 'grey';
-}
-document.getElementById('misuraGrande').onclick = function() {
-	var misura = window.getComputedStyle(document.getElementById("scritte")).fontSize;
-	misura = parseInt(misura.substring(0, 2));
-	misura = misura + 4;
-	misura = misura + "px";
-	document.getElementById('scritte').style.fontSize = misura;
-	document.getElementById('misuraGrande').style.color= '#f5a015';
-	document.getElementById('misuraPiccola').style.color= 'grey';
 }
 </script>
 </body>

@@ -68,9 +68,11 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 			<% for(Recensione x: listaRec){ %>
 				<% if(x.getUtente().equals(utente)) continue; %>
 				<div class="boxRecensione" id="rec--<%=x.getUtente().getUsername() %>">
-					<h3>Titolo: <i><%=x.getTitolo() %></i> 
-					<br/>
-					( Voto: <i><%=x.getVoto() %></i> - Autore: <i><%=x.getUtente().getUsername() %></i> )</h3>
+				
+					<h3 id="titoloRec"><span style="font-size: 13px; color: #777">Titolo: </span> <i><%=x.getTitolo() %></i> </h3>
+					<h3><span style="font-size: 13px; color: #777">Autore: </span> <i><%=x.getUtente().getUsername() %></i>  &emsp;&emsp;
+						<span style="font-size: 13px; color: #777">Voto: </span> <i><%=x.getVoto()%>
+						<span style="font-size: 13px; color: #777">/10</span></i></h3>
 					<p id="testo">
 						<% if (x.getTesto().length() > 250) {
 							out.print(x.getTesto().substring(0,250)+ " ...");
@@ -79,7 +81,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 						}
 						%>
 					</p>
-					<h3>Totale voti utenti: <i><%=x.getVotiTotali()%></i></h3>
+					<h3><span style="font-size: 13px; color: #777">Totale voti utenti: </span> <i><%=x.getVotiTotali()%></i> </h3>
 					<button class="moreButton" onClick="location.href='recensione?id=<%=x.getId()%>'">[Visualizza altro...]</button>
 				</div>
 				
@@ -120,9 +122,10 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 		<% if(recUtente.getUtente() != null)/*se l'utente ha fatto una recensione la mostra*/ {%>
 			<h2>La tua recensione:</h2>
 			<div class="boxRecensione personale" id="rec--<%=recUtente.getUtente().getUsername() %>" style="background-color: #b77cf1">
-				<h3>Titolo: <i><%=recUtente.getTitolo() %></i>
-				<br/>
-				( Voto: <i><%=recUtente.getVoto() %></i> )</h3>
+				<h3 id="titoloRec"><span style="font-size: 13px; color: white">Titolo: </span> <i><%=recUtente.getTitolo() %></i> </h3>
+				<h3>
+					<span style="font-size: 13px; color: white">Voto: </span> <i><%=recUtente.getVoto()%>
+					<span style="font-size: 13px; color: white">/10</span></i></h3>
 				<p id="testo"><%=recUtente.getTesto() %></p>
 			</div>
 		<% } else if(!utente.getRuolo().equals("visitatore")) /* altrimenti mostra il bottone per inserirla*/ { %>
@@ -233,11 +236,11 @@ function aggiornaVoto(voto, idVoto, bottone){
 				
 				if (voto == "+1") { //Se ha cliccato su sopra
 					document.getElementById('sopra' + idRecensione).style.color = 'green';
-					document.getElementById('sotto' + idRecensione).style.color = 'blue';
+					document.getElementById('sotto' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
 				} else if (voto == "-1") { //Se ha cliccato su sotto
-					document.getElementById('sopra' + idRecensione).style.color = 'blue';
+					document.getElementById('sopra' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sotto' + idRecensione).style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
@@ -260,7 +263,7 @@ function rimuoviVoto(idVoto, bottone){
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
 			if(xml.responseText === "succ"){
-				bottone.style.color = 'blue';
+				bottone.style.color = '#f5a015';
 				document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", +1, this);" );
 				document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", -1, this);" );
 			} else {

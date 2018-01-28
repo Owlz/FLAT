@@ -57,7 +57,8 @@ body {
 	width: 200px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+    border: solid #f5a015;
 	position: absolute;
     margin-top: -25%;
     margin-left: 45%;

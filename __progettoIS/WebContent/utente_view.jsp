@@ -44,7 +44,7 @@
 			<h2> La tua lista di recensioni </h2>
 			<% for(Recensione x: listaRec){ %>
 			
-				<div class="boxRecensione box effect7" id="<%=x.getId() %>">
+				<div class="boxRecensione" id="<%=x.getId() %>">
 				
 					<h3 id="titoloRec"><span style="font-size: 13px; color: #777">Film:</span> <i><%=((FilmLocal) x.getFilm()).getTitolo()%></i></h3>
 					<h3><span style="font-size: 13px; color: #777">Titolo: </span> <i><%=x.getTitolo()%></i> &emsp;&emsp;

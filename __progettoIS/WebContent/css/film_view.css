@@ -103,7 +103,9 @@ body {
 }
 
 .boxRecensione {
-    background-color: #7daaf2;
+    border-radius: 0px 15px;
+    border: solid black;
+    background-color: #fbc73c;
     width: 95%;
     margin-left: -40px;
     height: 255px;
@@ -113,6 +115,10 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#titoloRec {
+    margin-left: 40%;
 }
 
 .personale {
@@ -140,7 +146,7 @@ body {
 
 #pulsantiAzione {
     position: relative;
-    color: blue;
+    color: #f5a015;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,7 +177,8 @@ body {
     margin-left: 25%;
     margin-top: -55%;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+    border: solid #f5a015;
 	position: absolute;
 }
 
@@ -211,7 +218,8 @@ body {
 	width: 200px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+    border: solid #f5a015;
 	position: absolute;
     margin-top: -60%;
     margin-left: 45%;
@@ -241,7 +249,8 @@ body {
 	width: 200px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+    border: solid #f5a015;
 	position: absolute;
     margin-top: -45%;
     margin-left: 45%;
@@ -261,7 +270,8 @@ body {
 	width: 200px;
 	height: 200px;
 	background-color: white;
-    border: 2px solid;
+    border-radius: 7px;
+    border: solid #f5a015;
 	position: absolute;
     margin-top: -57%;
     margin-left: 45%;
