@@ -28,23 +28,24 @@ public class FilmLocalDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
-	public static FilmLocal select(FilmLocal f) throws SQLException {
+	public static FilmLocal select(Film f) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT);
 		pst.setInt(1, f.getId());
 		ResultSet rs = pst.executeQuery();
 		con.commit();
 	
+		FilmLocal fl = new FilmLocal();
 		while (rs.next()) {
-			f = new FilmLocal();
-			f.setId(rs.getInt("id"));
-			f.setLocandina(rs.getString("locandina"));
-			f.setTitolo(rs.getString("titolo"));
-			f.setTitoloOriginale(rs.getString("titolo_orig"));
+			fl = new FilmLocal();
+			fl.setId(rs.getInt("id"));
+			fl.setLocandina(rs.getString("locandina"));
+			fl.setTitolo(rs.getString("titolo"));
+			fl.setTitoloOriginale(rs.getString("titolo_orig"));
 		}
 
 		DBConnection.riaggiungiConnessione(con);
-		return f;
+		return fl;
 	}
 
 	public static void delete(Film f) throws SQLException {

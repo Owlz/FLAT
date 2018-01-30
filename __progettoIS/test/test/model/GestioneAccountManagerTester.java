@@ -91,7 +91,6 @@ public class GestioneAccountManagerTester {
 	@Ignore
 	@Test(expected = DatiNonValidi.class)
 	public void modificaDatiPersonaliFallimento() throws DatiNonValidi {
-		/* TODO: potrebbe essere da ripensare */
 		Utente input = new Utente();
 		input.setEmail("utente1@mail.it");
 

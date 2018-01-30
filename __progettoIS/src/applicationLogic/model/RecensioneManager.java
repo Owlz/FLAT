@@ -18,14 +18,13 @@ public class RecensioneManager {
 	private RecensioneManager() {/*Costruttore vuoto e privato poichè non istanziabile*/}
 
 	public static Recensione addRecensione(Recensione r) throws DatiTroppoBrevi, VotoMancante{
-		/* TODO: rendere decente questo controllo */
 		int LUNGHEZZA_MINIMA_REVIEW = 20;
 		int LUNGHEZZA_MINIMA_TITOLO = 5;
 		
-		if(!r.getTesto().equals("") && r.getTesto().length() < LUNGHEZZA_MINIMA_REVIEW)
+		if(r.getTesto().length() < LUNGHEZZA_MINIMA_REVIEW)
 			throw new DatiTroppoBrevi("Il testo della recensione non può essere meno di "+ LUNGHEZZA_MINIMA_REVIEW +" caratteri");
 		
-		if(!r.getTitolo().equals("") && r.getTitolo().length() < LUNGHEZZA_MINIMA_TITOLO)
+		if(r.getTitolo().length() < LUNGHEZZA_MINIMA_TITOLO)
 			throw new DatiTroppoBrevi("Il titolo della recensione non può essere meno di "+ LUNGHEZZA_MINIMA_TITOLO +" caratteri");
 		
 		if(r.getVoto() == 0 )
