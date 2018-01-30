@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonValidi;
-import applicationLogic.exception.DatiOccupati;
 import storage.database.UtenteDAO;
 
 /**
