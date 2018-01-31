@@ -14,11 +14,18 @@ import applicationLogic.bean.Utente;
 import applicationLogic.model.GestioneAccountManager;
 import applicationLogic.model.RecensioneManager;
 
+/**
+ * Servlet per visualizzare l'area utente
+ * 
+ * @author Luca
+ *
+ */
 @WebServlet("/utente")
 public class VisualizzaAreaUtente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Utente u = new Utente();
 		u.setUsername(request.getParameter("id"));
 		u = GestioneAccountManager.getUtente(u);
@@ -28,7 +35,10 @@ public class VisualizzaAreaUtente extends HttpServlet {
 		if (utenteInSessione != null && !utenteInSessione.getRuolo().equals("visitatore") && utenteInSessione.equals(u))
 			u = utenteInSessione;
 
-		if (u == null) // caso in cui l'url portava ad un utente che non è nel database
+		if (u == null || !u.equals(utenteInSessione)) // caso in cui l'url
+														// portava ad un utente
+														// che non è nel
+														// database
 			response.sendRedirect(request.getContextPath() + "/");
 
 		else { // caso standard

@@ -13,46 +13,59 @@ import applicationLogic.bean.Utente;
 import applicationLogic.bean.Voto;
 import applicationLogic.model.RecensioneManager;
 
+/**
+ * Servlet che permette di votare una recensione in maniera asincrona
+ * 
+ * @author Luca
+ *
+ */
 @WebServlet("/vota")
 public class JSONVotoRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Utente u = (Utente) request.getSession().getAttribute("utente");
-		
+
 		String flag = request.getParameter("flag");
 
-		
 		response.setContentType("application/json");
 
-		if(flag.equals("rimuovi")){
+		if (flag.equals("rimuovi")) {
 			int id = Integer.parseInt(request.getParameter("idVoto"));
 			Voto v = new Voto(id, 0, u);
-			if(RecensioneManager.rimuoviVoto(v)) response.getWriter().write("succ");
-			else response.getWriter().write("fall");
-		
-		}else if(flag.equals("modifica")){
+			if (RecensioneManager.rimuoviVoto(v))
+				response.getWriter().write("succ");
+			else
+				response.getWriter().write("fall");
+
+		} else if (flag.equals("modifica")) {
 			int id = Integer.parseInt(request.getParameter("idVoto"));
 			int voto = Integer.parseInt(request.getParameter("voto").trim());
 			Voto v = new Voto(id, voto, u);
-			
-			if(RecensioneManager.cambiaVoto(v)) response.getWriter().write("succ");
-			else response.getWriter().write("fall");
 
-		}else if(flag.equals("aggiungi")){
+			if (RecensioneManager.cambiaVoto(v))
+				response.getWriter().write("succ");
+			else
+				response.getWriter().write("fall");
+
+		} else if (flag.equals("aggiungi")) {
 			String idRecensione = request.getParameter("idRecensione");
 			Recensione r = Recensione.generateByStringId(idRecensione);
 			int voto = Integer.parseInt(request.getParameter("voto").trim());
 			Voto v = new Voto(-1, voto, u);
 			v = RecensioneManager.inserisciVoto(r, v);
-			
-			if(v != null && v.getId() != -1) response.getWriter().write("succ" + v.getId());
-			
-			else response.getWriter().write("fall");
+
+			if (v != null && v.getId() != -1)
+				response.getWriter().write("succ" + v.getId());
+
+			else
+				response.getWriter().write("fall");
 		}
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 }

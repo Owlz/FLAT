@@ -13,18 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet Filter per bloccare l'accesso a pagine .jsp (che devono gestire la sola view)
+ * Servlet Filter per bloccare l'accesso a pagine .jsp (che devono gestire la
+ * sola view)
  */
 @WebFilter("*.jsp")
 public class FilterNoJSP implements Filter {
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
 		res.sendRedirect(req.getContextPath());
 	}
 
 	@Override
-	public void destroy() {		
+	public void destroy() {
 	}
 
 	@Override

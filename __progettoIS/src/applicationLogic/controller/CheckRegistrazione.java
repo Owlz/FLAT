@@ -14,7 +14,7 @@ import applicationLogic.exception.DatiOccupati;
 import applicationLogic.model.RegistrazioneManager;
 
 /**
- * Implementazione del controllo della registrazione lato server
+ * Servlet che controlla la registrazione lato server
  * 
  * @author Luca
  * @since 1.0
@@ -23,14 +23,16 @@ import applicationLogic.model.RegistrazioneManager;
 public class CheckRegistrazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Utente u = new Utente();
 		u.setUsername(request.getParameter("username").trim());
-		
-		if(request.getParameter("password").trim().equals(request.getParameter("confermaPassword").trim()))
+
+		if (request.getParameter("password").trim().equals(request.getParameter("confermaPassword").trim()))
 			u.setPassword(request.getParameter("password").trim());
-		else u.setPassword("");
-		
+		else
+			u.setPassword("");
+
 		u.setNome(request.getParameter("nome").trim());
 		u.setCognome(request.getParameter("cognome").trim());
 		u.setEmail(request.getParameter("email").trim());
@@ -38,7 +40,7 @@ public class CheckRegistrazione extends HttpServlet {
 
 		try {
 			u = RegistrazioneManager.aggiungiUtente(u);
-			
+
 			request.getSession().setAttribute("utente", u);
 			response.sendRedirect(request.getContextPath() + "/utente?id=" + u.getUsername());
 

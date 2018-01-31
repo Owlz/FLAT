@@ -12,18 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import applicationLogic.bean.Recensione;
 import applicationLogic.model.RecensioneManager;
 
+/**
+ * Servlet per visualizzare le segnalazioni presenti nel sistema
+ * 
+ * @author Luca
+ *
+ */
 @WebServlet("/mostrasegnalate")
 public class VisualizzaSegnalazioni extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ArrayList<Recensione> listaSegnalate = RecensioneManager.getSegnalate();
-		
+
 		request.setAttribute("listaSegnalate", listaSegnalate);
 		request.getRequestDispatcher("gestioneSegnalazioni_view.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
