@@ -22,7 +22,6 @@ public class CheckCambioDati extends HttpServlet {
 		uNew.setPassword(request.getParameter("password").trim());
 		uNew.setNome(request.getParameter("nome").trim());
 		uNew.setCognome(request.getParameter("cognome").trim());
-		uNew.setEmail(request.getParameter("email").trim());
 		
 		try {
 			uNew = GestioneAccountManager.aggiornaUtente(uNew, uAtt);
