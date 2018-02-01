@@ -87,6 +87,6 @@ public class APIConnection {
 	protected static String sanitarizza(String query) {
 		return query.replaceAll(" ", "+").replaceAll("è", "&#232;").replaceAll("é", "&#232;").replaceAll("ì", "&#236;")
 				.replaceAll("à", "&#224;").replaceAll("ò", "&#242;").replaceAll("ù", "&#249;").replaceAll(">", "&gt;")
-				.replaceAll("<", "&lt;").replaceAll("'", "&#39;").replaceAll("\"", "&quot;").replaceAll("&", "&amp;");
+				.replaceAll("<", "&lt;").replaceAll("'", "&#39;").replaceAll("\"", "&quot;").replaceAll("&", "%26");
 	}
 }
