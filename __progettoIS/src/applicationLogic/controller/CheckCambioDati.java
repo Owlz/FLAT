@@ -31,11 +31,7 @@ public class CheckCambioDati extends HttpServlet {
 		uNew.setPassword(request.getParameter("password").trim());
 		uNew.setNome(request.getParameter("nome").trim());
 		uNew.setCognome(request.getParameter("cognome").trim());
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'master' of https://github.com/JustAnOwlz/FLAT.git
 		try {
 			uNew = GestioneAccountManager.aggiornaUtente(uNew, uAtt);
 			request.getSession().setAttribute("utente", uNew);
