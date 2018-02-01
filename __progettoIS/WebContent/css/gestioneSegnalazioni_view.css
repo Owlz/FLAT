@@ -30,6 +30,7 @@ body {
 	justify-content: space-between;
 	width: 1200px;
     height: 250px;
+    background-color: white;
 	border: 1px solid black;
 	margin-bottom: 10px;
 }
