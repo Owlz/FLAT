@@ -35,7 +35,7 @@
 		<label>Password: <input type="text" value="<%=utente.getPassword()%>" onfocus="if (this.value=='<%=utente.getPassword()%>') this.value = ''" name="password"></label>
 		<p> Modifica le informazioni che vorresti cambiare e clicca su "Conferma", altrimenti su "Annulla". </p>
 		<div>
-			<button onClick="location.href='utente?id=<%= utente.getUsername() %>'" id="submit">Annulla</button>
+			<button type="button" onClick="location.href='utente?id=<%= utente.getUsername() %>'" id="submit">Annulla</button>
 			<button type="submit" id="submit" value="Conferma">Conferma</button>
 		</div>
 	</form>
