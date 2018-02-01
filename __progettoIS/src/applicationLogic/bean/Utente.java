@@ -115,8 +115,9 @@ public class Utente {
 	 * Utente.
 	 * 
 	 * @see equalsComplete per la versione complea
-	 * @param object
+	 * @param o
 	 *            da testare con l'attuale utente
+	 * @return true se è uguale, false altrimenti
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -137,8 +138,9 @@ public class Utente {
 	/**
 	 * Equals utilizzato per il testing dell'intera classe
 	 * 
-	 * @param object
+	 * @param obj
 	 *            da testare con l'attuale utente
+	 * @return true se è uguale, false altrimenti
 	 */
 	public boolean equalsComplete(Object obj) {
 		if (this == obj)

@@ -1,0 +1,6 @@
+applicationLogic.bean
+applicationLogic.controller
+applicationLogic.exception
+applicationLogic.model
+storage.api
+storage.database
