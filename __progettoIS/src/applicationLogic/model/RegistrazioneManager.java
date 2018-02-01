@@ -16,7 +16,8 @@ import storage.database.UtenteDAO;
  */
 public class RegistrazioneManager {
 
-	private RegistrazioneManager() {/* Costruttore vuoto e privato poichè non istanziabile */}
+	private RegistrazioneManager() {
+		/* Costruttore vuoto e privato poichè non istanziabile */}
 
 	/**
 	 * Gesisce la registrazione di un utente
@@ -32,20 +33,22 @@ public class RegistrazioneManager {
 	public static Utente aggiungiUtente(Utente utente) throws DatiNonValidi, DatiOccupati {
 		String nome = utente.getNome();
 		String patternNome = "^[a-z A-Z]{2,15}$";
-		
+
 		String cognome = utente.getCognome();
 		String patternCognome = "^[a-z A-Z]{2,15}$";
-		
+
 		String email = utente.getEmail();
-		String patternEMail = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		
+		String patternEMail = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
 		String user = utente.getUsername();
 		String patternUser = "^[a-zA-Z._]{3,15}$";
-		
-		String passwd = utente.getPassword(); 
+
+		String passwd = utente.getPassword();
 		String patternPassword = "^[a-zA-Z0-9._-]{3,15}$";
-	      
-		if(!nome.matches(patternNome) || !cognome.matches(patternCognome) || !email.matches(patternEMail) || !user.matches(patternUser) || !passwd.matches(patternPassword)) {
+
+		if (!nome.matches(patternNome) || !cognome.matches(patternCognome) || !email.matches(patternEMail)
+				|| !user.matches(patternUser) || !passwd.matches(patternPassword)) {
 			throw new DatiNonValidi();
 		} else {
 			try {

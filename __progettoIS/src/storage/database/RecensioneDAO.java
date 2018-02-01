@@ -12,6 +12,12 @@ import applicationLogic.bean.Recensione;
 import applicationLogic.bean.Utente;
 import applicationLogic.bean.Voto;
 
+/**
+ * DAO che implementa i metodi <i>CRUD</i> per gli oggetti Recensione
+ * 
+ * @author Luca
+ *
+ */
 public class RecensioneDAO {
 	private static final String SELECT_BY_UTENTE = "SELECT * FROM `recensioni` WHERE `usernameUtente`=?";
 	private static final String SELECT_BY_FILM = "SELECT * FROM `recensioni` WHERE `idFilm`=?";
@@ -23,6 +29,15 @@ public class RecensioneDAO {
 	private static final String INSERT_SEGNALAZIONE = "UPDATE `recensioni` SET `segnalata`=? WHERE `id_recensione`=?";
 	private static final String DELETE = "DELETE FROM `recensioni` WHERE `id_recensione`=?";
 
+	/**
+	 * Seleziona una recensione in base all'id
+	 * 
+	 * @param r
+	 *            un oggetto recensione con un id
+	 * @return la recensione con quel dato id
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static Recensione selectById(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT_BY_ID);
@@ -62,6 +77,15 @@ public class RecensioneDAO {
 		return momentaneo;
 	}
 
+	/**
+	 * Seleziona la recensione dato un film ed un utente
+	 * 
+	 * @param r
+	 *            oggetto recensione con un film ed un utente
+	 * @return la recensione con quel film ed utente
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static Recensione selectByUtenteFilm(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT_BY_UTENTE_AND_FILM);
@@ -103,6 +127,15 @@ public class RecensioneDAO {
 		return momentaneo;
 	}
 
+	/**
+	 * Seleziona tutte le recensioni di un dato utente
+	 * 
+	 * @param u
+	 *            oggetto utente con un username
+	 * @return la lista di tutte le recensioni di un utente
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static ArrayList<Recensione> selectByUtente(Utente u) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT_BY_UTENTE);
@@ -136,6 +169,15 @@ public class RecensioneDAO {
 		return listaRec;
 	}
 
+	/**
+	 * Seleziona tutte le recensioni di un dato film
+	 * 
+	 * @param f
+	 *            oggetto film con un id
+	 * @return la lista di tutte le recensioni di un film
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static ArrayList<Recensione> selectByFilm(Film f) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT_BY_FILM);
@@ -169,6 +211,15 @@ public class RecensioneDAO {
 		return listaRec;
 	}
 
+	/**
+	 * Inserisce una recensione nel database
+	 * 
+	 * @param r
+	 *            un oggetto recensione con tutte le informazioni da inserire
+	 * @return la recensione inserita
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static Recensione insert(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -195,6 +246,14 @@ public class RecensioneDAO {
 		return r;
 	}
 
+	/**
+	 * Elimina una recensione nel database
+	 * 
+	 * @param r
+	 *            un oggetto recensione con un id
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static void delete(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(DELETE);
@@ -206,6 +265,15 @@ public class RecensioneDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
+	/**
+	 * Aggiorna lo stato di segnalazione nel database di una recensione
+	 * 
+	 * @param r
+	 *            un oggetto recensione con un id ed il campo "segnalata"
+	 *            riempito
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static void updateSegnalazione(Recensione r) throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(INSERT_SEGNALAZIONE);
@@ -218,6 +286,13 @@ public class RecensioneDAO {
 		DBConnection.riaggiungiConnessione(con);
 	}
 
+	/**
+	 * Seleziona tutte le recensioni segnalate
+	 * 
+	 * @return tutte le recensioni segnlate
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static ArrayList<Recensione> selectBySegnalate() throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT_BY_SEGNALAZIONE);
@@ -251,6 +326,13 @@ public class RecensioneDAO {
 		return listaRec;
 	}
 
+	/**
+	 * Seleziona tutte le recensioni nel database
+	 * 
+	 * @return tutte le recensioni nel database
+	 * @throws SQLException
+	 *             nel caso in cui la query non vada a buon fine
+	 */
 	public static ArrayList<Recensione> select() throws SQLException {
 		Connection con = DBConnection.ottieniConnessione();
 		PreparedStatement pst = con.prepareStatement(SELECT);

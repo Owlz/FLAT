@@ -12,22 +12,29 @@ import javax.servlet.http.HttpServletResponse;
 import applicationLogic.bean.Recensione;
 import applicationLogic.model.RecensioneManager;
 
+/**
+ * Servlet per visualizzare tutte le recensioni nel sistema
+ * 
+ * @author Luca
+ *
+ */
 @WebServlet("/mostrarecensioni")
 public class VisualizzaRecensioni extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ArrayList<Recensione> listaRecensioni = new ArrayList<Recensione>();
-		for(Recensione r: RecensioneManager.getAll()){
+		for (Recensione r : RecensioneManager.getAll()) {
 			listaRecensioni.add(RecensioneManager.getCompleta(r));
 		}
 		String ord = request.getParameter("ord");
-		
-		if(ord != null && ord.equals("segn")){
+
+		if (ord != null && ord.equals("segn")) {
 			listaRecensioni.sort(Recensione.COMP_BY_SEGNALATA);
-		}else if(ord != null && ord.equals("voti")){
+		} else if (ord != null && ord.equals("voti")) {
 			listaRecensioni.sort(Recensione.COMP_BY_VOTI_NEGATIVI);
-		}else{
+		} else {
 			listaRecensioni.sort(Recensione.COMP_BY_DATA);
 		}
 
@@ -35,7 +42,8 @@ public class VisualizzaRecensioni extends HttpServlet {
 		request.getRequestDispatcher("gestioneRecensioni_view.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

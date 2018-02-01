@@ -8,7 +8,9 @@ import applicationLogic.exception.DatiNonValidi;
 import storage.database.UtenteDAO;
 
 /**
- * Gestisce tutto ciò che riguarda il collegamento fra l'applicazione ed il database per l'autenticazione
+ * Gestisce tutto ciò che riguarda il collegamento fra l'applicazione ed il
+ * database per l'autenticazione
+ * 
  * @author Luca
  * @since 1.0
  */
