@@ -45,3 +45,28 @@ body {
     background-color: white;
     width: 80px;
 }
+
+/* --------------------------  ERRORE  -------------------------------- */
+
+#popUPErrore {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	height: 200px;
+	background-color: white;
+    border-radius: 7px;
+	border: solid #f5a015;
+	position: absolute;
+}
+
+#popUPErrore p {
+	text-align: center;
+	padding-top: 40px;
+}
+
+#ok {
+	width: 50%;
+    margin-left: 100px;
+    margin-top: 20px;
+    cursor: pointer;
+}

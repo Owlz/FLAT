@@ -1,7 +1,6 @@
 package applicationLogic.model;
 
 import java.sql.SQLException;
-
 import applicationLogic.bean.Utente;
 import applicationLogic.exception.DatiNonValidi;
 import applicationLogic.exception.DatiOccupati;
