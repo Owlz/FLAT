@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <jsp:useBean id="utente" class="applicationLogic.bean.Utente" scope="session" />
+<jsp:useBean id="succ" class="java.lang.String" scope="request"/>
 <jsp:useBean id="errore" class="java.lang.String" scope="request"/>
 
 <!DOCTYPE html>
@@ -24,6 +25,14 @@
 		
 		<div id="popUPErrore">
 			<p>Dati non validi</p>
+			<button id="ok" OnClick="closePopUp()">Conferma</button>
+		</div>
+		
+	<% }%>
+	<% if(succ.equals("Successo")){ %>
+		
+		<div id="popUPErrore">
+			<p>Modifica avvenuta con successo</p>
 			<button id="ok" OnClick="closePopUp()">Conferma</button>
 		</div>
 		

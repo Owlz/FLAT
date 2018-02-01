@@ -35,12 +35,12 @@ public class CheckCambioDati extends HttpServlet {
 		try {
 			uNew = GestioneAccountManager.aggiornaUtente(uNew, uAtt);
 			request.getSession().setAttribute("utente", uNew);
-			response.sendRedirect(request.getContextPath() + "/utente?id=" + uNew.getUsername());
+			request.setAttribute("succ", "Successo");
+			request.getRequestDispatcher("cambiodati").forward(request, response);
 
 		} catch (DatiNonValidi e) {
 			request.setAttribute("errore", "Dati non validi");
 			request.getRequestDispatcher("cambiodati").forward(request, response);
-//			response.sendRedirect(request.getContextPath() + "/cambiodati");
 		}
 	}
 
