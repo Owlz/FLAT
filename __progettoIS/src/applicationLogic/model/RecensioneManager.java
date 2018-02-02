@@ -63,24 +63,6 @@ public class RecensioneManager {
 	}
 
 	/**
-	 * Permette di ottenere una lista di recensioni che sono state segnalate
-	 * 
-	 * @return una lista di recensioni segnalate
-	 */
-	public static ArrayList<Recensione> getSegnalate() {
-		ArrayList<Recensione> out = new ArrayList<Recensione>();
-		try {
-			for (Recensione r : RecensioneDAO.selectBySegnalate()) {
-				out.add(RecensioneManager.getCompleta(r));
-			}
-			return out;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return out;
-		}
-	}
-
-	/**
 	 * Ottiene una recensione specifica
 	 * 
 	 * @param r
@@ -262,20 +244,6 @@ public class RecensioneManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}
-	}
-
-	/**
-	 * Permette di ottenere tutte le recensioni da dentro il database
-	 * 
-	 * @return la lista di tutte le recensioni
-	 */
-	public static ArrayList<Recensione> getAll() {
-		try {
-			return RecensioneDAO.select();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return new ArrayList<Recensione>();
 		}
 	}
 
