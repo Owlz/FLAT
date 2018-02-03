@@ -199,6 +199,8 @@ function inserisciVoto(idRecensione, voto, bottone){
 	
 	xml.open("get", url, true);
 	xml.send();
+	
+	var votoAttuale = parseInt($('#numero').text(), 10);
 
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
@@ -210,9 +212,13 @@ function inserisciVoto(idRecensione, voto, bottone){
 				if (voto == "+1") {
 					bottone.style.color = 'green';
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1," + xml.responseText.substring(4) + ", this);" );
+					votoAttuale = votoAttuale + 1;
+					document.getElementById('numero').innerHTML = votoAttuale; 
 				} else {
 					bottone.style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1," + xml.responseText.substring(4) + ", this);" );
+					votoAttuale = votoAttuale - 1;
+					document.getElementById('numero').innerHTML = votoAttuale; 
 				}
 				
 			} else {
@@ -229,6 +235,7 @@ function aggiornaVoto(voto, idVoto, bottone){
 	xml.open("get", url, true);
 	xml.send();
 	
+	var votoAttuale = parseInt($('#numero').text(), 10);
 	var idRecensione = bottone.id.substring(5);
 	
 	xml.onreadystatechange = function() {
@@ -240,11 +247,15 @@ function aggiornaVoto(voto, idVoto, bottone){
 					document.getElementById('sotto' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
+					votoAttuale = votoAttuale + 2;
+					document.getElementById('numero').innerHTML = votoAttuale; 
 				} else if (voto == "-1") { //Se ha cliccato su sotto
 					document.getElementById('sopra' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sotto' + idRecensione).style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
+					votoAttuale = votoAttuale - 2;
+					document.getElementById('numero').innerHTML = votoAttuale; 
 				}
 
 			}
@@ -259,6 +270,7 @@ function rimuoviVoto(idVoto, bottone){
 	xml.open("get", url, true);
 	xml.send();
 
+	var votoAttuale = parseInt($('#numero').text(), 10);
 	var idRecensione = bottone.id.substring(5);
 	
 	xml.onreadystatechange = function() {
@@ -267,6 +279,15 @@ function rimuoviVoto(idVoto, bottone){
 				bottone.style.color = '#f5a015';
 				document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", +1, this);" );
 				document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "inserisciVoto("+ idRecensione +", -1, this);" );
+				
+				if (bottone.id.substring(0,5) == "sopra") { // Ha tolto un +1
+					votoAttuale = votoAttuale - 1;
+					document.getElementById('numero').innerHTML = votoAttuale; 
+				} else if (bottone.id.substring(0,5) == "sotto") { // Ha tolto un -1
+					votoAttuale = votoAttuale + 1;
+					document.getElementById('numero').innerHTML = votoAttuale; 
+				}
+				
 			} else {
 				
 			} 
