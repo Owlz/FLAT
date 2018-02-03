@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import applicationLogic.bean.Recensione;
-import applicationLogic.model.RecensioneManager;
+import applicationLogic.model.AmministrazioneManager;
 
 /**
  * Servlet per visualizzare le segnalazioni presenti nel sistema
@@ -24,7 +24,7 @@ public class VisualizzaSegnalazioni extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<Recensione> listaSegnalate = RecensioneManager.getSegnalate();
+		ArrayList<Recensione> listaSegnalate = AmministrazioneManager.getSegnalate();
 
 		request.setAttribute("listaSegnalate", listaSegnalate);
 		request.getRequestDispatcher("gestioneSegnalazioni_view.jsp").forward(request, response);

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import applicationLogic.bean.FilmLocal;
 import applicationLogic.bean.Recensione;
+import applicationLogic.model.AmministrazioneManager;
 import applicationLogic.model.RecensioneManager;
 import applicationLogic.model.RicercaManager;
 
@@ -28,7 +29,7 @@ public class VisualizzaHomepage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ArrayList<Recensione> listaRecensioni = new ArrayList<Recensione>();
-		for (Recensione r : RecensioneManager.getAll()) {
+		for (Recensione r : AmministrazioneManager.getAllRecensioni()) {
 			listaRecensioni.add(RecensioneManager.getCompleta(r));
 		}
 
