@@ -1,6 +1,5 @@
 <jsp:useBean id="utente" class="applicationLogic.bean.Utente" scope="session" />
 
-<!--       ********************      NavBar      ********************           -->
 <nav id="nav">
 	<div id="spazioLogo">
 		<a href="home_view.jsp"><img src="img/logo.png" height="50" alt="logo"></a>
