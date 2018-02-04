@@ -5,6 +5,7 @@ Progetto per Ingegneria del Software 2017/2018
 Il progetto *FLAT* si propone di creare una piattaforma per la condivisione di idee cinematografiche, questo servizio sarà disponibile tramite un’applicazione online con la quale sarà possibile **esprimersi** circa film e serie tv. L'applicazione viene creata da zero.
 
 ## Il team
+
  - Di Luccio Luca (0512103554)
  - Vitale Francesco (0512103938)
  - Garofalo Antonio (0512102870)
