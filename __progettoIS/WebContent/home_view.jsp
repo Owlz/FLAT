@@ -62,8 +62,7 @@
 						out.print(y.getTesto().substring(0,250)+ " ...");
 					} else {
 						out.print(y.getTesto());
-					}
-					%>
+					} %>
 				</p>
 				<button class="moreButton" onClick="location.href='recensione?id=<%=y.getId()%>'">[Visualizza altro...]</button>
 			</div>

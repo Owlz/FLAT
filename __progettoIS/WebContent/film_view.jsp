@@ -81,7 +81,7 @@ pageEncoding="UTF-8" import="java.util.*, applicationLogic.bean.Recensione, appl
 						}
 						%>
 					</p>
-					<h3><span style="font-size: 13px; color: #777">Totale voti utenti: </span> <i><%=x.getVotiTotali()%></i> </h3>
+					<h3><span style="font-size: 13px; color: #777">Totale voti utenti: </span> <span id="numero<%=x.getId()%>"><i><%=x.getVotiTotali()%></i></span> </h3>
 					<button class="moreButton" onClick="location.href='recensione?id=<%=x.getId()%>'">[Visualizza altro...]</button>
 				</div>
 				
@@ -200,7 +200,8 @@ function inserisciVoto(idRecensione, voto, bottone){
 	xml.open("get", url, true);
 	xml.send();
 	
-	var votoAttuale = parseInt($('#numero').text(), 10);
+	var idCasellaVoti = 'numero' + idRecensione;
+	var votoAttuale = parseInt($('#' + idCasellaVoti).text(), 10);
 
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
@@ -213,12 +214,12 @@ function inserisciVoto(idRecensione, voto, bottone){
 					bottone.style.color = 'green';
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1," + xml.responseText.substring(4) + ", this);" );
 					votoAttuale = votoAttuale + 1;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				} else {
 					bottone.style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1," + xml.responseText.substring(4) + ", this);" );
 					votoAttuale = votoAttuale - 1;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				}
 				
 			} else {
@@ -235,8 +236,9 @@ function aggiornaVoto(voto, idVoto, bottone){
 	xml.open("get", url, true);
 	xml.send();
 	
-	var votoAttuale = parseInt($('#numero').text(), 10);
 	var idRecensione = bottone.id.substring(5);
+	var idCasellaVoti = 'numero' + idRecensione;
+	var votoAttuale = parseInt($('#' + idCasellaVoti).text(), 10);
 	
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
@@ -248,14 +250,14 @@ function aggiornaVoto(voto, idVoto, bottone){
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "aggiornaVoto(-1, " + idVoto + ", this);" );
 					votoAttuale = votoAttuale + 2;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				} else if (voto == "-1") { //Se ha cliccato su sotto
 					document.getElementById('sopra' + idRecensione).style.color = '#f5a015';
 					document.getElementById('sotto' + idRecensione).style.color = 'red';
 					document.getElementById('sopra' + idRecensione).setAttribute( "onClick", "aggiornaVoto(+1, " + idVoto + ", this);" );
 					document.getElementById('sotto' + idRecensione).setAttribute( "onClick", "rimuoviVoto(" + idVoto + ", this);" );
 					votoAttuale = votoAttuale - 2;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				}
 
 			}
@@ -270,8 +272,9 @@ function rimuoviVoto(idVoto, bottone){
 	xml.open("get", url, true);
 	xml.send();
 
-	var votoAttuale = parseInt($('#numero').text(), 10);
 	var idRecensione = bottone.id.substring(5);
+	var idCasellaVoti = 'numero' + idRecensione;
+	var votoAttuale = parseInt($('#' + idCasellaVoti).text(), 10);
 	
 	xml.onreadystatechange = function() {
 		if (xml.readyState == 4 && xml.status == 200) {
@@ -282,10 +285,10 @@ function rimuoviVoto(idVoto, bottone){
 				
 				if (bottone.id.substring(0,5) == "sopra") { // Ha tolto un +1
 					votoAttuale = votoAttuale - 1;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				} else if (bottone.id.substring(0,5) == "sotto") { // Ha tolto un -1
 					votoAttuale = votoAttuale + 1;
-					document.getElementById('numero').innerHTML = votoAttuale; 
+					document.getElementById(idCasellaVoti).innerHTML = votoAttuale; 
 				}
 				
 			} else {
